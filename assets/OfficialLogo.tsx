@@ -1,6 +1,6 @@
 import React from "react";
 
-const OficiallLogo = ({ height }: { height: string }) => {
+const OfficialLogo = ({ height }: { height: string }) => {
   return (
     <svg
       width="auto"
@@ -65,4 +65,4 @@ const OficiallLogo = ({ height }: { height: string }) => {
   );
 };
 
-export default OficiallLogo;
+export default OfficialLogo;

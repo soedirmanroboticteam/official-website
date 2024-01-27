@@ -1,3 +1,3 @@
-import OficiallLogo from "./OficiallLogo";
+import OfficialLogo from "./OfficialLogo";
 
-export { OficiallLogo };
+export { OfficialLogo };
