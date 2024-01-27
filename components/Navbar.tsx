@@ -5,6 +5,7 @@ import Link from "next/link";
 import { HamburgerMenuIcon } from "@radix-ui/react-icons";
 import { ModeToggle } from "./ToggleDark";
 import { NavigationMenuDesktop } from "./NavigationMenuDesktop";
+import { OficiallLogo } from "@/assets";
 
 export default function Navbar() {
   const [state, setState] = useState(false);
@@ -13,8 +14,13 @@ export default function Navbar() {
     <nav className="bg-background w-full border-b md:border-0">
       <div className="items-center px-4 max-w-screen-xl mx-auto md:flex md:justify-between md:gap-12 md:px-8">
         <div className="flex items-center justify-between py-3 md:py-5 md:block">
-          <Link href="/">
-            <h1 className="text-3xl font-bold text-purple-600">Logo</h1>
+          <Link href="/" className="flex items-center gap-2 text-foreground">
+            <OficiallLogo height="36" />
+            <h1 className="text-xs font-semibold leading-none">
+              Soedirman <br />
+              Robotic <br />
+              Team
+            </h1>
           </Link>
           <div className="md:hidden">
             <button

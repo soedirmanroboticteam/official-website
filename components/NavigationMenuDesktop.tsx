@@ -14,6 +14,7 @@ import {
   NavigationMenuTrigger,
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
+import { OficiallLogo } from "@/assets";
 
 const components: { title: string; href: string; description: string }[] = [
   {
@@ -58,7 +59,7 @@ export function NavigationMenuDesktop() {
     <NavigationMenu>
       <NavigationMenuList>
         <NavigationMenuItem className="flex-1 ">
-          <NavigationMenuTrigger>Getting started</NavigationMenuTrigger>
+          <NavigationMenuTrigger>About Us</NavigationMenuTrigger>
           <NavigationMenuContent>
             <ul className="grid gap-3 p-4 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]">
               <li className="row-span-3">
@@ -67,24 +68,23 @@ export function NavigationMenuDesktop() {
                     className="flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-muted/50 to-muted p-6 no-underline outline-none focus:shadow-md"
                     href="/"
                   >
-                    {/* <Icons.logo className="h-6 w-6" /> */}
+                    <OficiallLogo height="128" />
                     <div className="mb-2 mt-4 text-lg font-medium">
-                      shadcn/ui
+                      Soedirman Robotic Team
                     </div>
                     <p className="text-sm leading-tight text-muted-foreground">
-                      Beautifully designed components built with Radix UI and
-                      Tailwind CSS.
+                      Our missions, visions, and structure.
                     </p>
                   </a>
                 </NavigationMenuLink>
               </li>
-              <ListItem href="/docs" title="Introduction">
+              <ListItem href="/docs" title="Management Team">
                 Re-usable components built using Radix UI and Tailwind CSS.
               </ListItem>
-              <ListItem href="/docs/installation" title="Installation">
+              <ListItem href="/docs/installation" title="KRI Teams">
                 How to install dependencies and structure your app.
               </ListItem>
-              <ListItem href="/docs/primitives/typography" title="Typography">
+              <ListItem href="/docs/primitives/typography" title="KRTI Teams">
                 Styles for headings, paragraphs, lists...etc
               </ListItem>
             </ul>
