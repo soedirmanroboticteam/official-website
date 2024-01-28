@@ -8,7 +8,9 @@ import {
   SpotifyLogo,
   TiktokLogo,
   YoutubeLogo,
+  unsoedVector,
 } from "@/assets";
+import Image from "next/image";
 
 const footerLinks: {
   title: string;
@@ -77,10 +79,10 @@ const footerLinks: {
 
 const Footer = () => {
   return (
-    <footer className="bg-footer text-footer-foreground w-full px-4">
+    <footer className="bg-footer text-footer-foreground w-full px-4 pt-8">
       <div className="max-w-screen-xl mx-auto flex flex-col py-8 gap-4">
         <div className="flex justify-between gap-x-32 gap-y-4 flex-wrap">
-          <div className="max-w-md flex flex-col gap-6 items-center">
+          <div className="max-w-md flex flex-col gap-6 items-center md:items-start">
             <Link href="/" className="flex items-center gap-2">
               <OfficialLogo height="64" />
               <h1 className="text-xl font-semibold leading-none">
@@ -102,19 +104,28 @@ const Footer = () => {
               soedirmanrobotic@gmail.com
             </Link>
           </div>
-          <div className="flex flex-1 justify-between flex-wrap gap-y-4">
-            {footerLinks.map((section, index) => (
-              <div className="flex flex-col gap-3" key={index}>
-                <h3 className="text-lg font-bold">{section.title}</h3>
-                <ul className="flex flex-col gap-2">
-                  {section.contents.map((content, id) => (
-                    <li key={id}>
-                      <Link href={content.href}>{content.title}</Link>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
+          <div className="flex flex-1 flex-col gap-6">
+            <div className="flex flex-1 justify-between flex-wrap gap-y-4">
+              {footerLinks.map((section, index) => (
+                <div className="flex flex-col gap-3" key={index}>
+                  <h3 className="text-lg font-bold">{section.title}</h3>
+                  <ul className="flex flex-col gap-2">
+                    {section.contents.map((content, id) => (
+                      <li key={id}>
+                        <Link href={content.href}>{content.title}</Link>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </div>
+            <Separator />
+            <h3 className="font-bold">Big Thanks to:</h3>
+            <div className="flex flex-1 justify-end items-end gap-4">
+              <Link href={"https://unsoed.ac.id"}>
+                <Image src={unsoedVector} alt="unsoed" height={64} />
+              </Link>
+            </div>
           </div>
         </div>
         <Separator />
