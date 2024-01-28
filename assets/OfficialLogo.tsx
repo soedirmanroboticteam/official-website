@@ -3,7 +3,7 @@ import React from "react";
 const OfficialLogo = ({ height }: { height: string }) => {
   return (
     <svg
-      width="auto"
+      width="100%"
       height={height}
       viewBox="0 0 517 601"
       fill="none"

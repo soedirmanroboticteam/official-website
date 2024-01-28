@@ -103,12 +103,12 @@ const Footer = () => {
             </Link>
           </div>
           <div className="flex flex-1 justify-between flex-wrap">
-            {footerLinks.map((section) => (
-              <div className="flex flex-col gap-3">
+            {footerLinks.map((section, index) => (
+              <div className="flex flex-col gap-3" key={index}>
                 <h3 className="font-bold">{section.title}</h3>
                 <ul className="flex flex-col gap-2">
-                  {section.contents.map((content) => (
-                    <li>
+                  {section.contents.map((content, id) => (
+                    <li key={id}>
                       <Link href={content.href}>{content.title}</Link>
                     </li>
                   ))}
