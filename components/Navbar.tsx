@@ -6,6 +6,7 @@ import { HamburgerMenuIcon } from "@radix-ui/react-icons";
 import { ModeToggle } from "./ToggleDark";
 import { NavigationMenuDesktop } from "./NavigationMenuDesktop";
 import { OfficialLogo } from "@/assets";
+import NavigationMenuMobile from "./NavigationMenuMobile";
 
 export default function Navbar() {
   const [state, setState] = useState(false);
@@ -32,12 +33,15 @@ export default function Navbar() {
           </div>
         </div>
         <div
-          className={`pb-3 mt-8 md:flex md:flex-1 md:justify-between md:gap-2 md:pb-0 md:mt-0 ${
-            state ? "block" : "hidden"
+          className={`pb-3 mt-8 flex-col md:flex md:flex-row md:flex-1 md:justify-between md:gap-2 md:pb-0 md:mt-0 gap-y-4 ${
+            state ? "flex" : "hidden"
           }`}
         >
           <div className="hidden md:flex md:flex-1 md:justify-center md:items-center">
             <NavigationMenuDesktop />
+          </div>
+          <div className="flex md:hidden flex-1 flex-col">
+            <NavigationMenuMobile />
           </div>
 
           <ModeToggle />
