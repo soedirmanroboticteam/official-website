@@ -35,7 +35,7 @@ export const navMenu: {
     ],
   },
   {
-    title: "Our Content",
+    title: "Media",
     contents: [
       {
         title: "Konten Edukasi",
@@ -65,7 +65,7 @@ export const navMenu: {
     ],
   },
   {
-    title: "Our Events",
+    title: "Events",
     contents: [
       {
         title: "Pengabdian Masyarakat",
