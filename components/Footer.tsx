@@ -1,17 +1,11 @@
 import React from "react";
 import { Separator } from "@/components/ui/separator";
 import Link from "next/link";
-import {
-  InstagramLogo,
-  LinkedinLogo,
-  OfficialLogo,
-  SpotifyLogo,
-  TiktokLogo,
-  YoutubeLogo,
-  unsoedVector,
-} from "@/assets";
+import { OfficialLogo } from "@/assets";
 import Image from "next/image";
 import { navMenu } from "@/lib/navMenu";
+import { footSocials } from "@/lib/footSocials";
+import { footSponsors } from "@/lib/footSponsors";
 
 const Footer = () => {
   return (
@@ -41,55 +35,49 @@ const Footer = () => {
             </Link>
           </div>
           <div className="flex flex-1 flex-col gap-6">
-            <div className="flex flex-1 justify-between flex-wrap gap-y-4">
-              {navMenu.map((menu, index) => {
-                if (menu.contents) {
-                  return (
-                    <div className="flex flex-col gap-3" key={index}>
-                      <h3 className="text-lg font-bold">{menu.title}</h3>
-                      <ul className="flex flex-col gap-2">
-                        {menu.contents.map((content, id) => (
-                          <li key={id}>
-                            <Link href={content.href}>{content.title}</Link>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  );
-                }
-              })}
-            </div>
+            <ul className="flex flex-1 justify-between flex-wrap gap-y-4">
+              {navMenu.map((menu, index) =>
+                menu.contents ? (
+                  <li className="flex flex-col gap-3" key={index}>
+                    <h3 className="text-lg font-bold">{menu.title}</h3>
+                    <ul className="flex flex-col gap-2">
+                      {menu.contents.map((content, id) => (
+                        <li key={id}>
+                          <Link href={content.href}>{content.title}</Link>
+                        </li>
+                      ))}
+                    </ul>
+                  </li>
+                ) : null
+              )}
+            </ul>
             <Separator />
             <h3 className="font-bold">Big Thanks to:</h3>
-            <div className="flex flex-1 justify-center md:justify-end md:items-end flex-wrap gap-4">
-              <Link href={"https://unsoed.ac.id"}>
-                <Image src={unsoedVector} alt="unsoed" height={64} />
-              </Link>
-            </div>
+            <ul className="flex flex-1 justify-center md:justify-end md:items-end flex-wrap gap-4">
+              {footSponsors.map((sponsor, index) => (
+                <li key={index}>
+                  <Link href={sponsor.href}>
+                    <Image
+                      src={sponsor.src}
+                      alt={sponsor.title}
+                      height={sponsor.height ? sponsor.height : 64}
+                    />
+                  </Link>
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
         <Separator />
         <div className="flex justify-center md:justify-between flex-wrap-reverse gap-y-4 items-center">
           <p>© 2024 Soedirman Robotic Team</p>
-          <div className="flex gap-6 items-center">
-            <Link href="https://www.instagram.com/srtunsoed/">
-              <InstagramLogo height="25" />
-            </Link>
-            <Link href={"https://www.youtube.com/@soedirmanroboticteam"}>
-              <YoutubeLogo height="20" />
-            </Link>
-            <Link href={"https://www.tiktok.com/@srtunsoed"}>
-              <TiktokLogo height="24" />
-            </Link>
-            <Link
-              href={"https://www.linkedin.com/company/soedirman-robotic-team/"}
-            >
-              <LinkedinLogo height="25" />
-            </Link>
-            <Link href="https://open.spotify.com/show/49Nhx2wMSNFfZfC64O7Wmm?si=c6e1ff41fd814cc5">
-              <SpotifyLogo height="25" />
-            </Link>
-          </div>
+          <ul className="flex gap-6 items-center">
+            {footSocials.map((item, index) => (
+              <li key={index}>
+                <Link href={item.href}>{item.logo}</Link>
+              </li>
+            ))}
+          </ul>
         </div>
       </div>
     </footer>

@@ -48,13 +48,13 @@ export const navMenu: {
         href: "/",
       },
       {
-        title: "Cast-Tic",
-        description: "Get to know people behind our Robotic Teams.",
+        title: "YouTube",
+        description: "Get to know people behind our UAV Teams.",
         href: "/",
       },
       {
-        title: "YouTube",
-        description: "Get to know people behind our UAV Teams.",
+        title: "Cast-Tic",
+        description: "Get to know people behind our Robotic Teams.",
         href: "/",
       },
       {
