@@ -34,6 +34,7 @@ const NavigationMenuMobile = () => {
             <Link
               href={menu.href}
               className="flex flex-1 items-center justify-between py-4 text-sm font-bold transition-all hover:underline [&[data-state=open]>svg]:rotate-180"
+              key={index}
             >
               {menu.title}
             </Link>
