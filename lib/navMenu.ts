@@ -84,8 +84,4 @@ export const navMenu: {
       },
     ],
   },
-  {
-    title: "Contact Us",
-    href: "/",
-  },
 ];

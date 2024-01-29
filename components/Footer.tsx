@@ -11,71 +11,7 @@ import {
   unsoedVector,
 } from "@/assets";
 import Image from "next/image";
-
-const footerLinks: {
-  title: string;
-  contents: { title: string; href: string }[];
-}[] = [
-  {
-    title: "About Us",
-    contents: [
-      {
-        title: "Our Structure",
-        href: "/about",
-      },
-      {
-        title: "Management Teams",
-        href: "/about/management",
-      },
-      {
-        title: "KRI Teams",
-        href: "/about/kri",
-      },
-      {
-        title: "KRTI Teams",
-        href: "/about/krti",
-      },
-    ],
-  },
-  {
-    title: "Our Content",
-    contents: [
-      {
-        title: "Konten Edukasi",
-        href: "/konten-edukasi",
-      },
-      {
-        title: "E-Magazine",
-        href: "/emagz",
-      },
-      {
-        title: "Youtube",
-        href: "https://www.youtube.com/@soedirmanroboticteam",
-      },
-      {
-        title: "TikTok",
-        href: "https://www.tiktok.com/@srtunsoed",
-      },
-    ],
-  },
-  {
-    title: "Our Events",
-    contents: [
-      {
-        title: "Pengabdian Masyarakat",
-        href: "/konten-edukasi",
-      },
-      {
-        title: "Internship",
-        href: "/emagz",
-      },
-      {
-        title: "Open Recruitment",
-        href: "https://www.youtube.com/@soedirmanroboticteam",
-      },
-    ],
-  },
-];
+import { navMenu } from "@/lib/navMenu";
 
 const Footer = () => {
   return (
@@ -106,22 +42,26 @@ const Footer = () => {
           </div>
           <div className="flex flex-1 flex-col gap-6">
             <div className="flex flex-1 justify-between flex-wrap gap-y-4">
-              {footerLinks.map((section, index) => (
-                <div className="flex flex-col gap-3" key={index}>
-                  <h3 className="text-lg font-bold">{section.title}</h3>
-                  <ul className="flex flex-col gap-2">
-                    {section.contents.map((content, id) => (
-                      <li key={id}>
-                        <Link href={content.href}>{content.title}</Link>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              ))}
+              {navMenu.map((menu, index) => {
+                if (menu.contents) {
+                  return (
+                    <div className="flex flex-col gap-3" key={index}>
+                      <h3 className="text-lg font-bold">{menu.title}</h3>
+                      <ul className="flex flex-col gap-2">
+                        {menu.contents.map((content, id) => (
+                          <li key={id}>
+                            <Link href={content.href}>{content.title}</Link>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  );
+                }
+              })}
             </div>
             <Separator />
             <h3 className="font-bold">Big Thanks to:</h3>
-            <div className="flex flex-1 justify-end items-end gap-4">
+            <div className="flex flex-1 justify-center md:justify-end md:items-end flex-wrap gap-4">
               <Link href={"https://unsoed.ac.id"}>
                 <Image src={unsoedVector} alt="unsoed" height={64} />
               </Link>
