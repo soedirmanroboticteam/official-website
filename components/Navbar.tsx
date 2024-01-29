@@ -12,7 +12,7 @@ export default function Navbar() {
   const [state, setState] = useState(false);
 
   return (
-    <nav className="bg-background w-full border-b md:border-0">
+    <nav className="sticky top-0 bg-background w-full border-b md:border-0">
       <div className="items-center px-4 max-w-screen-xl mx-auto md:flex md:justify-between md:gap-12 md:px-8">
         <div className="flex items-center justify-between py-3 md:py-5 md:block">
           <Link href="/" className="flex items-center gap-2 text-foreground">
