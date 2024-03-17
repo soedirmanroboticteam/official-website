@@ -5,6 +5,7 @@ import SpotifyLogo from "./SpotifyLogo";
 import TiktokLogo from "./TiktokLogo";
 import YoutubeLogo from "./YoutubeLogo";
 import unsoedVector from "./unsoedVector.png";
+import MediumLogo from "./MediumLogo";
 
 export {
   OfficialLogo,
@@ -13,5 +14,6 @@ export {
   SpotifyLogo,
   TiktokLogo,
   YoutubeLogo,
+  MediumLogo,
   unsoedVector,
 };

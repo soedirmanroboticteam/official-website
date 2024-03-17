@@ -1,6 +1,7 @@
 import {
   InstagramLogo,
   LinkedinLogo,
+  MediumLogo,
   SpotifyLogo,
   TiktokLogo,
   YoutubeLogo,
@@ -17,14 +18,19 @@ export const footSocials: {
     logo: InstagramLogo({ height: "25" }),
   },
   {
+    title: "TikTok",
+    href: "https://www.tiktok.com/@srtunsoed",
+    logo: TiktokLogo({ height: "25" }),
+  },
+  {
     title: "YouTube",
     href: "https://www.youtube.com/@soedirmanroboticteam",
     logo: YoutubeLogo({ height: "20" }),
   },
   {
-    title: "TikTok",
-    href: "https://www.tiktok.com/@srtunsoed",
-    logo: TiktokLogo({ height: "25" }),
+    title: "Medium",
+    href: "https://www.youtube.com/@soedirmanroboticteam",
+    logo: MediumLogo({ height: "25" }),
   },
   {
     title: "LinkedIn",
