@@ -49,12 +49,8 @@ const config = {
           foreground: "hsl(var(--popover-foreground))",
         },
         card: {
-          DEFAULT: "hsl(var(--card))",
-          foreground: "hsl(var(--card-foreground))",
-        },
-        footer: {
-          DEFAULT: "hsl(var(--footer))",
-          foreground: "hsl(var(--footer-foreground))",
+          DEFAULT: "hsla(var(--card))",
+          foreground: "hsla(var(--card-foreground))",
         },
       },
       borderRadius: {
