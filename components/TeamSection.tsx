@@ -14,7 +14,12 @@ const TeamSection = () => {
       <div className="self-stretch justify-start items-start inline-flex">
         <div className="grow shrink basis-0 flex-col justify-start items-start gap-20 inline-flex">
           {ourTeams.map((team) => (
-            <TeamCard title={team.title} desc={team.desc} logo={team.logo} />
+            <TeamCard
+              title={team.title}
+              desc={team.desc}
+              logo={team.logo}
+              key={team.title}
+            />
           ))}
         </div>
       </div>

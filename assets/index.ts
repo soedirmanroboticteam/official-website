@@ -10,7 +10,7 @@ import BlakasuthaLogo from "./BlakasuthaLogo";
 import biantaraLogo from "./biantaraLogo.png";
 import satriaLogo from "./satriaLogo.png";
 import yudishtiraLogo from "./yudishtiraLogo.png";
-import StaticToJsx from "./staticToJsx";
+import StaticToJsx from "./StaticToJsx";
 
 export {
   OfficialLogo,
