@@ -1,3 +1,4 @@
+import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import React from "react";
 
@@ -10,11 +11,10 @@ const NotFound = () => {
         still working on this feature. <br /> Thank you for your understanding!
         ❤️
       </p>
-      <Link
-        href="/"
-        className="px-4 py-2 font-bold text-primary-foreground bg-primary text-lg rounded-md"
-      >
-        Back to Home
+      <Link href="/">
+        <Button variant={"outline"} size={"lg"}>
+          Back to Home
+        </Button>
       </Link>
     </div>
   );
