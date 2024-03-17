@@ -6,6 +6,11 @@ import TiktokLogo from "./TiktokLogo";
 import YoutubeLogo from "./YoutubeLogo";
 import unsoedVector from "./unsoedVector.png";
 import MediumLogo from "./MediumLogo";
+import BlakasuthaLogo from "./BlakasuthaLogo";
+import biantaraLogo from "./biantaraLogo.png";
+import satriaLogo from "./satriaLogo.png";
+import yudishtiraLogo from "./yudishtiraLogo.png";
+import StaticToJsx from "./staticToJsx";
 
 export {
   OfficialLogo,
@@ -15,5 +20,10 @@ export {
   TiktokLogo,
   YoutubeLogo,
   MediumLogo,
+  BlakasuthaLogo,
   unsoedVector,
+  satriaLogo,
+  yudishtiraLogo,
+  biantaraLogo,
+  StaticToJsx,
 };

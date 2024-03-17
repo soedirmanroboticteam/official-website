@@ -1,6 +1,6 @@
 import React from "react";
 
-const TiktokLogo = ({ height }: { height: string }) => {
+const TiktokLogo = ({ height }: { height: number }) => {
   return (
     <svg
       width="100%"

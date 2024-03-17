@@ -1,6 +1,6 @@
 import React from "react";
 
-const SpotifyLogo = ({ height }: { height: string }) => {
+const SpotifyLogo = ({ height }: { height: number }) => {
   return (
     <svg
       width="100%"

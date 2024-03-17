@@ -1,6 +1,6 @@
 import React from "react";
 
-const InstagramLogo = ({ height }: { height: string }) => {
+const InstagramLogo = ({ height }: { height: number }) => {
   return (
     <svg
       width="100%"

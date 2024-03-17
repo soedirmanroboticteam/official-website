@@ -1,6 +1,6 @@
 import React from "react";
 
-const YoutubeLogo = ({ height }: { height: string }) => {
+const YoutubeLogo = ({ height }: { height: number }) => {
   return (
     <svg
       width="100%"

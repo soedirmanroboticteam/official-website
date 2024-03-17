@@ -1,6 +1,6 @@
 import React from "react";
 
-const OfficialLogo = ({ height }: { height: string }) => {
+const OfficialLogo = ({ height }: { height: number }) => {
   return (
     <svg
       width="100%"
