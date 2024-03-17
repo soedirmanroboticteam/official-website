@@ -15,31 +15,31 @@ export const footSocials: {
   {
     title: "Instagram",
     href: "https://www.instagram.com/srtunsoed/",
-    logo: InstagramLogo({ height: "25" }),
+    logo: InstagramLogo({ height: 25 }),
   },
   {
     title: "TikTok",
     href: "https://www.tiktok.com/@srtunsoed",
-    logo: TiktokLogo({ height: "25" }),
+    logo: TiktokLogo({ height: 25 }),
   },
   {
     title: "YouTube",
     href: "https://www.youtube.com/@soedirmanroboticteam",
-    logo: YoutubeLogo({ height: "20" }),
+    logo: YoutubeLogo({ height: 20 }),
   },
   {
     title: "Medium",
-    href: "https://www.youtube.com/@soedirmanroboticteam",
-    logo: MediumLogo({ height: "25" }),
+    href: "https://medium.com/@soedirmanrobotic",
+    logo: MediumLogo({ height: 25 }),
   },
   {
     title: "LinkedIn",
     href: "https://www.linkedin.com/company/soedirman-robotic-team/",
-    logo: LinkedinLogo({ height: "25" }),
+    logo: LinkedinLogo({ height: 25 }),
   },
   {
     title: "Spotify",
     href: "https://open.spotify.com/show/49Nhx2wMSNFfZfC64O7Wmm?si=c6e1ff41fd814cc5",
-    logo: SpotifyLogo({ height: "25" }),
+    logo: SpotifyLogo({ height: 25 }),
   },
 ];
