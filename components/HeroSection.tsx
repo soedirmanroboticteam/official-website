@@ -1,6 +1,7 @@
 import { OfficialLogo } from "@/assets";
 import React from "react";
 import { Button } from "./ui/button";
+import Link from "next/link";
 
 const HeroSection = () => {
   return (
@@ -35,7 +36,9 @@ const HeroSection = () => {
       </div>
       <div className="w-full py-5 justify-center items-center inline-flex">
         <Button variant={"outline"} size={"xl"}>
-          Get Started
+          <Link href={"mailto:soedirmanrobotic@gmail.com"}>
+            Get In Touch With Us
+          </Link>
         </Button>
       </div>
     </div>

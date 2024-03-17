@@ -6,6 +6,14 @@ import {
   StaticToJsx,
 } from "@/assets";
 
+export const teamSection: {
+  title: string;
+  desc: string;
+} = {
+  title: "Our Team",
+  desc: "We are group of students with ambitions to be the winner of Kontes Robot Indonesia (KRI) and Kontes Robot Terbang Indonesia (KRTI). We will always strike through for “The Future We Make, For The Better Life”.",
+};
+
 export const ourTeams: {
   title: string;
   desc: string;
@@ -13,17 +21,17 @@ export const ourTeams: {
 }[] = [
   {
     title: "Blakasutha",
-    desc: "Salah satu tim lomba Kontes Robot Indonesia (KRI) divisi Kontes Robot ABU Indonesia (KRAI).",
+    desc: "Our representative for the Kontes Robot ABU Indonesia (KRAI) division of Kontes Robot Indonesia (KRI). ",
     logo: BlakasuthaLogo({ height: 40 }),
   },
   {
     title: "Satria",
-    desc: "Salah satu tim lomba Kontes Robot Indonesia (KRI) divisi Kontes Robot ABU Indonesia (KRAI).",
+    desc: "Our representative for the Kontes Robot SAR Indonesia (KRSRI) division of Kontes Robot Indonesia (KRI).",
     logo: StaticToJsx({ src: satriaLogo, alt: "Satria Logo", height: 40 }),
   },
   {
     title: "Yudishtira",
-    desc: "Salah satu tim lomba Kontes Robot Indonesia (KRI) divisi Kontes Robot ABU Indonesia (KRAI).",
+    desc: "Our representative for the Kontes Robot Tematik Indonesia (KRTMI) division of Kontes Robot Indonesia (KRI).",
     logo: StaticToJsx({
       src: yudishtiraLogo,
       alt: "Yudishtira Logo",
@@ -32,12 +40,12 @@ export const ourTeams: {
   },
   {
     title: "Biantara Racing Plane",
-    desc: "Salah satu tim lomba Kontes Robot Indonesia (KRI) divisi Kontes Robot ABU Indonesia (KRAI).",
+    desc: "Our representative for the Racing Plane (RP) division of Kontes Robot Terbang Indonesia (KRTI).",
     logo: StaticToJsx({ src: biantaraLogo, alt: "Biantara Logo", height: 40 }),
   },
   {
     title: "Biantara Fixed Wing",
-    desc: "Salah satu tim lomba Kontes Robot Indonesia (KRI) divisi Kontes Robot ABU Indonesia (KRAI).",
+    desc: "Our representative for the Fixed Wing (FW) division of Kontes Robot Terbang Indonesia (KRTI).",
     logo: StaticToJsx({ src: biantaraLogo, alt: "Biantara Logo", height: 40 }),
   },
 ];

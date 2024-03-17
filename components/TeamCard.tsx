@@ -18,7 +18,7 @@ const TeamCard = ({
 }) => {
   return (
     <div className="w-full h-72 flex odd:flex-row even:flex-row-reverse gap-24">
-      <Card className="w-fit h-full">
+      <Card className="w-full h-full">
         <CardHeader>
           <div className="w-fit">{logo}</div>
           <CardTitle className="pt-8">{title}</CardTitle>
