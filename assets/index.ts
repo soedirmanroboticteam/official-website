@@ -11,6 +11,9 @@ import biantaraLogo from "./biantaraLogo.png";
 import satriaLogo from "./satriaLogo.png";
 import yudishtiraLogo from "./yudishtiraLogo.png";
 import StaticToJsx from "./StaticToJsx";
+import kri_2021 from "./achievements/kri_2021.png";
+import kri_2023 from "./achievements/kri_2023.png";
+import krti_2023 from "./achievements/krti_2023.png";
 
 export {
   OfficialLogo,
@@ -26,4 +29,7 @@ export {
   yudishtiraLogo,
   biantaraLogo,
   StaticToJsx,
+  kri_2021,
+  kri_2023,
+  krti_2023,
 };
