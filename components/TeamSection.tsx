@@ -22,7 +22,7 @@ const TeamSection = () => {
       </div>
       <div className="self-stretch px-96 justify-center items-start inline-flex">
         <div className="self-stretch flex-col justify-start items-start inline-flex">
-          <Button variant={"outline"} size={"xl"}>
+          <Button variant={"outline"} size={"xl"} style={{ padding: '20px 32px' }}>
             Check Out Our Full Organization Structure
           </Button>
         </div>
