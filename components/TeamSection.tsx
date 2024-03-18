@@ -6,9 +6,9 @@ import TeamCard from "./TeamCard";
 
 const TeamSection = () => {
   return (
-    <div className="flex w-full px-10 py-20 flex-col justify-center items-start gap-12">
+    <section className="flex w-full px-10 py-20 flex-col justify-center items-start gap-12">
       <SectionTitle title={teamSection.title} desc={teamSection.desc} />
-      <div className="self-stretch justify-start items-start inline-flex">
+      <div className="self-stretch justify-start items-start inline-flex px-12">
         <div className="grow shrink basis-0 flex-col justify-start items-start gap-8 inline-flex">
           {ourTeams.map((team) => (
             <TeamCard
@@ -27,7 +27,7 @@ const TeamSection = () => {
           </Button>
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 
