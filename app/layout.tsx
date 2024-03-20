@@ -4,6 +4,7 @@ import { ThemeProvider } from "@/components/theme-provider";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { poppins } from "./styles/fonts";
+import { Analytics } from "@vercel/analytics/react";
 
 export const metadata: Metadata = {
   title: "Soedirman Robotic Team",
@@ -26,6 +27,7 @@ export default function RootLayout({
         >
           <Navbar />
           {children}
+          <Analytics />
           <Footer />
         </ThemeProvider>
       </body>

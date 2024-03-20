@@ -18,7 +18,6 @@ const AchievementSection = () => {
             </div>
           </div>
         </div>
-        
         <div className="w-full overflow-hidden">
           <div className="flex overflow-hidden w-full justify-start items-start">
             <div className="relative flex flex-row flex-nowrap justify-start py-2 w-full overflow-hidden">
