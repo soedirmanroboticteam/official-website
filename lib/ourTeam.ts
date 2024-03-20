@@ -11,7 +11,7 @@ export const teamSection: {
   desc: string;
 } = {
   title: "Our Team",
-  desc: "Soedirman Robotic Team adalah salah satu unit kegiatan mahasiswa yang berkecimpung dalam pengembangan dunia robotic serta sebagai sarana pengembangan kreativitas mahasiswa dalam berkarya.",
+  desc: "We're a group of students with ambitions to be the winner of Kontes Robot Indonesia (KRI) and Kontes Robot Terbang Indonesia (KRTI). We will always strike through for “The Future We Make, For The Better Life”.",
 };
 
 export const ourTeams: {
@@ -21,27 +21,31 @@ export const ourTeams: {
 }[] = [
   {
     title: "Blakasutha",
-    desc: "Melakukan riset dan  pengembangan  robot ABU Robocon yang akan diikutkan ke ajang kontes robot Abu Indonesia. oleh tim KRAI.",
+    desc: "Our representative for the Kontes Robot ABU Indonesia (KRAI) division of Kontes Robot Indonesia (KRI).",
     logo: BlakasuthaLogo({ height: 40 }),
   },
   {
     title: "Satria",
-    desc: "Bergerak dalam bidang riset dan pengembangan robot otonom berkaki khususnya dalam ajang Kontes Robot Indonesia divisi kontes robot SAR. Memiliki tugas yang mencakup  tentang konsep robot yang akan dibuat, seperti bentuk fisik,dimensi robot, komponen yang digunakan ,dan algoritma  pergerakan robot.",
+    desc: "Our representative for the Kontes Robot SAR Indonesia (KRSRI) division of Kontes Robot Indonesia (KRI).",
     logo: StaticToJsx({ src: satriaLogo, alt: "Satria Logo", height: 40 }),
   },
   {
     title: "Yudishtira",
-    desc: "Melakukan riset dan pengembangan robot tematik yang akan diikutkan ke ajang kontes  robot tematik  indonesia  oleh tim KRTMI dan ikut  berkecimpung dalam memastikan robot yang akan diikutkan dalam ajang tersebut.",
-    logo: StaticToJsx({ src: yudishtiraLogo, alt: "Yudishtira Logo", height: 40 }),
+    desc: "Our representative for the Kontes Robot Tematik Indonesia (KRTMI) division of Kontes Robot Indonesia (KRI).",
+    logo: StaticToJsx({
+      src: yudishtiraLogo,
+      alt: "Yudishtira Logo",
+      height: 40,
+    }),
   },
   {
     title: "Biantara Racing Plane",
-    desc: "Berfokus merancang dan mengembangkan  robot terbang tanpa awak dalam bidang aeromodelling agar dapat bergerak dengan lincah , cepat dan akurat pada lintasan.yang diinginkan.",
+    desc: "Our representative for the Racing Plane (RP) division of Kontes Robot Terbang Indonesia (KRTI).",
     logo: StaticToJsx({ src: biantaraLogo, alt: "Biantara Logo", height: 40 }),
   },
   {
     title: "Biantara Fixed Wing",
-    desc: "Melakukan riset berkala di bidang robot terbang dalam mempersiapkan robot yang akan diikut konteskan serta mengembangkan robot tersebut untuk dipastikan kembali..",
+    desc: "Our representative for the Fixed Wing (FW) division of Kontes Robot Terbang Indonesia (KRTI).",
     logo: StaticToJsx({ src: biantaraLogo, alt: "Biantara Logo", height: 40 }),
   },
 ];

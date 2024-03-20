@@ -13,7 +13,7 @@ export const frequentQuestion: {
       React.createElement(
         "a",
         {
-          className: "underline",
+          style: { "text-decoration": "underline" },
           href: "mailto:soedirmanrobotic@gmail.com",
         },
         "soedirmanrobotic@gmail.com"
@@ -22,19 +22,19 @@ export const frequentQuestion: {
       React.createElement(
         "a",
         {
-          className: "underline",
-          href: "https://wa.me/6282328826221",
+          style: { "text-decoration": "underline" },
+          href: "https://wa.me/6281229947468",
         },
-        "082328826221 (Fida)"
+        "081229947468 (Fida)"
       ),
       " for media partnership and ",
       React.createElement(
         "a",
         {
-          className: "underline",
-          href: "https://wa.me/6282328826221",
+          style: { "text-decoration": "underline" },
+          href: "https://wa.me/6281295234031",
         },
-        "082328826221 (Tsania)"
+        "081295234031 (Tsania)"
       ),
       " if you're interested to support us as one of our sponsors."
     ),
@@ -49,10 +49,10 @@ export const frequentQuestion: {
       React.createElement(
         "a",
         {
-          className: "underline",
-          href: "https://wa.me/6282328826221",
+          style: { "text-decoration": "underline" },
+          href: "https://wa.me/6281229947468",
         },
-        "082328826221 (Fida)."
+        "081229947468 (Fida)."
       )
     ),
   },
@@ -65,7 +65,7 @@ export const frequentQuestion: {
       React.createElement(
         "a",
         {
-          className: "underline",
+          style: { "text-decoration": "underline" },
           href: "https://instagram.com/srtunsoed",
         },
         "Instagram"
@@ -82,7 +82,7 @@ export const frequentQuestion: {
       React.createElement(
         "a",
         {
-          className: "underline",
+          style: { "text-decoration": "underline" },
           href: "https://instagram.com/srtunsoed",
         },
         "Instagram."
