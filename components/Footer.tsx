@@ -6,6 +6,7 @@ import Image from "next/image";
 import { navMenu } from "@/lib/navMenu";
 import { footSocials } from "@/lib/footSocials";
 import { footSponsors } from "@/lib/footSponsors";
+import { footDesc } from "@/lib/footDesc";
 
 const Footer = () => {
   return (
@@ -21,17 +22,9 @@ const Footer = () => {
                 Team
               </h1>
             </Link>
-            <p className=" text-center md:text-justify">
-              We are group of students with ambitions to be the winner of Kontes
-              Robot Indonesia (KRI) and Kontes Robot Terbang Indonesia (KRTI).
-              We will always strike through for “The Future We Make, For The
-              Better Life”.
-            </p>
-            <Link
-              href={"mailto:soedirmanrobotic@gmail.com"}
-              className="font-bold"
-            >
-              soedirmanrobotic@gmail.com
+            <p className=" text-center md:text-justify">{footDesc.desc}</p>
+            <Link href={`mailto:${footDesc.email}`} className="font-bold">
+              {footDesc.email}
             </Link>
           </div>
           <div className="flex flex-1 flex-col gap-6">
