@@ -11,7 +11,7 @@ const TeamSection = () => {
         <SectionTitle title={teamSection.title} desc={teamSection.desc} />
       </div>
       <div className="self-stretch justify-start items-start inline-flex px-12">
-        <div className="grow shrink basis-0 flex-col justify-start items-start gap-20 inline-flex">
+        <div className="grow shrink basis-0 flex-col justify-start items-start gap-8 inline-flex">
           {ourTeams.map((team) => (
             <TeamCard
               title={team.title}
@@ -24,7 +24,7 @@ const TeamSection = () => {
       </div>
       <div className="self-stretch px-96 justify-center items-start inline-flex">
         <div className="self-stretch flex-col justify-start items-start inline-flex">
-          <Button variant={"outline"} size={"xl"} style={{ padding: '20px 32px' }}>
+          <Button variant={"outline"} size={"xl"}>
             Check Out Our Full Organization Structure
           </Button>
         </div>
