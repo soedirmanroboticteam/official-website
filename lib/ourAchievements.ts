@@ -38,4 +38,16 @@ export const ourAchievements: {
     pos: "16 Besar Nasional",
     division: "Divisi KRAI",
   },
+  {
+    img: kri_2021,
+    title: "KRI 2021",
+    pos: "Peringkat 5 Nasional",
+    division: "Divisi KRSRI",
+  },
+  {
+    img: kri_2021,
+    title: "KRI 2021",
+    pos: "16 Besar Nasional",
+    division: "Divisi KRAI",
+  },
 ];

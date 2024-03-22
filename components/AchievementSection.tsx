@@ -33,7 +33,7 @@ const AchievementSection = () => {
                   {ourAchievements.map((achievement, index) => (
                     <CarouselItem
                       key={index}
-                      className="basis-1/4 h-16 justify-center items-center gap-1 inline-flex"
+                      className=" basis-auto h-16 justify-center items-center gap-1 inline-flex"
                     >
                       <Image
                         height={64}

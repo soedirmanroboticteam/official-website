@@ -1,6 +1,7 @@
 // import Image from "next/image";
 
 import AchievementSection from "@/components/AchievementSection";
+import ContactSection from "@/components/ContactSection";
 import FaqSection from "@/components/FaqSection";
 import HeroSection from "@/components/HeroSection";
 import TeamSection from "@/components/TeamSection";
@@ -12,6 +13,7 @@ export default function Home() {
       <TeamSection />
       <AchievementSection />
       <FaqSection />
+      <ContactSection />
     </main>
   );
 }
