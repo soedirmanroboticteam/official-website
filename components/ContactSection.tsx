@@ -10,7 +10,7 @@ import Link from "next/link";
 const ContactSection = () => {
   return (
     <section className="w-full px-12">
-      <div className="relative w-full h-96 flex flex-col bg-muted text-muted-foreground rounded-3xl justify-center items-center gap-6 overflow-hidden">
+      <div className="relative w-full h-96 flex flex-col bg-accent rounded-3xl justify-center items-center gap-6 overflow-hidden">
         <Carousel
           orientation="horizontal"
           plugins={[AutoScroll({ speed: 0.5, playOnInit: true })]}
@@ -20,7 +20,7 @@ const ContactSection = () => {
           <CarouselContent className="-ml-0">
             {contactImages.map((contact, index) => (
               <CarouselItem key={index} className=" pl-0 basis-24">
-                <Image src={contact.img} alt="" />
+                <Image src={contact.img} alt="" className="w-24" />
               </CarouselItem>
             ))}
           </CarouselContent>
