@@ -17,15 +17,13 @@ const TeamCard = ({
   desc: string;
 }) => {
   return (
-    <div className="w-full h-72 flex odd:flex-row even:flex-row-reverse gap-24">
-      <Card className="w-full h-full">
-        <CardHeader>
-          <div className="w-fit">{logo}</div>
-          <CardTitle className="pt-8">{title}</CardTitle>
-          <CardDescription>{desc}</CardDescription>
-        </CardHeader>
-      </Card>
-    </div>
+    <Card className="basis-2/3 h-72">
+      <CardHeader>
+        <div className="w-fit">{logo}</div>
+        <CardTitle className="pt-8">{title}</CardTitle>
+        <CardDescription>{desc}</CardDescription>
+      </CardHeader>
+    </Card>
   );
 };
 

@@ -3,6 +3,7 @@ import SectionTitle from "./SectionTitle";
 import { Button } from "./ui/button";
 import { teamSection, ourTeams } from "@/lib/ourTeam";
 import TeamCard from "./TeamCard";
+import TeamCardPhoto from "./TeamCardPhoto";
 
 const TeamSection = () => {
   return (
@@ -11,14 +12,23 @@ const TeamSection = () => {
         <SectionTitle title={teamSection.title} desc={teamSection.desc} />
       </div>
       <div className="self-stretch justify-start items-start inline-flex px-12">
-        <div className="grow shrink basis-0 flex-col justify-start items-start gap-8 inline-flex">
-          {ourTeams.map((team) => (
-            <TeamCard
-              title={team.title}
-              desc={team.desc}
-              logo={team.logo}
-              key={team.title}
-            />
+        <div className="w-full grow shrink basis-1 flex-col justify-start items-start gap-8 inline-flex">
+          {ourTeams.map((team, index) => (
+            <div
+              className="w-full flex odd:flex-row even:flex-row-reverse justify-between gap-8"
+              key={index}
+            >
+              <TeamCard
+                title={team.title}
+                desc={team.desc}
+                logo={team.logo}
+                key={team.title}
+              />
+              <TeamCardPhoto
+                direction={team.direction}
+                members={team.members}
+              />
+            </div>
           ))}
         </div>
       </div>

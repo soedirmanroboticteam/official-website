@@ -5,10 +5,12 @@ import Link from "next/link";
 
 const HeroSection = () => {
   return (
-    <div className="w-full flex-col justify-start items-center inline-flex">
-      <div className="self-stretch py-12 px-12 bg-black justify-center items-center gap-32 inline-flex">
-        <OfficialLogo height={360} />
-        <div className="flex-col justify-start items-start inline-flex">
+    <div className="w-full flex-col justify-start items-center flex">
+      <div className="self-stretch py-12 pl-24 bg-black justify-center items-center gap-32 flex">
+        <div className=" h-full">
+          <OfficialLogo height={360} />
+        </div>
+        <div className="flex-col justify-start items-start flex">
           <div className="justify-center items-start inline-flex">
             <div className="self-stretch flex-col justify-start items-center inline-flex">
               <div className="text-center text-foreground text-xl font-normal font-poppins leading-7">
@@ -34,7 +36,7 @@ const HeroSection = () => {
           </div>
         </div>
       </div>
-      <div className="w-full py-5 justify-center items-center inline-flex">
+      <div className="w-full py-5 justify-center items-center flex">
         <Button variant={"outline"} size={"xl"}>
           <Link href={"mailto:soedirmanrobotic@gmail.com"}>
             Get In Touch With Us
