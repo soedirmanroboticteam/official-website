@@ -39,27 +39,31 @@ export const navMenu: {
     contents: [
       {
         title: "Konten Edukasi",
-        description: "Get to know more about us.",
+        description: "Check out our stories on Medium.",
         href: "https://medium.com/@soedirmanrobotic",
       },
       {
         title: "E-Magazine",
-        description: "Get to know people behind our organization.",
+        description:
+          "Get up to date about latest technology via our E-Magazine.",
         href: "/e-magazine",
       },
       {
         title: "YouTube",
-        description: "Get to know people behind our UAV Teams.",
+        description:
+          "Get to know more about our organization achievements and history!",
         href: "https://www.youtube.com/@soedirmanroboticteam",
       },
       {
         title: "Cast-Tic",
-        description: "Get to know people behind our Robotic Teams.",
+        description:
+          "Don't have time to learn new things? Listen to our podcast and learn something new while still being able to do what you do.",
         href: "https://open.spotify.com/show/49Nhx2wMSNFfZfC64O7Wmm?si=c6e1ff41fd814cc5",
       },
       {
         title: "TikTok",
-        description: "Get to know people behind our UAV Teams.",
+        description:
+          "Learning doesn't have to be boring! Have fun while learning new things with our TikTok videos.",
         href: "https://www.tiktok.com/@srtunsoed",
       },
     ],
@@ -69,17 +73,19 @@ export const navMenu: {
     contents: [
       {
         title: "Pengabdian Masyarakat",
-        description: "Get to know more about us.",
+        description: "Teaching is the best way of learning!",
         href: "/pengabdian-masyarakat",
       },
       {
         title: "Internship",
-        description: "Get to know people behind our organization.",
+        description:
+          "Follow our Instagram and get notified about our Internship program!",
         href: "/internship",
       },
       {
         title: "Open Recruitment",
-        description: "Get to know people behind our Robotic Teams.",
+        description:
+          "Are you ready to be the next fighters? Don't miss out our opening for new recruits! ",
         href: "https://join.soedirmanrobotic.com",
       },
     ],
