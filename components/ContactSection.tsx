@@ -9,7 +9,7 @@ import Link from "next/link";
 
 const ContactSection = () => {
   return (
-    <section className="w-full px-12">
+    <section className="w-full px-1 md:px-12">
       <div className="relative w-full h-96 flex flex-col bg-accent rounded-3xl justify-center items-center gap-6 overflow-hidden">
         <Carousel
           orientation="horizontal"

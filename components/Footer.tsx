@@ -28,11 +28,11 @@ const Footer = () => {
             </Link>
           </div>
           <div className="flex flex-1 flex-col gap-6">
-            <ul className="inline-flex flex-1 justify-between items-start">
+            <ul className="flex flex-1 flex-wrap justify-between items-start">
               {navMenu.map((menu, index) =>
                 menu.contents ? (
                   <li
-                    className="grow shrink basis-0 self-stretch px-2 flex-col justify-start items-start gap-2 inline-flex"
+                    className="grow shrink basis-1/2 md:basis-0 self-stretch px-2 flex-col justify-start items-start gap-2 inline-flex"
                     key={index}
                   >
                     <h3 className="text-lg font-bold">{menu.title}</h3>
