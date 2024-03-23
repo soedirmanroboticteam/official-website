@@ -16,7 +16,7 @@ const TeamCardPhoto = ({
   }[];
 }) => {
   return (
-    <Card className="relative basis-1/3 h-72 bg-foreground overflow-hidden">
+    <Card className="relative basis-full md:basis-1/3 min-h-72 bg-foreground overflow-hidden">
       <Carousel
         orientation="horizontal"
         plugins={[
@@ -25,16 +25,18 @@ const TeamCardPhoto = ({
         opts={{ loop: true }}
         className="absolute w-full h-full top-0 left-0"
       >
-        <CarouselContent
-          className={`-ml-0 flex ${
-            direction == "forward" ? "flex-row" : "flex-row-reverse"
-          }`}
-        >
-          {members.map((member, index) => (
-            <CarouselItem key={index} className="pl-0 basis-[72px]">
-              <Image src={member.img} alt={member.alt} height={288} />
-            </CarouselItem>
-          ))}
+        <CarouselContent className={`-ml-0 flex`}>
+          {direction == "forward"
+            ? members.map((member, index) => (
+                <CarouselItem key={index} className="pl-0 basis-[72px]">
+                  <Image src={member.img} alt={member.alt} height={288} />
+                </CarouselItem>
+              ))
+            : members.reverse().map((member, index) => (
+                <CarouselItem key={index} className="pl-0 basis-[72px]">
+                  <Image src={member.img} alt={member.alt} height={288} />
+                </CarouselItem>
+              ))}
         </CarouselContent>
       </Carousel>
       <div

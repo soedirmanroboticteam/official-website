@@ -17,7 +17,7 @@ const TeamCard = ({
   desc: string;
 }) => {
   return (
-    <Card className="basis-2/3 h-72">
+    <Card className="basis-full md:basis-2/3 h-72">
       <CardHeader>
         <div className="w-fit">{logo}</div>
         <CardTitle className="pt-8">{title}</CardTitle>
