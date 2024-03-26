@@ -4,6 +4,7 @@ import { Button } from "./ui/button";
 import { teamSection, ourTeams } from "@/lib/ourTeam";
 import TeamCard from "./TeamCard";
 import TeamCardPhoto from "./TeamCardPhoto";
+import Link from "next/link";
 
 const TeamSection = () => {
   return (
@@ -34,9 +35,11 @@ const TeamSection = () => {
       </div>
       <div className="self-stretch justify-center items-start inline-flex">
         <div className="self-stretch flex-col justify-start items-start inline-flex">
-          <Button variant={"outline"} size={"xl"}>
-            Check Out Our Full Organization Structure
-          </Button>
+          <Link href={"/about"}>
+            <Button variant={"outline"} size={"xl"} className="max-w-full">
+              Check Out Our Full Organization
+            </Button>
+          </Link>
         </div>
       </div>
     </section>
