@@ -7,7 +7,7 @@ import TeamCardPhoto from "./TeamCardPhoto";
 
 const TeamSection = () => {
   return (
-    <section className="flex w-full px-4 md:px-10 py-20 flex-col justify-center items-start gap-12">
+    <section className="flex w-full px-4 md:px-10 py-8 md:py-20 flex-col justify-center items-start gap-12">
       <div className="md:px-12">
         <SectionTitle title={teamSection.title} desc={teamSection.desc} />
       </div>
