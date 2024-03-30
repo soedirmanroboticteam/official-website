@@ -2,10 +2,11 @@ import { OfficialLogo } from "@/assets";
 import React from "react";
 import { Button } from "./ui/button";
 import Link from "next/link";
+import HeroGallery from "./HeroGallery";
 
 const HeroSection = () => {
   return (
-    <div className="w-full flex-col justify-start items-center py-6 md:py-12 flex">
+    <section className="w-full flex-col justify-start items-center gap-8 py-6 md:py-12 flex">
       <div className="relative flex-col md:flex-row bg-black justify-center items-center gap-8 md:gap-32 flex">
         <div className="relative h-60 md:h-80">
           <OfficialLogo height={"100%"} />
@@ -43,7 +44,8 @@ const HeroSection = () => {
           </Link>
         </Button>
       </div>
-    </div>
+      <HeroGallery />
+    </section>
   );
 };
 
