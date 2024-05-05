@@ -1,7 +1,11 @@
 "use client";
 import React from "react";
-import { Button } from "./ui/button";
-import { Carousel, CarouselContent, CarouselItem } from "./ui/carousel";
+import { Button } from "../../components/ui/button";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+} from "../../components/ui/carousel";
 import { contactImages } from "@/lib/contactSection";
 import AutoScroll from "embla-carousel-auto-scroll";
 import Image from "next/image";

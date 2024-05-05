@@ -1,7 +1,11 @@
 "use client";
 import React from "react";
-import { Card } from "./ui/card";
-import { Carousel, CarouselContent, CarouselItem } from "./ui/carousel";
+import { Card } from "../../components/ui/card";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+} from "../../components/ui/carousel";
 import Image, { StaticImageData } from "next/image";
 import AutoScroll from "embla-carousel-auto-scroll";
 

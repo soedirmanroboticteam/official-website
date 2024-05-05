@@ -3,7 +3,11 @@ import { sora } from "@/app/styles/fonts";
 import { ourAchievements } from "@/lib/ourAchievements";
 import Image from "next/image";
 import React from "react";
-import { Carousel, CarouselContent, CarouselItem } from "./ui/carousel";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+} from "../../components/ui/carousel";
 import AutoScroll from "embla-carousel-auto-scroll";
 
 const AchievementSection = () => {

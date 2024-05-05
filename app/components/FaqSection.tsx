@@ -1,11 +1,11 @@
 import React from "react";
-import SectionTitle from "./SectionTitle";
+import SectionTitle from "../../components/SectionTitle";
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
-} from "./ui/accordion";
+} from "../../components/ui/accordion";
 import { frequentQuestion } from "@/lib/frequentQuestions";
 
 const FaqSection = () => {

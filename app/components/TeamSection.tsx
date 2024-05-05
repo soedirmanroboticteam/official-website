@@ -1,6 +1,6 @@
 import React from "react";
-import SectionTitle from "./SectionTitle";
-import { Button } from "./ui/button";
+import SectionTitle from "../../components/SectionTitle";
+import { Button } from "../../components/ui/button";
 import { teamSection, ourTeams } from "@/lib/ourTeam";
 import TeamCard from "./TeamCard";
 import TeamCardPhoto from "./TeamCardPhoto";
@@ -26,7 +26,7 @@ const TeamSection = () => {
                 key={team.title}
               />
               <TeamCardPhoto
-                direction={team.direction}
+                direction={index % 2 ? "backward" : "forward"}
                 members={team.members}
               />
             </div>
