@@ -2,6 +2,7 @@ import { sora } from "@/app/styles/fonts";
 import { createClientBrowserServer } from "@/lib/supabase/server";
 import React from "react";
 import SponsorCarousel from "./SponsorCarousel";
+import { Fade } from "react-awesome-reveal";
 
 const SponsorSection = async () => {
   const supabase = createClientBrowserServer();
@@ -16,8 +17,8 @@ const SponsorSection = async () => {
         <div className="pb-5 flex-col justify-start items-start flex">
           <div className="h-8 px-2 justify-start items-start flex">
             <div className="flex-col justify-start items-start flex">
-              <div className="text-2xl font-semibold leading-loose">
-                Our Achievements
+              <div className="text-3xl font-semibold leading-loose">
+                Sponsorship
               </div>
             </div>
           </div>
