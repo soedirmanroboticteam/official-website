@@ -27,6 +27,11 @@ const HeroManagement = () => {
                 className="border-20px border-white rounded-lg bg-white md:max-w-3xl lg:max-w-6xl px-10"
             />
           </div>
+          <div className="w-full flex justify-center items-center text-center mt-24">
+            <div className="text-foreground text-3xl md:text-4xl font-bold font-poppins md:leading-7">
+              OUR STORY
+            </div>
+          </div>
         </div>
       </div>
     </section>
