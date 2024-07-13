@@ -1,6 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 'use client' //Client Side
-import { management1 } from "@/assets/hero";
+import { Management } from "@/assets/otherpages/about";
 import Image from 'next/image';
 
 const HeroManagement = () => {
@@ -20,15 +20,15 @@ const HeroManagement = () => {
               Connection <br />
             </div>
           </div>
-          <div className="w-full flex justify-center items-center mt-8">
+          <div className="w-full flex justify-center items-center mt-8 md:max-w-7xl max-w-6xl px-10">
             <Image
-                src={management1}
+                src={Management}
                 alt="Team Image"
-                className="border-20px border-white rounded-lg bg-white md:max-w-3xl lg:max-w-6xl px-10"
+                className="border-20px border-black rounded-lg bg-black "
             />
           </div>
           <div className="w-full flex justify-center items-center text-center mt-24">
-            <div className="text-foreground text-3xl md:text-4xl font-bold font-poppins md:leading-7">
+            <div className="text-foreground text-xl md:text-4xl font-bold font-poppins md:leading-7">
               OUR STORY
             </div>
           </div>
