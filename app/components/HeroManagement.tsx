@@ -28,7 +28,7 @@ const HeroManagement = () => {
             />
           </div>
           <div className="w-full flex justify-center items-center text-center mt-24">
-            <div className="text-foreground text-xl md:text-4xl font-bold font-poppins md:leading-7">
+            <div className="text-foreground text-2xl md:text-4xl font-bold font-poppins md:leading-7">
               OUR STORY
             </div>
           </div>
