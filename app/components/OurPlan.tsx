@@ -21,7 +21,6 @@ const OurHistory = () => {
             src={Plan}
             alt="Our History"
             className="object-cover border-black rounded-lg bg-black h-full w-full"
-            layout="fill"
           />
         </div>
       </div>

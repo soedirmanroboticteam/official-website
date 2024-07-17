@@ -6,15 +6,14 @@ const OurAchievement = () => {
   return (
     <section className="flex flex-col-reverse md:flex-row justify-between items-center gap-8 py-6 md:py-12">
         <div className="w-full md:w-1/2 px-10 md:px-32">
-        <div className="md:h-[400px] relative">
-          <Image
-            src={Achievement}
-            alt="Our History"
-            className="object-cover border-black rounded-lg bg-black h-full w-full"
-            layout="fill"
-          />
+          <div className="md:h-[400px] relative">
+            <Image
+              src={Achievement}
+              alt="Our History"
+              className="object-cover border-black rounded-lg bg-black h-full w-full"
+            />
+          </div>
         </div>
-      </div>
       <div className="w-full md:w-1/2 px-10 md:px-32">
         <div className="text-xl">2021 - 2024</div>
         <div className="md:text-3xl text-2xl  font-bold mb-4">
