@@ -16,10 +16,14 @@ const OurHistory = () => {
         </div>
       </div>
       <div className="w-full md:w-1/2 px-10 md:px-32">
-        <Image
-          src={History}
-          alt="Our History"
-          className="w-full h-auto border-20px border-white rounded-lg bg-black" />
+        <div className="h-[400px] relative">
+          <Image
+            src={History}
+            alt="Our History"
+            className="object-cover border-black rounded-lg bg-black h-full w-full"
+            layout="fill"
+          />
+        </div>
       </div>
     </section>
   );

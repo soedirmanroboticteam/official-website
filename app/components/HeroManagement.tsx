@@ -20,7 +20,7 @@ const HeroManagement = () => {
               Connection <br />
             </div>
           </div>
-          <div className="w-full flex justify-center items-center mt-8 md:max-w-7xl max-w-6xl px-10">
+          <div className="w-full flex justify-center items-center mt-8 md:max-w-7xl max-w-6xl md:px-10 px-4">
             <Image
                 src={Management}
                 alt="Team Image"
