@@ -16,12 +16,11 @@ const OurHistory = () => {
         </div>
       </div>
       <div className="w-full md:w-1/2 px-10 md:px-32">
-        <div className="h-[400px] relative">
+        <div className="md:h-[400px] relative">
           <Image
             src={History}
             alt="Our History"
             className="object-cover border-black rounded-lg bg-black h-full w-full"
-            layout="fill"
           />
         </div>
       </div>

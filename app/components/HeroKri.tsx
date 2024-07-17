@@ -8,8 +8,7 @@ const HeroAboutUs = () => {
         <div className="relative flex flex-col justify-center items-center">
           <div className="w-full py-1 flex justify-center items-center">
             <div className="text-white text-center text-5xl md:text-8xl font-bold font-poppins uppercase leading-10">
-              Management <br />
-              Teams <br />
+              KRI Teams
             </div>
           </div>
           <div className="w-full flex justify-center items-center text-center mt-4">

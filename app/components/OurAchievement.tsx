@@ -6,7 +6,7 @@ const OurAchievement = () => {
   return (
     <section className="flex flex-col-reverse md:flex-row justify-between items-center gap-8 py-6 md:py-12">
         <div className="w-full md:w-1/2 px-10 md:px-32">
-        <div className="h-[400px] relative">
+        <div className="md:h-[400px] relative">
           <Image
             src={Achievement}
             alt="Our History"
