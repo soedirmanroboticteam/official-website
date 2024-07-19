@@ -1,4 +1,4 @@
-import HeroKri from "@/app/components/HeroKri";
+import HeroKri from "@/app/components/technical/HeroKri";
 
 export default function Home() {
   return (

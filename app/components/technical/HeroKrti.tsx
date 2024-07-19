@@ -1,14 +1,14 @@
 /* eslint-disable @next/next/no-img-element */
 'use client' //Client Side
 
-const HeroAboutUs = () => {
+const HeroKrti = () => {
   return (
-    <section className="flex-col justify-start items-center gap-8 py-6 md:py-12 pt-7 md:pt-115 flex">
+    <section className="flex-col justify-start items-center gap-8 py-6 md:py-12 flex ">
       <div className="relative flex flex-col md:flex-row bg-black justify-center items-center gap-8 md:gap-32 w-full">
         <div className="relative flex flex-col justify-center items-center">
           <div className="w-full py-1 flex justify-center items-center">
             <div className="text-white text-center text-5xl md:text-8xl font-bold font-poppins uppercase leading-10">
-              KRI Teams
+              KRTI Teams
             </div>
           </div>
           <div className="w-full flex justify-center items-center text-center mt-4">
@@ -23,4 +23,4 @@ const HeroAboutUs = () => {
   );
 };
 
-export default HeroAboutUs;
+export default HeroKrti;
