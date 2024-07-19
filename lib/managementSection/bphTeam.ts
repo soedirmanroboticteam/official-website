@@ -50,14 +50,9 @@ export const bphTeam: {
     division: "Staff of Financial Manager"
   },
   {
-    img: h1a023101,
+    img: h1e023009,
     name: "Muhammad Timur Priatama",
     division: "Staff of Financial Manager"
-  },
-  {
-    img: h1e023009,
-    name: "Helga Ramania Harianto",
-    division: "Staff of Secretary"
   },
 ];
 
