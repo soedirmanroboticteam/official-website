@@ -1,7 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 'use client' //Client Side
 
-const HeroAboutUs = () => {
+const HeroManagement = () => {
   return (
     <section className="flex-col justify-start items-center gap-8 py-6 md:py-12 flex ">
       <div className="relative flex flex-col md:flex-row bg-black justify-center items-center gap-8 md:gap-32 w-full">
@@ -24,4 +24,4 @@ const HeroAboutUs = () => {
   );
 };
 
-export default HeroAboutUs;
+export default HeroManagement;
