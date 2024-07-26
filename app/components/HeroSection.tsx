@@ -8,8 +8,8 @@ import { Fade } from "react-awesome-reveal";
 
 const HeroSection = () => {
   return (
-    <Fade triggerOnce={true}>
-      <section className="w-full flex-col justify-start items-center gap-8 py-6 md:py-12 flex">
+    <section className="w-full flex-col justify-start items-center gap-8 py-6 md:py-12 flex">
+      <Fade triggerOnce={true}>
         <div className="relative flex-col md:flex-row bg-black justify-center items-center gap-8 md:gap-32 flex">
           <div className="relative h-60 md:h-80">
             <OfficialLogo height={"100%"} />
@@ -48,8 +48,8 @@ const HeroSection = () => {
             </Button>
         </div>
         <HeroGallery />
-      </section>
-    </Fade>
+      </Fade>
+    </section>
   );
 };
 
