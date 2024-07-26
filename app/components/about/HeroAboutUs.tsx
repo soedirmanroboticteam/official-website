@@ -1,6 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 'use client' //Client Side
-import { Management } from "@/assets/otherpages/about";
+import { other01 } from "@/assets/otherpages";
 import Image from 'next/image';
 
 const HeroAboutUs = () => {
@@ -22,7 +22,7 @@ const HeroAboutUs = () => {
           </div>
           <div className="w-full flex justify-center items-center mt-8 md:max-w-7xl max-w-6xl md:px-10 px-4">
             <Image
-                src={Management}
+                src={other01}
                 alt="Team Image"
                 className="border-20px border-black rounded-lg bg-black "
             />

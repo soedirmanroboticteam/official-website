@@ -1,5 +1,5 @@
   'use client' //Client Side
-  import { History } from "@/assets/otherpages/about";
+  import { other02 } from "@/assets/otherpages";
   import Image from 'next/image';
 
   const OurHistory = () => {
@@ -18,7 +18,7 @@
         <div className="w-full md:w-1/2 px-10 md:px-32">
           <div className="md:h-[400px] relative">
             <Image
-              src={History}
+              src={other02}
               alt="Our History"
               className="object-cover border-black rounded-lg bg-black h-full w-full"
             />

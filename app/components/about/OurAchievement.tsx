@@ -1,5 +1,5 @@
 'use client' //Client Side
-import { Achievement } from "@/assets/otherpages/about";
+import { other03 } from "@/assets/otherpages";
 import Image from 'next/image';
 
 const OurAchievement = () => {
@@ -8,7 +8,7 @@ const OurAchievement = () => {
         <div className="w-full md:w-1/2 px-10 md:px-32">
           <div className="md:h-[400px] relative">
             <Image
-              src={Achievement}
+              src={other03}
               alt="Our History"
               className="object-cover border-black rounded-lg bg-black h-full w-full"
             />
