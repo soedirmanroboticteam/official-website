@@ -1,7 +1,7 @@
-import HeroAboutUs from "@/app/components/about/HeroAboutUs";
-import OurHistory from "@/app/components/about/OurHistory";
-import OurAchievement from "../components/about/OurAchievement";
-import OurPlan from "../components/about/OurPlan";
+import HeroAboutUs from "@/app/about/components/HeroAboutUs";
+import OurHistory from "@/app/about/components/OurHistory";
+import OurAchievement from "./components/OurAchievement";
+import OurPlan from "./components/OurPlan";
 
 export default function Home() {
   return (

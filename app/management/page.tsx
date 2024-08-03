@@ -1,19 +1,26 @@
-import HeroManagement from "@/app/components/management/HeroManagement";
-import BPHSection from "@/app/components/management/BPHSection";
-import HRDSection from "@/app/components/management/HRDSection";
-import MEDCRESection from "@/app/components/management/MEDCRESection";
-import PRSection from "@/app/components/management/PRSection";
-import SponsorshipSection from "@/app/components/management/SponsorshipSection";
+import { createClientBrowserServer } from "@/lib/supabase/server";
+import HeroManagement from "@/app/management/components/HeroManagement";
+import DivisionSection from "@/components/DivisionSection";
 
-export default function Home() {
+export default async function Home() {
+  const supabase = createClientBrowserServer();
+
+  const { data, error } = await supabase
+    .from("divisions")
+    .select("*")
+    .eq("team_id", "1")
+    .order("id", { ascending: true });
+
+  if (error) {
+    return <div>Error: {error.message}</div>;
+  }
+
   return (
     <main className="flex flex-col items-center justify-between px-2">
       <HeroManagement />
-      <BPHSection />
-      <HRDSection />
-      <MEDCRESection />
-      <PRSection />
-      <SponsorshipSection />
+      {data.map((division, index) => (
+        <DivisionSection division={division} key={index} />
+      ))}
     </main>
   );
 }
