@@ -13,11 +13,11 @@ export default async function ProtectedPage() {
   }
 
   return (
-    <div className="flex-1 w-full flex flex-col gap-20 items-center">
+    <main className="flex-1 w-full flex flex-col gap-20 items-center">
       <form action={logoutServer}>
         <Button>SignOut</Button>
       </form>
       this is protected page
-    </div>
+    </main>
   );
 }

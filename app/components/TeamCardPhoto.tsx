@@ -6,19 +6,21 @@ import {
   CarouselContent,
   CarouselItem,
 } from "../../components/ui/carousel";
-import Image, { StaticImageData } from "next/image";
+import Image from "next/image";
 import AutoScroll from "embla-carousel-auto-scroll";
 
-const TeamCardPhoto = ({
-  direction,
-  members,
-}: {
-  direction: string;
-  members: {
-    alt: string;
-    img: StaticImageData;
-  }[];
-}) => {
+interface MemberInterface {
+  id: number;
+  name: string;
+  image_url: string;
+}
+
+interface TeamCardPhotoProps {
+  direction: "forward" | "backward";
+  members: MemberInterface[];
+}
+
+const TeamCardPhoto = ({ direction, members }: TeamCardPhotoProps) => {
   return (
     <Card className="relative basis-full md:basis-1/3 min-h-72 bg-foreground overflow-hidden">
       <Carousel
@@ -33,12 +35,30 @@ const TeamCardPhoto = ({
           {direction == "forward"
             ? members.map((member, index) => (
                 <CarouselItem key={index} className="pl-0 basis-[72px]">
-                  <Image src={member.img} alt={member.alt} height={288} />
+                  <div className="relative w-[72px] h-72">
+                    <Image
+                      src={member.image_url}
+                      alt={member.name}
+                      fill={true}
+                      style={{
+                        objectFit: "cover",
+                      }}
+                    />
+                  </div>
                 </CarouselItem>
               ))
             : members.reverse().map((member, index) => (
                 <CarouselItem key={index} className="pl-0 basis-[72px]">
-                  <Image src={member.img} alt={member.alt} height={288} />
+                  <div className="relative w-[72px] h-72">
+                    <Image
+                      src={member.image_url}
+                      alt={member.name}
+                      fill={true}
+                      style={{
+                        objectFit: "cover",
+                      }}
+                    />
+                  </div>
                 </CarouselItem>
               ))}
         </CarouselContent>
