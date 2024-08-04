@@ -12,7 +12,7 @@ export const loginWithGoogleServer = async () => {
         access_type: "offline",
         prompt: "consent",
       },
-      redirectTo: `${process.env.NEXT_PUBLIC_URL}/auth/callback`,
+      redirectTo: `/auth/callback`,
     },
   });
 
