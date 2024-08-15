@@ -292,7 +292,8 @@ const ProfileForm = ({
                 </SelectContent>
               </Select>
               <FormDescription>
-                Select last 3 digit of your student id number/NIM.
+                Select last 3 digit of your student id number/NIM. Ex: H1A021053{" "}
+                {"->"} 053.
               </FormDescription>
               <FormMessage />
             </FormItem>

@@ -216,7 +216,7 @@ const InternshipForm = ({ userId, options }: InternshipFormProps) => {
                 />
               </FormControl>
               <FormDescription>
-                You're free to use any language you feel comfortable with.
+                You&apos;re free to use any language you feel comfortable with.
               </FormDescription>
               <FormMessage />
             </FormItem>
@@ -264,7 +264,7 @@ const InternshipForm = ({ userId, options }: InternshipFormProps) => {
                 />
               </FormControl>
               <FormDescription>
-                You're free to use any language you feel comfortable with.
+                You&apos;re free to use any language you feel comfortable with.
               </FormDescription>
               <FormMessage />
             </FormItem>
@@ -333,9 +333,6 @@ const InternshipForm = ({ userId, options }: InternshipFormProps) => {
           <LoadingButton type="submit" loading={loading}>
             Save
           </LoadingButton>
-          {/* <Button type="submit" disabled={loading}>
-            {loading?:"Save"}
-          </Button> */}
         </div>
       </form>
     </Form>
