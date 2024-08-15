@@ -27,6 +27,10 @@ const DivisionSection = async ({
     .eq("division", division.id)
     .order("title", { ascending: true });
 
+  if (error) {
+    return <div>Error: {error.message}</div>;
+  }
+
   return (
     <section className="w-full px-2 md:px-12 py-6">
       <div className="w-full text-center font-bold text-2xl md:text-4xl font-poppins pb-8">

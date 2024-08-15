@@ -7,6 +7,7 @@ import { poppins } from "./styles/fonts";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { supabase } from "@/lib/initSupabase";
+import { Toaster } from "@/components/ui/toaster";
 
 export const metadata: Metadata = {
   title: "Soedirman Robotic Team",
@@ -32,6 +33,7 @@ export default function RootLayout({
           <Analytics />
           <SpeedInsights />
           <Footer />
+          <Toaster />
         </ThemeProvider>
       </body>
     </html>
