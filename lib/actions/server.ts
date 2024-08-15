@@ -8,7 +8,7 @@ export const loginWithGoogleServer = async () => {
   const { data } = await supabase.auth.signInWithOAuth({
     provider: "google",
     options: {
-      redirectTo: `/auth/callback`,
+      redirectTo: `${process.env.NEXT_PUBLIC_URL}/auth/callback`,
     },
   });
 
