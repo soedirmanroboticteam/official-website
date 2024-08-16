@@ -79,7 +79,8 @@ const FormSchema = z.object({
       required_error: "Please enter your name.",
     })
     .regex(/^[^,]*$/)
-    .min(3),
+    .min(3, { message: "Name must be at least 3 characters." })
+    .max(128, { message: "Name must be at most 128 characters." }),
   major_id: z
     .string({
       required_error: "Please select your major.",
@@ -99,8 +100,8 @@ const FormSchema = z.object({
     .string({
       required_error: "Please enter your WhatsApp number.",
     })
-    .min(12)
-    .max(14)
+    .min(12, { message: "WhatsApp number must be at least 12 characters." })
+    .max(14, { message: "WhatsApp number must be at most 14 characters." })
     .regex(/62\d+/),
 });
 

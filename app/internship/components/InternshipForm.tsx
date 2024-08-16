@@ -56,7 +56,8 @@ const FormSchema = z.object({
       required_error: "Please input your motivation for your first choice.",
     })
     .regex(/^[^,]*$/)
-    .min(3),
+    .min(24, { message: "Please input at least 24 characters." })
+    .max(300, { message: "Please input at most 300 characters." }),
   second_choice: z
     .string({
       required_error: "Please select your second choice.",
@@ -67,24 +68,34 @@ const FormSchema = z.object({
       required_error: "Please input your motivation for your second choice.",
     })
     .regex(/^[^,]*$/)
-    .min(3),
+    .min(24, { message: "Please input at least 24 characters." })
+    .max(300, { message: "Please input at most 300 characters." }),
   hope: z
     .string({
       required_error:
         "Please input your hope by joining this internship program.",
     })
     .regex(/^[^,]*$/)
-    .min(3),
+    .min(24, { message: "Please input at least 24 characters." })
+    .max(300, { message: "Please input at most 300 characters." }),
   cv_url: z
     .string({
       required_error: "Please enter your CV Url.",
     })
-    .regex(/http[A-Za-z]?:\/\/([A-Za-z]+\.[A-Za-z][A-Za-z]+)[^,]*$/),
+    .regex(/http[A-Za-z]?:\/\/([A-Za-z]+\.[A-Za-z][A-Za-z]+)[^,]*$/, {
+      message: "Please enter a valid URL.",
+    })
+    .max(128, { message: "Please input URL at most 128 characters." }),
   twibbon_url: z
     .string({
       required_error: "Please enter your Twibbon Url.",
     })
-    .regex(/http[A-Za-z]?:\/\/((www.)?instagram.com\/p\/)[^,]*$/),
+    .regex(/http[A-Za-z]?:\/\/((www.)?instagram.com\/p\/)[^,]*$/, {
+      message: "Please input a valid Instagram Post URL.",
+    })
+    .max(128, {
+      message: "Please input Instagram Post URL at most 128 characters.",
+    }),
 });
 
 const InternshipForm = ({ userId, options }: InternshipFormProps) => {

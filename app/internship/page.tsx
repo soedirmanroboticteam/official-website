@@ -3,6 +3,8 @@ import { redirect } from "next/navigation";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { ExclamationTriangleIcon } from "@radix-ui/react-icons";
 import FormTab from "./components/FormTab";
+import SectionTitle from "@/components/SectionTitle";
+import { Progress } from "@/components/ui/progress";
 
 interface MajorInterface {
   id: number;
@@ -32,6 +34,28 @@ export default async function ProtectedPage() {
 
   if (error || !data?.user) {
     redirect("/login");
+  }
+
+  test: if (new Date("2024-08-26 00:00:00.000000+00").getTime() > Date.now()) {
+    break test;
+
+    return (
+      <main className="container mx-auto py-4">
+        <SectionTitle
+          title="Coming Soon"
+          desc="Stay tuned at our Instagram @srtunsoed for the latest updates! Don't forget to join our upcoming Open House Events too!"
+        />
+        <Progress
+          value={
+            ((new Date("2024-08-11 00:00:00.000000+00").getTime() -
+              Date.now()) /
+              (new Date("2024-08-11 00:00:00.000000+00").getTime() -
+                new Date("2024-08-26 00:00:00.000000+00").getTime())) *
+            100
+          }
+        />
+      </main>
+    );
   }
 
   const [majors, years, options] = await Promise.all([
