@@ -39,6 +39,7 @@ import {
   CommandList,
 } from "@/components/ui/command";
 import { cn } from "@/lib/utils";
+import { logoutClient } from "@/lib/actions/client";
 
 interface ProfileInterface {
   name: string;
@@ -425,7 +426,15 @@ const ProfileForm = ({
             </FormItem>
           )}
         />
-        <div className="flex justify-end">
+        <div className="flex justify-between">
+          <Button
+            className="rounded-md"
+            variant="destructive"
+            onClick={() => logoutClient()}
+          >
+            Log Out
+          </Button>
+
           <LoadingButton type="submit" loading={loading}>
             Save
           </LoadingButton>
