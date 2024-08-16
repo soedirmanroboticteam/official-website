@@ -13,10 +13,21 @@ export default async function DashboardPage() {
     redirect("/login");
   }
 
+  const isAdmin = await supabase
+    .from("profiles")
+    .select("is_admin")
+    .eq("id", data.user.id)
+    .limit(1)
+    .single();
+
+  if (isAdmin.error || !Boolean(isAdmin.data.is_admin)) {
+    redirect("/internship");
+  }
+
   const internApplications = await supabase
     .from("intern_applications")
     .select(
-      "id, profiles:profiles!inner(name, email, majors:majors!inner(name, alphabet_codes(name), degrees(code), faculties(name, alphabet_codes(name))), years:years!inner(name), student_code_id, whatsapp), first:options!biodatas_first_choice_fkey(id, name), first_reason, second:options!biodatas_second_choice_fkey(id, name), second_reason, hope, cv_url, twibbon_url, updated_at"
+      "id, profiles:profiles!inner(name, email, majors:majors!inner(name, alphabet_codes(name), degrees(code), faculties(name, alphabet_codes(name))), years:years!inner(name), student_code_id, whatsapp), first:options!biodatas_first_choice_fkey(id, name), first_reason, second:options!biodatas_second_choice_fkey(id, name), second_reason, hope, cv_url, twibbon_url, created_at, updated_at"
     )
     .order("created_at", { ascending: true })
     .returns<InternApplication[]>();

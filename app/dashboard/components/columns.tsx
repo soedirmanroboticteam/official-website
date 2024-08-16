@@ -1,7 +1,6 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { Checkbox } from "@/components/ui/checkbox";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -60,6 +59,7 @@ export type InternApplication = {
   hope: string;
   cv_url: string;
   twibbon_url: string;
+  created_at: string;
   updated_at: string;
 };
 
@@ -74,7 +74,7 @@ export const columns: ColumnDef<InternApplication>[] = [
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
           className="rounded-md"
         >
-          Name
+          Fullname
           <ChevronsUpDown className="ml-2 h-4 w-4" />
         </Button>
       );
@@ -97,9 +97,18 @@ export const columns: ColumnDef<InternApplication>[] = [
     },
   },
   {
-    id: "first_choice",
+    id: "First Choice",
     accessorKey: "first.name",
-    header: () => <div className="text-left">First Choice</div>,
+    header: ({ column }) => (
+      <Button
+        variant="ghost"
+        onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        className="rounded-md"
+      >
+        First Choice
+        <ChevronsUpDown className="ml-2 h-4 w-4" />
+      </Button>
+    ),
     cell: ({ row }) => {
       const data = row.original;
 
@@ -116,9 +125,18 @@ export const columns: ColumnDef<InternApplication>[] = [
     },
   },
   {
-    id: "second_choice",
-    accessorKey: "second.name",
-    header: () => <div className="text-left">Second Choice</div>,
+    id: "Second Choice",
+    accessorKey: "second.id",
+    header: ({ column }) => (
+      <Button
+        variant="ghost"
+        onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        className="rounded-md"
+      >
+        Second Choice
+        <ChevronsUpDown className="ml-2 h-4 w-4" />
+      </Button>
+    ),
     cell: ({ row }) => {
       const data = row.original;
 
@@ -135,20 +153,43 @@ export const columns: ColumnDef<InternApplication>[] = [
     },
   },
   {
-    id: "updated_at",
-    header: () => <div className="text-right">Date</div>,
+    id: "Last Edited",
+    accessorKey: "updated_at",
+    header: ({ column }) => (
+      <div className="flex justify-end">
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          className="rounded-md"
+        >
+          Last Edited
+          <ChevronsUpDown className="ml-2 h-4 w-4" />
+        </Button>
+      </div>
+    ),
     cell: ({ row }) => {
       const data = row.original;
 
       return (
-        <div className="text-right">
-          {new Date(data.updated_at).toLocaleDateString()}
+        <div className="flex justify-end">
+          <HoverCard>
+            <HoverCardTrigger>
+              <Button variant="link" suppressHydrationWarning>
+                {new Date(data.updated_at).toLocaleString()}
+              </Button>
+            </HoverCardTrigger>
+            <HoverCardContent>
+              <p suppressHydrationWarning>
+                First submited: {new Date(data.created_at).toLocaleString()}
+              </p>
+            </HoverCardContent>
+          </HoverCard>
         </div>
       );
     },
   },
   {
-    id: "actions",
+    id: "Actions",
     header: () => <div className="text-right">Actions</div>,
     cell: ({ row }) => {
       const data = row.original;

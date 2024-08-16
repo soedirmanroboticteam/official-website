@@ -30,6 +30,15 @@ import {
   DropdownMenuContent,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import {
+  Select,
+  SelectContent,
+  SelectLabel,
+  SelectTrigger,
+  SelectGroup,
+  SelectValue,
+  SelectItem,
+} from "@/components/ui/select";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -66,43 +75,88 @@ export function DataTable<TData, TValue>({
 
   return (
     <div>
-      <div className="flex items-center py-4">
-        <Input
-          placeholder="Filter first choice..."
-          value={
-            (table.getColumn("first_choice")?.getFilterValue() as string) ?? ""
+      <div className="flex items-center py-4 gap-4">
+        <Select
+          onValueChange={(value) =>
+            table.getColumn("First Choice")?.setFilterValue(value)
           }
-          onChange={(event) =>
-            table.getColumn("first_choice")?.setFilterValue(event.target.value)
+          defaultValue={
+            table.getColumn("First Choice")?.getFilterValue() as string
           }
-          className="max-w-sm"
-        />
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="outline" className="ml-auto">
-              Columns
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end">
-            {table
-              .getAllColumns()
-              .filter((column) => column.getCanHide())
-              .map((column) => {
-                return (
-                  <DropdownMenuCheckboxItem
-                    key={column.id}
-                    className="capitalize"
-                    checked={column.getIsVisible()}
-                    onCheckedChange={(value) =>
-                      column.toggleVisibility(!!value)
-                    }
-                  >
-                    {column.id}
-                  </DropdownMenuCheckboxItem>
-                );
-              })}
-          </DropdownMenuContent>
-        </DropdownMenu>
+          value={table.getColumn("First Choice")?.getFilterValue() as string}
+        >
+          <SelectTrigger className="max-w-xs">
+            <SelectValue placeholder="Filter first choice" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectGroup>
+              <SelectLabel>Management Team</SelectLabel>
+              <SelectItem value="Secretary">Secretary</SelectItem>
+              <SelectItem value="Financial Manager">
+                Financial Manager
+              </SelectItem>
+              <SelectItem value="Human Resource Development (HRD)">
+                Human Resource Development (HRD)
+              </SelectItem>
+              <SelectItem value="Public Relation (PR)">
+                Public Relation (PR)
+              </SelectItem>
+              <SelectItem value="Creative Media">Creative Media</SelectItem>
+              <SelectItem value="Sponsorship">Sponsorship</SelectItem>
+              <SelectItem value="Team Manager">Team Manager</SelectItem>
+            </SelectGroup>
+            <SelectGroup>
+              <SelectLabel>Technical Team</SelectLabel>
+              <SelectItem value="Mechanic">Mechanic</SelectItem>
+              <SelectItem value="Electronic">Electronic</SelectItem>
+              <SelectItem value="Programmer/System">
+                Programmer/System
+              </SelectItem>
+            </SelectGroup>
+          </SelectContent>
+        </Select>
+        <Select
+          onValueChange={(value) =>
+            table.getColumn("Second Choice")?.setFilterValue(value)
+          }
+          defaultValue={
+            table.getColumn("Second Choice")?.getFilterValue() as string
+          }
+          value={table.getColumn("Second Choice")?.getFilterValue() as string}
+        >
+          <SelectTrigger className="max-w-xs">
+            <SelectValue placeholder="Filter second choice" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectGroup>
+              <SelectLabel>Management Team</SelectLabel>
+              <SelectItem value="1">Secretary</SelectItem>
+              <SelectItem value="2">Financial Manager</SelectItem>
+              <SelectItem value="3">
+                Human Resource Development (HRD)
+              </SelectItem>
+              <SelectItem value="4">Public Relation (PR)</SelectItem>
+              <SelectItem value="5">Creative Media</SelectItem>
+              <SelectItem value="6">Sponsorship</SelectItem>
+              <SelectItem value="7">Team Manager</SelectItem>
+            </SelectGroup>
+            <SelectGroup>
+              <SelectLabel>Technical Team</SelectLabel>
+              <SelectItem value="8">Mechanic</SelectItem>
+              <SelectItem value="9">Electronic</SelectItem>
+              <SelectItem value="10">Programmer/System</SelectItem>
+            </SelectGroup>
+          </SelectContent>
+        </Select>
+        <Button
+          className="rounded-md ml-auto"
+          onClick={() => {
+            table.getColumn("First Choice")?.setFilterValue(null);
+            table.getColumn("Second Choice")?.setFilterValue(null);
+          }}
+        >
+          Reset filter
+        </Button>
       </div>
       <div className="rounded-md border">
         <Table>
@@ -153,28 +207,10 @@ export function DataTable<TData, TValue>({
             )}
           </TableBody>
         </Table>
-        <div className="flex justify-between items-center px-4">
-          <div className="flex-1 text-sm text-muted-foreground">
+        <div className="flex justify-end items-center px-4">
+          <div className="text-sm text-muted-foreground p-4">
             Showing a total of {table.getFilteredRowModel().rows.length}{" "}
             records.
-          </div>
-          <div className="flex items-center justify-end space-x-2 py-4">
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={() => table.previousPage()}
-              disabled={!table.getCanPreviousPage()}
-            >
-              Previous
-            </Button>
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={() => table.nextPage()}
-              disabled={!table.getCanNextPage()}
-            >
-              Next
-            </Button>
           </div>
         </div>
       </div>
