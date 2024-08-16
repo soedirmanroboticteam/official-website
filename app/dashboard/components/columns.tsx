@@ -25,12 +25,14 @@ export type InternApplication = {
   profiles: {
     name: string;
     email: string;
+    avatar: string;
     majors: {
       name: string;
       alphabet_codes: {
         name: string;
       };
       degrees: {
+        name: string;
         code: number;
       };
       faculties: {
@@ -70,7 +72,7 @@ export const columns: ColumnDef<InternApplication>[] = [
     header: ({ column }) => {
       return (
         <Button
-          variant="ghost"
+          variant="link"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
           className="rounded-md"
         >
@@ -101,7 +103,7 @@ export const columns: ColumnDef<InternApplication>[] = [
     accessorKey: "first.name",
     header: ({ column }) => (
       <Button
-        variant="ghost"
+        variant="link"
         onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         className="rounded-md"
       >
@@ -129,7 +131,7 @@ export const columns: ColumnDef<InternApplication>[] = [
     accessorKey: "second.id",
     header: ({ column }) => (
       <Button
-        variant="ghost"
+        variant="link"
         onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         className="rounded-md"
       >
@@ -158,7 +160,7 @@ export const columns: ColumnDef<InternApplication>[] = [
     header: ({ column }) => (
       <div className="flex justify-end">
         <Button
-          variant="ghost"
+          variant="link"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
           className="rounded-md"
         >
