@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -51,31 +51,40 @@ const FormSchema = z.object({
       required_error: "Please select your first choice.",
     })
     .regex(/\d+/),
-  first_reason: z.string({
-    required_error: "Please input your motivation for your first choice.",
-  }),
+  first_reason: z
+    .string({
+      required_error: "Please input your motivation for your first choice.",
+    })
+    .regex(/^[^,]*$/)
+    .min(3),
   second_choice: z
     .string({
       required_error: "Please select your second choice.",
     })
     .regex(/\d+/),
-  second_reason: z.string({
-    required_error: "Please input your motivation for your second choice.",
-  }),
-  hope: z.string({
-    required_error:
-      "Please input your hope by joining this internship program.",
-  }),
+  second_reason: z
+    .string({
+      required_error: "Please input your motivation for your second choice.",
+    })
+    .regex(/^[^,]*$/)
+    .min(3),
+  hope: z
+    .string({
+      required_error:
+        "Please input your hope by joining this internship program.",
+    })
+    .regex(/^[^,]*$/)
+    .min(3),
   cv_url: z
     .string({
       required_error: "Please enter your CV Url.",
     })
-    .regex(/http[A-Za-z]?:\/\/([A-Za-z]+\.[A-Za-z][A-Za-z]+)/),
+    .regex(/http[A-Za-z]?:\/\/([A-Za-z]+\.[A-Za-z][A-Za-z]+)[^,]*$/),
   twibbon_url: z
     .string({
       required_error: "Please enter your Twibbon Url.",
     })
-    .regex(/http[A-Za-z]?:\/\/((www.)?instagram.com\/p\/)/),
+    .regex(/http[A-Za-z]?:\/\/((www.)?instagram.com\/p\/)[^,]*$/),
 });
 
 const InternshipForm = ({ userId, options }: InternshipFormProps) => {

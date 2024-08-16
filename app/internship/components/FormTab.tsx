@@ -18,7 +18,7 @@ interface MajorInterface {
 
 interface YearInterface {
   id: number;
-  name: string;
+  name: number;
 }
 
 interface OptionsInterface {

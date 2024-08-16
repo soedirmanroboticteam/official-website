@@ -1,9 +1,5 @@
 import { createClientBrowserServer } from "@/lib/supabase/server";
 import { redirect } from "next/navigation";
-import ProfileForm from "./components/ProfileForm";
-import SectionTitle from "@/components/SectionTitle";
-import InternshipForm from "./components/InternshipForm";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { ExclamationTriangleIcon } from "@radix-ui/react-icons";
 import FormTab from "./components/FormTab";
@@ -21,7 +17,7 @@ interface MajorInterface {
 
 interface YearInterface {
   id: number;
-  name: string;
+  name: number;
 }
 
 interface OptionsInterface {

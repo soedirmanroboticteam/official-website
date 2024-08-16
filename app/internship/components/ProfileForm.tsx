@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -61,7 +61,7 @@ interface MajorInterface {
 
 interface YearInterface {
   id: number;
-  name: string;
+  name: number;
 }
 
 interface ProfileFormProps {
@@ -76,6 +76,7 @@ const FormSchema = z.object({
     .string({
       required_error: "Please enter your name.",
     })
+    .regex(/^[^,]*$/)
     .min(3),
   major_id: z
     .string({
@@ -328,7 +329,7 @@ const ProfileForm = ({
                 <SelectContent>
                   {years.map((year) => (
                     <SelectItem value={year.id.toString()} key={year.id}>
-                      {year.name}
+                      {(year.name + 2000).toString()}
                     </SelectItem>
                   ))}
                 </SelectContent>
