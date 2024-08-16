@@ -77,9 +77,10 @@ export function DataTable<TData, TValue>({
     <div>
       <div className="flex items-center py-4 gap-4">
         <Select
-          onValueChange={(value) =>
-            table.getColumn("First Choice")?.setFilterValue(value)
-          }
+          onValueChange={(value) => {
+            table.getColumn("First Choice")?.setFilterValue(value);
+            table.getColumn("Second Choice")?.setFilterValue(null);
+          }}
           defaultValue={
             table.getColumn("First Choice")?.getFilterValue() as string
           }
@@ -116,9 +117,10 @@ export function DataTable<TData, TValue>({
           </SelectContent>
         </Select>
         <Select
-          onValueChange={(value) =>
-            table.getColumn("Second Choice")?.setFilterValue(value)
-          }
+          onValueChange={(value) => {
+            table.getColumn("Second Choice")?.setFilterValue(value);
+            table.getColumn("Second Choice")?.setFilterValue(null);
+          }}
           defaultValue={
             table.getColumn("Second Choice")?.getFilterValue() as string
           }
