@@ -87,45 +87,43 @@ const InternshipForm = ({ userId, options }: InternshipFormProps) => {
 
   const supabase = createClientBrowserClient();
 
-  useEffect(() => {
-    async function getApplication() {
-      const { data, error } = await supabase
-        .from("intern_applications")
-        .select(
-          "first_choice, first_reason, second_choice, second_reason, hope, cv_url, twibbon_url"
-        )
-        .eq("id", userId)
-        .single<InternshipInterface>();
+  async function getApplication() {
+    const { data, error } = await supabase
+      .from("intern_applications")
+      .select(
+        "first_choice, first_reason, second_choice, second_reason, hope, cv_url, twibbon_url"
+      )
+      .eq("id", userId)
+      .maybeSingle<InternshipInterface>();
 
-      if (error) {
-        if (error.code === "PGRST116") return;
+    if (error) {
+      toast({
+        title: "Error!",
+        description: (
+          <p className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
+            {error.code}
+          </p>
+        ),
+        variant: "destructive",
+      });
 
-        toast({
-          title: "Error!",
-          description: (
-            <p className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-              {error.code}
-            </p>
-          ),
-          variant: "destructive",
-        });
-
-        return;
-      }
-
-      if (data.first_choice)
-        form.setValue("first_choice", data.first_choice.toString());
-      if (data.first_choice) form.setValue("first_reason", data.first_reason);
-      if (data.first_choice)
-        form.setValue("second_choice", data.second_choice.toString());
-      if (data.first_choice) form.setValue("second_reason", data.second_reason);
-      if (data.first_choice) form.setValue("hope", data.hope);
-      if (data.first_choice) form.setValue("cv_url", data.cv_url);
-      if (data.first_choice) form.setValue("twibbon_url", data.twibbon_url);
+      return;
     }
 
-    getApplication();
-  }, []);
+    if (!data) return;
+
+    if (data.first_choice)
+      form.setValue("first_choice", data.first_choice.toString());
+    if (data.first_choice) form.setValue("first_reason", data.first_reason);
+    if (data.first_choice)
+      form.setValue("second_choice", data.second_choice.toString());
+    if (data.first_choice) form.setValue("second_reason", data.second_reason);
+    if (data.first_choice) form.setValue("hope", data.hope);
+    if (data.first_choice) form.setValue("cv_url", data.cv_url);
+    if (data.first_choice) form.setValue("twibbon_url", data.twibbon_url);
+  }
+
+  getApplication();
 
   async function onSubmit(data: z.infer<typeof FormSchema>) {
     setLoading(true);

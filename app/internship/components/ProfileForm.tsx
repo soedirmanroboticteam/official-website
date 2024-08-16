@@ -23,6 +23,22 @@ import {
 import { toast } from "@/components/ui/use-toast";
 import { LoadingButton } from "@/components/ui/loading-button";
 import { createClientBrowserClient } from "@/lib/supabase/client";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
+import { Button } from "@/components/ui/button";
+import { CaretSortIcon, CheckIcon } from "@radix-ui/react-icons";
+import {
+  Command,
+  CommandEmpty,
+  CommandGroup,
+  CommandInput,
+  CommandItem,
+  CommandList,
+} from "@/components/ui/command";
+import { cn } from "@/lib/utils";
 
 interface ProfileInterface {
   name: string;
@@ -48,16 +64,11 @@ interface YearInterface {
   name: string;
 }
 
-interface StudentCodesInterface {
-  id: number;
-  name: string;
-}
-
 interface ProfileFormProps {
   userId: string;
   majors: MajorInterface[];
   years: YearInterface[];
-  student_codes: StudentCodesInterface[];
+  setVerified: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const FormSchema = z.object({
@@ -94,7 +105,7 @@ const ProfileForm = ({
   userId,
   majors,
   years,
-  student_codes,
+  setVerified,
 }: ProfileFormProps) => {
   const [loading, setLoading] = useState<boolean>(false);
 
@@ -104,39 +115,48 @@ const ProfileForm = ({
     resolver: zodResolver(FormSchema),
   });
 
-  useEffect(() => {
-    async function getProfile() {
-      const { data, error } = await supabase
-        .from("profiles")
-        .select("name, major_id, year_id, student_code_id, whatsapp")
-        .eq("id", userId)
-        .single<ProfileInterface>();
+  async function getProfile() {
+    const { data, error } = await supabase
+      .from("profiles")
+      .select("name, major_id, year_id, student_code_id, whatsapp")
+      .eq("id", userId)
+      .maybeSingle<ProfileInterface>();
 
-      if (error) {
-        toast({
-          title: "Error!",
-          description: (
-            <p className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-              {error.message}
-            </p>
-          ),
-          variant: "destructive",
-        });
+    if (error) {
+      toast({
+        title: "Error!",
+        description: (
+          <p className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
+            {error.message}
+          </p>
+        ),
+        variant: "destructive",
+      });
 
-        return;
-      }
-
-      form.setValue("name", data.name);
-
-      if (data.major_id) form.setValue("major_id", data.major_id.toString());
-      if (data.year_id) form.setValue("year_id", data.year_id.toString());
-      if (data.student_code_id)
-        form.setValue("student_code_id", data.student_code_id.toString());
-      if (data.whatsapp) form.setValue("whatsapp", data.whatsapp);
+      return;
     }
 
-    getProfile();
-  }, []);
+    if (!data) return;
+
+    form.setValue("name", data.name);
+
+    if (data.major_id) form.setValue("major_id", data.major_id.toString());
+    if (data.year_id) form.setValue("year_id", data.year_id.toString());
+    if (data.student_code_id)
+      form.setValue("student_code_id", data.student_code_id.toString());
+    if (data.whatsapp) form.setValue("whatsapp", data.whatsapp);
+
+    if (
+      data.major_id &&
+      data.year_id &&
+      data.student_code_id &&
+      data.whatsapp
+    ) {
+      setVerified(true);
+    }
+  }
+
+  getProfile();
 
   async function onSubmit(data: z.infer<typeof FormSchema>) {
     setLoading(true);
@@ -177,6 +197,8 @@ const ProfileForm = ({
 
     setLoading(false);
 
+    setVerified(true);
+
     return;
   }
 
@@ -207,27 +229,79 @@ const ProfileForm = ({
           control={form.control}
           name="major_id"
           render={({ field }) => (
-            <FormItem>
+            <FormItem className="flex flex-col">
               <FormLabel>Major</FormLabel>
-              <Select
-                onValueChange={field.onChange}
-                defaultValue={field.value}
-                {...field}
-              >
-                <FormControl>
-                  <SelectTrigger>
-                    <SelectValue placeholder="Select your major" />
-                  </SelectTrigger>
-                </FormControl>
-                <SelectContent>
-                  {majors.map((major) => (
-                    <SelectItem key={major.id} value={major.id.toString()}>
-                      {major.name} - {major.degrees.name} -{" "}
-                      {major.faculties.name}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
+              <Popover>
+                <PopoverTrigger asChild>
+                  <FormControl>
+                    <Button
+                      variant="outline"
+                      role="combobox"
+                      className={cn(
+                        "justify-between rounded-md",
+                        !field.value && "text-muted-foreground"
+                      )}
+                    >
+                      {field.value
+                        ? majors.find(
+                            (major) => major.id.toString() === field.value
+                          )?.name +
+                          " - " +
+                          majors.find(
+                            (major) => major.id.toString() === field.value
+                          )?.degrees.name +
+                          " - " +
+                          majors.find(
+                            (major) => major.id.toString() === field.value
+                          )?.faculties.name
+                        : "Select major"}
+                      <CaretSortIcon className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+                    </Button>
+                  </FormControl>
+                </PopoverTrigger>
+                <PopoverContent className="w-full p-0">
+                  <Command>
+                    <CommandInput
+                      placeholder="Search major..."
+                      className="h-9"
+                    />
+                    <CommandList>
+                      <CommandEmpty>No major found.</CommandEmpty>
+                      <CommandGroup>
+                        {majors.map((major) => (
+                          <CommandItem
+                            value={
+                              major.name +
+                              " - " +
+                              major.degrees.name +
+                              " - " +
+                              major.faculties.name
+                            }
+                            key={major.id}
+                            onSelect={() => {
+                              form.setValue("major_id", major.id.toString());
+                            }}
+                          >
+                            {major.name +
+                              " - " +
+                              major.degrees.name +
+                              " - " +
+                              major.faculties.name}
+                            <CheckIcon
+                              className={cn(
+                                "ml-auto h-4 w-4",
+                                major.id.toString() === field.value
+                                  ? "opacity-100"
+                                  : "opacity-0"
+                              )}
+                            />
+                          </CommandItem>
+                        ))}
+                      </CommandGroup>
+                    </CommandList>
+                  </Command>
+                </PopoverContent>
+              </Popover>
               <FormDescription>
                 Select your major, degree, and faculty.
               </FormDescription>
@@ -268,32 +342,67 @@ const ProfileForm = ({
           control={form.control}
           name="student_code_id"
           render={({ field }) => (
-            <FormItem>
+            <FormItem className="flex flex-col">
               <FormLabel>Student Id</FormLabel>
-              <Select
-                onValueChange={field.onChange}
-                defaultValue={field.value}
-                {...field}
-              >
-                <FormControl>
-                  <SelectTrigger>
-                    <SelectValue placeholder="Select your student id number" />
-                  </SelectTrigger>
-                </FormControl>
-                <SelectContent>
-                  {student_codes.map((studentCode) => (
-                    <SelectItem
-                      value={studentCode.id.toString()}
-                      key={studentCode.id}
+              <Popover>
+                <PopoverTrigger asChild>
+                  <FormControl>
+                    <Button
+                      variant="outline"
+                      role="combobox"
+                      className={cn(
+                        "justify-between rounded-md",
+                        !field.value && "text-muted-foreground"
+                      )}
                     >
-                      {studentCode.name}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
+                      {field.value
+                        ? field.value.padStart(3, "0")
+                        : "Select your student id number"}
+                      <CaretSortIcon className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+                    </Button>
+                  </FormControl>
+                </PopoverTrigger>
+                <PopoverContent className="w-full p-0">
+                  <Command>
+                    <CommandInput
+                      placeholder="Search student code id..."
+                      className="h-9"
+                    />
+                    <CommandList>
+                      <CommandEmpty>No student code id found.</CommandEmpty>
+                      <CommandGroup>
+                        {Array(500)
+                          .fill(0)
+                          .map((_, i) => (
+                            <CommandItem
+                              value={(i + 1).toString().padStart(3, "0")}
+                              key={i + 1}
+                              onSelect={() => {
+                                form.setValue(
+                                  "student_code_id",
+                                  (i + 1).toString()
+                                );
+                              }}
+                            >
+                              {(i + 1).toString().padStart(3, "0")}
+                              <CheckIcon
+                                className={cn(
+                                  "ml-auto h-4 w-4",
+                                  (i + 1).toString() === field.value
+                                    ? "opacity-100"
+                                    : "opacity-0"
+                                )}
+                              />
+                            </CommandItem>
+                          ))}
+                      </CommandGroup>
+                    </CommandList>
+                  </Command>
+                </PopoverContent>
+              </Popover>
               <FormDescription>
                 Select last 3 digit of your student id number/NIM. Ex: H1A021053{" "}
-                {"->"} 053.
+                {"->"} 053.{" "}
               </FormDescription>
               <FormMessage />
             </FormItem>
