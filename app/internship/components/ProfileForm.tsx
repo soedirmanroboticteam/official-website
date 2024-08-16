@@ -40,6 +40,7 @@ import {
 } from "@/components/ui/command";
 import { cn } from "@/lib/utils";
 import { logoutClient } from "@/lib/actions/client";
+import { redirect } from "next/navigation";
 
 interface ProfileInterface {
   name: string;
@@ -430,7 +431,11 @@ const ProfileForm = ({
           <Button
             className="rounded-md"
             variant="destructive"
-            onClick={() => logoutClient()}
+            onClick={async () => {
+              await logoutClient();
+
+              redirect("/login");
+            }}
           >
             Log Out
           </Button>
