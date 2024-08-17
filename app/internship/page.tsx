@@ -33,7 +33,7 @@ export default async function ProtectedPage() {
     debug: new Date("2024-08-18 00:00:00.000000+00"),
     start: new Date("2024-08-26 00:00:00.000000+00"),
     end: new Date("2024-08-29 00:00:00.000000+00"),
-    extend: new Date("2024-08-17 00:00:00.000000+00"),
+    extend: new Date("2024-08-31 00:00:00.000000+00"),
   };
 
   if (date.debug.getTime() < Date.now() && date.start.getTime() > Date.now()) {
