@@ -86,7 +86,9 @@ export default async function DashboardPage() {
         return {
           name: (year.name + 2000).toString(),
           value: internApplications.data.filter(
-            (data) => data.profiles.majors.faculties.name == item.name
+            (data) =>
+              data.profiles.majors.faculties.name == item.name &&
+              data.profiles.years.name == year.name
           ).length,
         };
       }),
