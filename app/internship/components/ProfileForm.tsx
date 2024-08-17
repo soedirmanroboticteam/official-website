@@ -104,7 +104,7 @@ const FormSchema = z.object({
     })
     .min(12, { message: "WhatsApp number must be at least 12 characters." })
     .max(14, { message: "WhatsApp number must be at most 14 characters." })
-    .regex(/62\d+/),
+    .regex(/62\d+/, { message: "Please input a valid WhatsApp number." }),
 });
 
 const ProfileForm = ({
