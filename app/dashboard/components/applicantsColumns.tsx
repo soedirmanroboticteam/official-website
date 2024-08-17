@@ -224,26 +224,37 @@ export const applicantsColumns: ColumnDef<InternApplication>[] = [
               </DropdownMenuItem>
               <DropdownMenuSeparator />
               <DropdownMenuItem>
-                <Link href={`/dashboard/${data.id}`}>View detail</Link>
+                <Link className="flex-1" href={`/dashboard/${data.id}`}>
+                  View detail
+                </Link>
               </DropdownMenuItem>
               <DropdownMenuItem>
-                <Link href={data.cv_url} target="_blank">
+                <Link className="flex-1" href={data.cv_url} target="_blank">
                   Open CV
                 </Link>
               </DropdownMenuItem>
               <DropdownMenuItem>
-                <Link href={data.twibbon_url} target="_blank">
+                <Link
+                  className="flex-1"
+                  href={data.twibbon_url}
+                  target="_blank"
+                >
                   Open Twibbon
                 </Link>
               </DropdownMenuItem>
               <DropdownMenuSeparator />
               <DropdownMenuItem>
-                <Link href={`https://wa.me/${data.profiles.whatsapp}`}>
+                <Link
+                  className="flex-1"
+                  href={`https://wa.me/${data.profiles.whatsapp}`}
+                >
                   WhatsApp
                 </Link>
               </DropdownMenuItem>
               <DropdownMenuItem>
-                <Link href={`mailto:${data.profiles.email}`}>Email</Link>
+                <Link className="flex-1" href={`mailto:${data.profiles.email}`}>
+                  Email
+                </Link>
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
