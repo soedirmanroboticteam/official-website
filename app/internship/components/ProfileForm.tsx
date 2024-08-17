@@ -78,7 +78,9 @@ const FormSchema = z.object({
     .string({
       required_error: "Please enter your name.",
     })
-    .regex(/^[^,]*$/)
+    .regex(/^[^,]*$/, {
+      message: "Please do not use comma in your name.",
+    })
     .min(3, { message: "Name must be at least 3 characters." })
     .max(128, { message: "Name must be at most 128 characters." }),
   major_id: z
