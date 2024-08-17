@@ -55,7 +55,9 @@ const FormSchema = z.object({
     .string({
       required_error: "Please input your motivation for your first choice.",
     })
-    .regex(/^[^,]*$/)
+    .regex(/^[^,]*$/, {
+      message: "Please do not use comma in your motivation.",
+    })
     .min(24, { message: "Please input at least 24 characters." })
     .max(300, { message: "Please input at most 300 characters." }),
   second_choice: z
@@ -67,7 +69,9 @@ const FormSchema = z.object({
     .string({
       required_error: "Please input your motivation for your second choice.",
     })
-    .regex(/^[^,]*$/)
+    .regex(/^[^,]*$/, {
+      message: "Please do not use comma in your motivation.",
+    })
     .min(24, { message: "Please input at least 24 characters." })
     .max(300, { message: "Please input at most 300 characters." }),
   hope: z
@@ -75,7 +79,9 @@ const FormSchema = z.object({
       required_error:
         "Please input your hope by joining this internship program.",
     })
-    .regex(/^[^,]*$/)
+    .regex(/^[^,]*$/, {
+      message: "Please do not use comma in your hope.",
+    })
     .min(24, { message: "Please input at least 24 characters." })
     .max(300, { message: "Please input at most 300 characters." }),
   cv_url: z
