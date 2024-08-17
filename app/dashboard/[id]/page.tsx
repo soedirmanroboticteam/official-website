@@ -8,7 +8,7 @@ import Link from "next/link";
 import { Separator } from "@/components/ui/separator";
 import { Button } from "@/components/ui/button";
 
-const InternDetailPage = async () => {
+const InternDetailPage = async ({ params }: { params: { id: string } }) => {
   const supabase = createClientBrowserServer();
 
   const { data, error } = await supabase.auth.getUser();
@@ -31,7 +31,7 @@ const InternDetailPage = async () => {
     .select(
       "id, profiles:profiles!inner(name, email, avatar, majors:majors!inner(name, alphabet_codes(name), degrees(name, code), faculties(name, alphabet_codes(name))), years:years!inner(name), student_code_id, whatsapp), first:options!biodatas_first_choice_fkey(name), first_reason, second:options!biodatas_second_choice_fkey(name), second_reason, hope, cv_url, twibbon_url, created_at, updated_at"
     )
-    .eq("id", data.user.id)
+    .eq("id", params.id)
     .limit(1)
     .maybeSingle<InternApplication>();
 
@@ -45,7 +45,9 @@ const InternDetailPage = async () => {
           <AvatarImage src={internApplication.data.profiles.avatar} />
           <AvatarFallback className="text-6xl">
             {internApplication.data.profiles.name.split(" ")[0][0]}
-            {internApplication.data.profiles.name.split(" ")[1][0]}
+            {internApplication.data.profiles.name.split(" ")[
+              internApplication.data.profiles.name.split(" ").length - 1
+            ][0] ?? ""}
           </AvatarFallback>
         </Avatar>
         <div className="flex flex-col justify-between">
@@ -73,12 +75,12 @@ const InternDetailPage = async () => {
           </p>
           <div className="flex flex-row gap-8">
             <Link
-              href={`mailto:${data.user.email}`}
+              href={`mailto:${internApplication.data.profiles.email}`}
               className="flex items-center pt-2"
             >
               <MailIcon className="mr-2 h-4 w-4 opacity-70" />{" "}
               <span className="text-xs text-muted-foreground">
-                {data.user.email}
+                {internApplication.data.profiles.email}
               </span>
             </Link>
             <Link
