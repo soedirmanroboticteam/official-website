@@ -23,13 +23,6 @@ import {
 } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
-import { Input } from "@/components/ui/input";
-import {
-  DropdownMenu,
-  DropdownMenuCheckboxItem,
-  DropdownMenuContent,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
 import {
   Select,
   SelectContent,
@@ -39,16 +32,19 @@ import {
   SelectValue,
   SelectItem,
 } from "@/components/ui/select";
+import { InternApplication } from "./applicantsColumns";
 
-interface DataTableProps<TData, TValue> {
+interface ApplicantsDataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
+  applicants: InternApplication[];
 }
 
-export function DataTable<TData, TValue>({
+export function ApplicantsDataTable<TData, TValue>({
   columns,
   data,
-}: DataTableProps<TData, TValue>) {
+  applicants,
+}: ApplicantsDataTableProps<TData, TValue>) {
   const [sorting, setSorting] = useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
@@ -209,11 +205,54 @@ export function DataTable<TData, TValue>({
             )}
           </TableBody>
         </Table>
-        <div className="flex justify-end items-center px-4">
+        <div className="flex justify-between items-center px-4">
           <div className="text-sm text-muted-foreground p-4">
             Showing a total of {table.getFilteredRowModel().rows.length}{" "}
             records.
           </div>
+          <Button
+            className="rounded-md"
+            onClick={() =>
+              navigator.clipboard.writeText(
+                "fullname, email, faculty, major, NIM, whatsapp, first choice, first motivation, second choice, second motivation, hope, CV Url, Twibbon Url, first submit, last edited".concat(
+                  "\n",
+                  applicants
+                    .map(
+                      (applicant) =>
+                        `${applicant.profiles.name}, ${
+                          applicant.profiles.email
+                        }, ${applicant.profiles.majors.faculties.name}, ${
+                          applicant.profiles.majors.name
+                        }, ${
+                          applicant.profiles.majors.faculties.alphabet_codes
+                            .name +
+                          applicant.profiles.majors.degrees.code.toString() +
+                          applicant.profiles.majors.alphabet_codes.name +
+                          applicant.profiles.years.name
+                            .toString()
+                            .padStart(3, "0") +
+                          applicant.profiles.student_code_id
+                            .toString()
+                            .padStart(3, "0")
+                        }, https://wa.me/${applicant.profiles.whatsapp}, ${
+                          applicant.first.name
+                        }, ${applicant.first_reason}, ${
+                          applicant.second.name
+                        }, ${applicant.second_reason}, ${applicant.hope}, ${
+                          applicant.cv_url
+                        }, ${applicant.twibbon_url}, ${new Date(
+                          applicant.created_at
+                        ).toLocaleString()}, ${new Date(
+                          applicant.updated_at
+                        ).toLocaleString()}`
+                    )
+                    .join("\n")
+                )
+              )
+            }
+          >
+            Copy all data as CSV
+          </Button>
         </div>
       </div>
     </div>

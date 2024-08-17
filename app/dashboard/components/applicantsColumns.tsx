@@ -65,7 +65,7 @@ export type InternApplication = {
   updated_at: string;
 };
 
-export const columns: ColumnDef<InternApplication>[] = [
+export const applicantsColumns: ColumnDef<InternApplication>[] = [
   {
     id: "fullname",
     accessorKey: "profiles.name",

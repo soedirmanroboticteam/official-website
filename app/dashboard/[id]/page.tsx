@@ -2,7 +2,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { createClientBrowserServer } from "@/lib/supabase/server";
 import { redirect } from "next/navigation";
 import React from "react";
-import { InternApplication } from "../components/columns";
+import { InternApplication } from "../components/applicantsColumns";
 import { MailIcon, PhoneIcon } from "lucide-react";
 import Link from "next/link";
 import { Separator } from "@/components/ui/separator";
