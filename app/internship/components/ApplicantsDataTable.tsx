@@ -1,18 +1,14 @@
 "use client";
-
 import {
   ColumnDef,
   ColumnFiltersState,
   flexRender,
   getCoreRowModel,
   getFilteredRowModel,
-  getPaginationRowModel,
   getSortedRowModel,
   SortingState,
   useReactTable,
-  VisibilityState,
 } from "@tanstack/react-table";
-
 import {
   Table,
   TableBody,
@@ -47,25 +43,18 @@ export function ApplicantsDataTable<TData, TValue>({
 }: ApplicantsDataTableProps<TData, TValue>) {
   const [sorting, setSorting] = useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
-  const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
-  const [rowSelection, setRowSelection] = useState({});
 
   const table = useReactTable({
     data,
     columns,
     getCoreRowModel: getCoreRowModel(),
-    getPaginationRowModel: getPaginationRowModel(),
     onSortingChange: setSorting,
     getSortedRowModel: getSortedRowModel(),
     onColumnFiltersChange: setColumnFilters,
     getFilteredRowModel: getFilteredRowModel(),
-    onColumnVisibilityChange: setColumnVisibility,
-    onRowSelectionChange: setRowSelection,
     state: {
       sorting,
       columnFilters,
-      columnVisibility,
-      rowSelection,
     },
   });
 
@@ -75,12 +64,17 @@ export function ApplicantsDataTable<TData, TValue>({
         <Select
           onValueChange={(value) => {
             table.getColumn("First Choice")?.setFilterValue(value);
-            table.getColumn("Second Choice")?.setFilterValue(null);
+
+            table.getColumn("Second Choice")?.setFilterValue(undefined);
           }}
           defaultValue={
-            table.getColumn("First Choice")?.getFilterValue() as string
+            (table.getColumn("First Choice")?.getFilterValue() as string) ??
+            undefined
           }
-          value={table.getColumn("First Choice")?.getFilterValue() as string}
+          value={
+            (table.getColumn("First Choice")?.getFilterValue() as string) ??
+            undefined
+          }
         >
           <SelectTrigger className="max-w-xs">
             <SelectValue placeholder="Filter first choice" />
@@ -115,12 +109,17 @@ export function ApplicantsDataTable<TData, TValue>({
         <Select
           onValueChange={(value) => {
             table.getColumn("Second Choice")?.setFilterValue(value);
-            table.getColumn("Second Choice")?.setFilterValue(null);
+
+            table.getColumn("First Choice")?.setFilterValue(undefined);
           }}
           defaultValue={
-            table.getColumn("Second Choice")?.getFilterValue() as string
+            (table.getColumn("First Choice")?.getFilterValue() as string) ??
+            undefined
           }
-          value={table.getColumn("Second Choice")?.getFilterValue() as string}
+          value={
+            (table.getColumn("First Choice")?.getFilterValue() as string) ??
+            undefined
+          }
         >
           <SelectTrigger className="max-w-xs">
             <SelectValue placeholder="Filter second choice" />
@@ -128,29 +127,36 @@ export function ApplicantsDataTable<TData, TValue>({
           <SelectContent>
             <SelectGroup>
               <SelectLabel>Management Team</SelectLabel>
-              <SelectItem value="1">Secretary</SelectItem>
-              <SelectItem value="2">Financial Manager</SelectItem>
-              <SelectItem value="3">
+              <SelectItem value="Secretary">Secretary</SelectItem>
+              <SelectItem value="Financial Manager">
+                Financial Manager
+              </SelectItem>
+              <SelectItem value="Human Resource Development (HRD)">
                 Human Resource Development (HRD)
               </SelectItem>
-              <SelectItem value="4">Public Relation (PR)</SelectItem>
-              <SelectItem value="5">Creative Media</SelectItem>
-              <SelectItem value="6">Sponsorship</SelectItem>
-              <SelectItem value="7">Team Manager</SelectItem>
+              <SelectItem value="Public Relation (PR)">
+                Public Relation (PR)
+              </SelectItem>
+              <SelectItem value="Creative Media">Creative Media</SelectItem>
+              <SelectItem value="Sponsorship">Sponsorship</SelectItem>
+              <SelectItem value="Team Manager">Team Manager</SelectItem>
             </SelectGroup>
             <SelectGroup>
               <SelectLabel>Technical Team</SelectLabel>
-              <SelectItem value="8">Mechanic</SelectItem>
-              <SelectItem value="9">Electronic</SelectItem>
-              <SelectItem value="10">Programmer/System</SelectItem>
+              <SelectItem value="Mechanic">Mechanic</SelectItem>
+              <SelectItem value="Electronic">Electronic</SelectItem>
+              <SelectItem value="Programmer/System">
+                Programmer/System
+              </SelectItem>
             </SelectGroup>
           </SelectContent>
         </Select>
         <Button
           className="rounded-md ml-auto"
           onClick={() => {
-            table.getColumn("First Choice")?.setFilterValue(null);
-            table.getColumn("Second Choice")?.setFilterValue(null);
+            table.getColumn("First Choice")?.setFilterValue(undefined);
+
+            table.getColumn("Second Choice")?.setFilterValue(undefined);
           }}
         >
           Reset filter

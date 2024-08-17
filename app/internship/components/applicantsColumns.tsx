@@ -128,7 +128,7 @@ export const applicantsColumns: ColumnDef<InternApplication>[] = [
   },
   {
     id: "Second Choice",
-    accessorKey: "second.id",
+    accessorKey: "second.name",
     header: ({ column }) => (
       <Button
         variant="link"

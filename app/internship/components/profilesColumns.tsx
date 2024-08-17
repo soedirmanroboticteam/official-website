@@ -116,19 +116,25 @@ export const profilesColumns: ColumnDef<Profiles>[] = [
     id: "is admin",
     accessorKey: "is_admin",
     header: ({ column }) => (
-      <Button
-        variant="link"
-        onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-        className="rounded-md"
-      >
-        Is Admin
-        <ChevronsUpDown className="ml-2 h-4 w-4" />
-      </Button>
+      <div className="flex justify-end">
+        <Button
+          variant="link"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          className="rounded-md"
+        >
+          Is Admin
+          <ChevronsUpDown className="ml-2 h-4 w-4" />
+        </Button>
+      </div>
     ),
     cell: ({ row }) => {
       const profile = row.original;
 
-      return <ToggleAdmin profile={profile} />;
+      return (
+        <div className="flex justify-end py-2 px-8">
+          <ToggleAdmin profile={profile} />
+        </div>
+      );
     },
   },
 ];

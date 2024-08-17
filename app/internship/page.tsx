@@ -2,19 +2,34 @@ import { createClientBrowserServer } from "@/lib/supabase/server";
 import { redirect } from "next/navigation";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { ExclamationTriangleIcon } from "@radix-ui/react-icons";
-import FormTab from "@/app/internship/components/FormTab";
+import FormTab from "./components/FormTab";
 import SectionTitle from "@/components/SectionTitle";
 import { Progress } from "@/components/ui/progress";
+import {
+  applicantsColumns,
+  InternApplication,
+} from "./components/applicantsColumns";
+import { Profiles, profilesColumns } from "./components/profilesColumns";
+import {
+  ApplicantsChart,
+  ApplicantsChartProps,
+} from "./components/ApplicantsChart";
+import { ApplicantsDataTable } from "./components/ApplicantsDataTable";
+import { ProfilesDataTable } from "./components/ProfilesDataTable";
+
+interface FacultyInterface {
+  name: string;
+}
+
+interface DegreeInterface {
+  name: string;
+}
 
 interface MajorInterface {
   id: number;
   name: string;
-  faculties: {
-    name: string;
-  };
-  degrees: {
-    name: string;
-  };
+  faculties: FacultyInterface;
+  degrees: DegreeInterface;
 }
 
 interface YearInterface {
@@ -28,39 +43,7 @@ interface OptionsInterface {
 }
 
 export default async function ProtectedPage() {
-  const date = {
-    coming: new Date("2024-08-11 00:00:00.000000+00"),
-    debug: new Date("2024-08-18 00:00:00.000000+00"),
-    start: new Date("2024-08-26 00:00:00.000000+00"),
-    end: new Date("2024-08-29 00:00:00.000000+00"),
-    extend: new Date("2024-08-31 00:00:00.000000+00"),
-  };
-
-  if (date.debug.getTime() < Date.now() && date.start.getTime() > Date.now()) {
-    return (
-      <main className="container mx-auto py-4">
-        <SectionTitle
-          title="Coming Soon"
-          desc="Stay tuned at our Instagram @srtunsoed for the latest updates! Don't forget to join our upcoming Open House Events too!"
-        />
-        <Progress
-          value={
-            ((date.coming.getTime() - Date.now()) /
-              (date.coming.getTime() - date.start.getTime())) *
-            100
-          }
-        />
-      </main>
-    );
-  }
-
   const supabase = createClientBrowserServer();
-
-  const count = await supabase.from("intern_applications").select("");
-
-  if (count.error) {
-    return <div>Error: {count.error.message}</div>;
-  }
 
   const { data, error } = await supabase.auth.getUser();
 
@@ -68,100 +51,217 @@ export default async function ProtectedPage() {
     redirect("/login");
   }
 
-  if (Date.now() > date.extend.getTime())
+  const isAdmin = await supabase
+    .from("profiles")
+    .select("is_admin")
+    .eq("id", data.user.id)
+    .limit(1)
+    .single();
+
+  if (isAdmin.error || !Boolean(isAdmin.data.is_admin)) {
+    const date = {
+      coming: new Date("2024-08-11 00:00:00.000000+00"),
+      debug: new Date("2024-08-18 00:00:00.000000+00"),
+      start: new Date("2024-08-26 00:00:00.000000+00"),
+      end: new Date("2024-08-29 00:00:00.000000+00"),
+      extend: new Date("2024-08-31 00:00:00.000000+00"),
+    };
+
+    if (
+      date.debug.getTime() < Date.now() &&
+      date.start.getTime() > Date.now()
+    ) {
+      return (
+        <main className="container mx-auto py-4">
+          <SectionTitle
+            title="Coming Soon"
+            desc="Stay tuned at our Instagram @srtunsoed for the latest updates! Don't forget to join our upcoming Open House Events too!"
+          />
+          <Progress
+            value={
+              ((date.coming.getTime() - Date.now()) /
+                (date.coming.getTime() - date.start.getTime())) *
+              100
+            }
+          />
+        </main>
+      );
+    }
+
+    if (Date.now() > date.extend.getTime()) {
+      const count = await supabase.from("intern_applications").select("");
+
+      if (count.error) {
+        return <div>Error: {count.error.message}</div>;
+      }
+
+      return (
+        <main className="container mx-auto py-4 space-y-4">
+          <SectionTitle
+            title="Closed Registration"
+            desc="Thank you for your participation! Now that the registration is closed. For those that have filled our form, you'll be contacted soon. Further information will be provided there."
+          />
+          <h3 className="text-center text-8xl font-semibold">
+            {count.data.length} <br />
+          </h3>
+          <h4 className="text-center text-3xl font-semibold">registrant</h4>
+        </main>
+      );
+    }
+
+    const [majors, years, options] = await Promise.all([
+      supabase
+        .from("majors")
+        .select("id, name, faculties(name), degrees(name)")
+        .order("faculty_id", { ascending: true })
+        .returns<MajorInterface[]>(),
+      supabase
+        .from("years")
+        .select("id, name")
+        .order("name", { ascending: true })
+        .returns<YearInterface[]>(),
+      supabase
+        .from("options")
+        .select("id, name")
+        .order("id", { ascending: true })
+        .returns<OptionsInterface[]>(),
+    ]);
+
+    if (majors.error || years.error || options.error) {
+      return (
+        <div>
+          Error:{" "}
+          {majors.error?.message ||
+            years.error?.message ||
+            options.error?.message}
+        </div>
+      );
+    }
+
     return (
-      <main className="container mx-auto py-4 space-y-4">
-        <SectionTitle
-          title="Closed Registration"
-          desc="Thank you for your participation! Now that the registration is closed. For those that have filled our form, you'll be contacted soon. Further information will be provided there."
+      <main className="w-full flex flex-col gap-20 items-center justify-center p-4">
+        {date.debug.getTime() < Date.now() ? null : (
+          <section className="w-full max-w-3xl">
+            <Alert variant="destructive">
+              <ExclamationTriangleIcon className="h-4 w-4" />
+              <AlertTitle>Warning!!!</AlertTitle>
+              <AlertDescription>
+                This form is still under development! All the submitted data
+                will be deleted until the official Open Internship is announced.
+              </AlertDescription>
+            </Alert>
+          </section>
+        )}
+
+        <FormTab
+          userId={data.user.id}
+          majors={majors.data}
+          years={years.data}
+          options={options.data}
         />
-        <h3 className="text-center text-8xl font-semibold">
-          {count.data.length} <br />
-        </h3>
-        <h4 className="text-center text-3xl font-semibold">registrant</h4>
+
+        <section className="w-full max-w-3xl">
+          <Progress
+            value={
+              Date.now() > date.end.getTime()
+                ? ((date.end.getTime() - Date.now()) /
+                    (date.end.getTime() - date.extend.getTime())) *
+                  100
+                : ((date.start.getTime() - Date.now()) /
+                    (date.start.getTime() - date.end.getTime())) *
+                  100
+            }
+            className={`${
+              Date.now() > date.end.getTime() ? "bg-destructive/50" : ""
+            }`}
+          />
+        </section>
+
+        {date.debug.getTime() < Date.now() ? null : (
+          <section className="w-full max-w-3xl">
+            <Alert variant="destructive">
+              <ExclamationTriangleIcon className="h-4 w-4" />
+              <AlertTitle>Warning!!!</AlertTitle>
+              <AlertDescription>
+                This form is still under development! All the submitted data
+                will be deleted until the official Open Internship is announced.
+              </AlertDescription>
+            </Alert>
+          </section>
+        )}
       </main>
     );
+  }
 
-  const [majors, years, options] = await Promise.all([
+  const [internApplications, profiles, faculties, years] = await Promise.all([
     supabase
-      .from("majors")
-      .select("id, name, faculties(name), degrees(name)")
-      .order("faculty_id", { ascending: true })
-      .returns<MajorInterface[]>(),
+      .from("intern_applications")
+      .select(
+        "id, profiles:profiles!inner(name, email, majors:majors!inner(name, alphabet_codes(name), degrees(code), faculties(name, alphabet_codes(name))), years:years!inner(name), student_code_id, whatsapp), first:options!biodatas_first_choice_fkey(id, name), first_reason, second:options!biodatas_second_choice_fkey(id, name), second_reason, hope, cv_url, twibbon_url, created_at, updated_at"
+      )
+      .order("created_at", { ascending: true })
+      .returns<InternApplication[]>(),
+    supabase
+      .from("profiles")
+      .select("id, name, email, is_admin")
+      .order("name", { ascending: true })
+      .returns<Profiles[]>(),
+    supabase
+      .from("faculties")
+      .select("name")
+      .order("name", { ascending: true })
+      .returns<FacultyInterface[]>(),
     supabase
       .from("years")
-      .select("id, name")
+      .select("name")
       .order("name", { ascending: true })
       .returns<YearInterface[]>(),
-    supabase
-      .from("options")
-      .select("id, name")
-      .order("id", { ascending: true })
-      .returns<OptionsInterface[]>(),
   ]);
 
-  if (majors.error || years.error || options.error) {
+  if (
+    internApplications.error ||
+    profiles.error ||
+    faculties.error ||
+    years.error
+  ) {
     return (
       <div>
         Error:{" "}
-        {majors.error?.message ||
-          years.error?.message ||
-          options.error?.message}
+        {internApplications.error?.message ||
+          profiles.error?.message ||
+          faculties.error?.message ||
+          years.error?.message}
       </div>
     );
   }
 
-  return (
-    <main className="w-full flex flex-col gap-20 items-center justify-center p-4">
-      {date.debug.getTime() < Date.now() ? null : (
-        <section className="w-full max-w-3xl">
-          <Alert variant="destructive">
-            <ExclamationTriangleIcon className="h-4 w-4" />
-            <AlertTitle>Warning!!!</AlertTitle>
-            <AlertDescription>
-              This form is still under development! All the submitted data will
-              be deleted until the official Open Internship is announced.
-            </AlertDescription>
-          </Alert>
-        </section>
-      )}
+  const chartDatas: ApplicantsChartProps[] = faculties.data.map((item) => {
+    return {
+      faculty: item.name,
+      year: years.data.map((year) => {
+        return {
+          name: (year.name + 2000).toString(),
+          value: internApplications.data.filter(
+            (data) =>
+              data.profiles.majors.faculties.name == item.name &&
+              data.profiles.years.name == year.name
+          ).length,
+        };
+      }),
+    };
+  });
 
-      <FormTab
-        userId={data.user.id}
-        majors={majors.data}
-        years={years.data}
-        options={options.data}
+  return (
+    <main className="container mx-auto py-10 space-y-4">
+      <ApplicantsChart data={chartDatas} />
+
+      <ApplicantsDataTable
+        columns={applicantsColumns}
+        data={internApplications.data}
+        applicants={internApplications.data}
       />
 
-      <section className="w-full max-w-3xl">
-        <Progress
-          value={
-            Date.now() > date.end.getTime()
-              ? ((date.end.getTime() - Date.now()) /
-                  (date.end.getTime() - date.extend.getTime())) *
-                100
-              : ((date.start.getTime() - Date.now()) /
-                  (date.start.getTime() - date.end.getTime())) *
-                100
-          }
-          className={`${
-            Date.now() > date.end.getTime() ? "bg-destructive/50" : ""
-          }`}
-        />
-      </section>
-
-      {date.debug.getTime() < Date.now() ? null : (
-        <section className="w-full max-w-3xl">
-          <Alert variant="destructive">
-            <ExclamationTriangleIcon className="h-4 w-4" />
-            <AlertTitle>Warning!!!</AlertTitle>
-            <AlertDescription>
-              This form is still under development! All the submitted data will
-              be deleted until the official Open Internship is announced.
-            </AlertDescription>
-          </Alert>
-        </section>
-      )}
+      <ProfilesDataTable columns={profilesColumns} data={profiles.data} />
     </main>
   );
 }

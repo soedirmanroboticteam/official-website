@@ -9,13 +9,13 @@ import {
   ChartTooltipContent,
 } from "@/components/ui/chart";
 
-interface ApplicantsChartProps {
+export type ApplicantsChartProps = {
   faculty: string;
   year: {
     name: string;
     value: number;
   }[];
-}
+};
 
 const colors = ["#2563eb", "#60a5fa", "#93c5fd", "#c3dafe", "#e0eefc"];
 
@@ -50,7 +50,13 @@ export function ApplicantsChart({ data }: { data: ApplicantsChartProps[] }) {
           tickLine={false}
           tickMargin={10}
           axisLine={false}
-          tickFormatter={(value) => value.slice(0, 3)}
+          tickFormatter={(value: string) => {
+            return `F${value
+              .split(" ")
+              .map((item) => item[0])
+              .filter((item) => item != "d")
+              .join("")}`;
+          }}
         />
         <ChartTooltip content={<ChartTooltipContent />} />
         {data[0].year.map((_, index) => (
