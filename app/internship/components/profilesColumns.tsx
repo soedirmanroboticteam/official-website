@@ -14,31 +14,34 @@ export type Profiles = {
   id: string;
   name: string;
   email: string;
-  is_admin: boolean;
+  roles: {
+    is_admin: boolean;
+  };
 };
 
 import React from "react";
 
 const ToggleAdmin = ({ profile }: { profile: Profiles }) => {
-  const [isAdmin, setIsAdmin] = useState<boolean>(profile.is_admin);
-
   const supabase = createClientBrowserClient();
+
+  const [isAdmin, setIsAdmin] = useState<boolean>(profile.roles.is_admin);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   return (
     <Switch
       id={profile.id}
       checked={isAdmin}
-      onChange={async () => {
-        console.log("testing");
+      onClick={async () => {
+        setIsLoading(true);
 
         const { error } = await supabase
-          .from("profiles")
+          .from("roles")
           .update({
-            is_admin: isAdmin,
+            is_admin: !isAdmin,
           })
           .eq("id", profile.id);
 
-        if (error)
+        if (error) {
           toast({
             title: "Error",
             description: (
@@ -48,35 +51,25 @@ const ToggleAdmin = ({ profile }: { profile: Profiles }) => {
             ),
             variant: "destructive",
           });
-      }}
-      onClick={async () => {
-        const { data, error } = await supabase
-          .from("profiles")
-          .update({
-            is_admin: !isAdmin,
-          })
-          .eq("id", profile.id)
-          .select("is_admin")
-          .order("id", { ascending: true })
-          .limit(1)
-          .maybeSingle();
-
-        if (error || !data) {
-          toast({
-            title: "Error",
-            description: (
-              <p className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-                {error?.message ?? "No data returned"}
-              </p>
-            ),
-            variant: "destructive",
-          });
 
           return;
         }
 
-        setIsAdmin(Boolean(data.is_admin));
+        toast({
+          title: "Success",
+          description: (
+            <p className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
+              Admin status of {profile.email} has been updated.
+            </p>
+          ),
+          variant: "default",
+        });
+
+        setIsAdmin(!isAdmin);
+
+        setIsLoading(false);
       }}
+      disabled={isLoading}
     />
   );
 };
@@ -114,7 +107,6 @@ export const profilesColumns: ColumnDef<Profiles>[] = [
   },
   {
     id: "is admin",
-    accessorKey: "is_admin",
     header: ({ column }) => (
       <div className="flex justify-end">
         <Button

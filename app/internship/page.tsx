@@ -1,7 +1,5 @@
 import { createClientBrowserServer } from "@/lib/supabase/server";
 import { redirect } from "next/navigation";
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
-import { ExclamationTriangleIcon } from "@radix-ui/react-icons";
 import FormTab from "./components/FormTab";
 import SectionTitle from "@/components/SectionTitle";
 import { Progress } from "@/components/ui/progress";
@@ -42,6 +40,11 @@ interface OptionsInterface {
   name: string;
 }
 
+interface RolesInterface {
+  id: string;
+  is_admin: boolean;
+}
+
 export default async function ProtectedPage() {
   const supabase = createClientBrowserServer();
 
@@ -52,7 +55,7 @@ export default async function ProtectedPage() {
   }
 
   const isAdmin = await supabase
-    .from("profiles")
+    .from("roles")
     .select("is_admin")
     .eq("id", data.user.id)
     .limit(1)
@@ -62,7 +65,7 @@ export default async function ProtectedPage() {
     const date = {
       coming: new Date("2024-08-11 00:00:00.000000+00"),
       debug: new Date("2024-08-18 00:00:00.000000+00"),
-      start: new Date("2024-08-26 00:00:00.000000+00"),
+      start: new Date("2024-08-20 00:00:00.000000+00"),
       end: new Date("2024-08-29 00:00:00.000000+00"),
       extend: new Date("2024-08-31 00:00:00.000000+00"),
     };
@@ -140,19 +143,6 @@ export default async function ProtectedPage() {
 
     return (
       <main className="w-full flex flex-col gap-20 items-center justify-center p-4">
-        {date.debug.getTime() < Date.now() ? null : (
-          <section className="w-full max-w-3xl">
-            <Alert variant="destructive">
-              <ExclamationTriangleIcon className="h-4 w-4" />
-              <AlertTitle>Warning!!!</AlertTitle>
-              <AlertDescription>
-                This form is still under development! All the submitted data
-                will be deleted until the official Open Internship is announced.
-              </AlertDescription>
-            </Alert>
-          </section>
-        )}
-
         <FormTab
           userId={data.user.id}
           majors={majors.data}
@@ -176,19 +166,6 @@ export default async function ProtectedPage() {
             }`}
           />
         </section>
-
-        {date.debug.getTime() < Date.now() ? null : (
-          <section className="w-full max-w-3xl">
-            <Alert variant="destructive">
-              <ExclamationTriangleIcon className="h-4 w-4" />
-              <AlertTitle>Warning!!!</AlertTitle>
-              <AlertDescription>
-                This form is still under development! All the submitted data
-                will be deleted until the official Open Internship is announced.
-              </AlertDescription>
-            </Alert>
-          </section>
-        )}
       </main>
     );
   }
@@ -203,7 +180,7 @@ export default async function ProtectedPage() {
       .returns<InternApplication[]>(),
     supabase
       .from("profiles")
-      .select("id, name, email, is_admin")
+      .select("id, name, email, roles:roles!inner(is_admin)")
       .order("name", { ascending: true })
       .returns<Profiles[]>(),
     supabase

@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -43,6 +43,7 @@ interface OptionsInterface {
 interface InternshipFormProps {
   userId: string;
   options: OptionsInterface[];
+  setSubmitted: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const FormSchema = z.object({
@@ -104,7 +105,11 @@ const FormSchema = z.object({
     }),
 });
 
-const InternshipForm = ({ userId, options }: InternshipFormProps) => {
+const InternshipForm = ({
+  userId,
+  options,
+  setSubmitted,
+}: InternshipFormProps) => {
   const [loading, setLoading] = useState<boolean>(false);
 
   const form = useForm<z.infer<typeof FormSchema>>({
@@ -113,45 +118,57 @@ const InternshipForm = ({ userId, options }: InternshipFormProps) => {
 
   const supabase = createClientBrowserClient();
 
-  async function getApplication() {
-    const { data, error } = await supabase
-      .from("intern_applications")
-      .select(
-        "first_choice, first_reason, second_choice, second_reason, hope, cv_url, twibbon_url"
-      )
-      .eq("id", userId)
-      .maybeSingle<InternshipInterface>();
+  useEffect(() => {
+    const getApplication = async () => {
+      const { data, error } = await supabase
+        .from("intern_applications")
+        .select(
+          "first_choice, first_reason, second_choice, second_reason, hope, cv_url, twibbon_url"
+        )
+        .eq("id", userId)
+        .maybeSingle<InternshipInterface>();
 
-    if (error) {
-      toast({
-        title: "Error!",
-        description: (
-          <p className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-            {error.code}
-          </p>
-        ),
-        variant: "destructive",
-      });
+      if (error) {
+        toast({
+          title: "Error!",
+          description: (
+            <p className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
+              {error.code}
+            </p>
+          ),
+          variant: "destructive",
+        });
 
-      return;
-    }
+        return;
+      }
 
-    if (!data) return;
+      if (!data) return;
 
-    if (data.first_choice)
-      form.setValue("first_choice", data.first_choice.toString());
-    if (data.first_choice) form.setValue("first_reason", data.first_reason);
-    if (data.first_choice)
-      form.setValue("second_choice", data.second_choice.toString());
-    if (data.first_choice) form.setValue("second_reason", data.second_reason);
-    if (data.first_choice) form.setValue("hope", data.hope);
-    if (data.first_choice) form.setValue("cv_url", data.cv_url);
-    if (data.first_choice) form.setValue("twibbon_url", data.twibbon_url);
-  }
+      if (
+        data.first_choice &&
+        data.first_reason &&
+        data.second_choice &&
+        data.second_reason &&
+        data.hope &&
+        data.cv_url &&
+        data.twibbon_url
+      ) {
+        form.setValue("first_choice", data.first_choice.toString());
+        form.setValue("first_reason", data.first_reason);
+        form.setValue("second_choice", data.second_choice.toString());
+        form.setValue("second_reason", data.second_reason);
+        form.setValue("hope", data.hope);
+        form.setValue("cv_url", data.cv_url);
+        form.setValue("twibbon_url", data.twibbon_url);
 
-  getApplication();
+        setSubmitted(true);
+      }
+    };
 
-  async function onSubmit(data: z.infer<typeof FormSchema>) {
+    getApplication();
+  });
+
+  const onSubmit = async (data: z.infer<typeof FormSchema>) => {
     setLoading(true);
 
     const { error } = await supabase.from("intern_applications").upsert({
@@ -192,8 +209,10 @@ const InternshipForm = ({ userId, options }: InternshipFormProps) => {
 
     setLoading(false);
 
+    setSubmitted(true);
+
     return;
-  }
+  };
 
   return (
     <Form {...form}>
@@ -355,7 +374,7 @@ const InternshipForm = ({ userId, options }: InternshipFormProps) => {
         />
         <div className="flex justify-end">
           <LoadingButton type="submit" loading={loading}>
-            Save
+            Save & Submit
           </LoadingButton>
         </div>
       </form>

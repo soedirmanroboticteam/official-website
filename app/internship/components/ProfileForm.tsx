@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -121,50 +121,62 @@ const ProfileForm = ({
     resolver: zodResolver(FormSchema),
   });
 
-  async function getProfile() {
-    const { data, error } = await supabase
-      .from("profiles")
-      .select("name, major_id, year_id, student_code_id, whatsapp")
-      .eq("id", userId)
-      .maybeSingle<ProfileInterface>();
+  useEffect(() => {
+    const getProfile = async () => {
+      const { data, error } = await supabase
+        .from("profiles")
+        .select("name, major_id, year_id, student_code_id, whatsapp")
+        .eq("id", userId)
+        .maybeSingle<ProfileInterface>();
 
-    if (error) {
-      toast({
-        title: "Error!",
-        description: (
-          <p className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-            {error.message}
-          </p>
-        ),
-        variant: "destructive",
-      });
+      if (error) {
+        toast({
+          title: "Error!",
+          description: (
+            <p className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
+              {error.message}
+            </p>
+          ),
+          variant: "destructive",
+        });
 
-      return;
-    }
+        return;
+      }
 
-    if (!data) return;
+      if (!data) return;
 
-    form.setValue("name", data.name);
+      form.setValue("name", data.name);
 
-    if (data.major_id) form.setValue("major_id", data.major_id.toString());
-    if (data.year_id) form.setValue("year_id", data.year_id.toString());
-    if (data.student_code_id)
-      form.setValue("student_code_id", data.student_code_id.toString());
-    if (data.whatsapp) form.setValue("whatsapp", data.whatsapp);
+      if (
+        data.major_id &&
+        data.year_id &&
+        data.student_code_id &&
+        data.whatsapp
+      ) {
+        form.setValue("major_id", data.major_id.toString());
+        form.setValue("year_id", data.year_id.toString());
+        form.setValue("student_code_id", data.student_code_id.toString());
+        form.setValue("whatsapp", data.whatsapp);
 
-    if (
-      data.major_id &&
-      data.year_id &&
-      data.student_code_id &&
-      data.whatsapp
-    ) {
-      setVerified(true);
-    }
-  }
+        setVerified(true);
+      } else if (
+        data.major_id ||
+        data.year_id ||
+        data.student_code_id ||
+        data.whatsapp
+      ) {
+        if (data.major_id) form.setValue("major_id", data.major_id.toString());
+        if (data.year_id) form.setValue("year_id", data.year_id.toString());
+        if (data.student_code_id)
+          form.setValue("student_code_id", data.student_code_id.toString());
+        if (data.whatsapp) form.setValue("whatsapp", data.whatsapp);
+      }
+    };
 
-  getProfile();
+    getProfile();
+  });
 
-  async function onSubmit(data: z.infer<typeof FormSchema>) {
+  const onSubmit = async (data: z.infer<typeof FormSchema>) => {
     setLoading(true);
 
     const { error } = await supabase.from("profiles").upsert({
@@ -206,7 +218,7 @@ const ProfileForm = ({
     setVerified(true);
 
     return;
-  }
+  };
 
   return (
     <Form {...form}>
@@ -444,7 +456,7 @@ const ProfileForm = ({
           </Button>
 
           <LoadingButton type="submit" loading={loading}>
-            Save
+            Save & Submit
           </LoadingButton>
         </div>
       </form>
