@@ -3,7 +3,7 @@ import Link from "next/link";
 import React from "react";
 import QRCode from "react-qr-code";
 
-const whatsAppGroupLink = "https://chat.whatsapp.com/Ft0J83k5bTcJRgIulXrvXZ";
+const whatsAppGroupLink = "https://chat.whatsapp.com/EJ2GjRnHGGQ7bntrH6K2sl";
 
 const WhatsAppGroup = () => {
   return (
