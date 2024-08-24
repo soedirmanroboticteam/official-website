@@ -224,7 +224,7 @@ export const applicantsColumns: ColumnDef<InternApplication>[] = [
               </DropdownMenuItem>
               <DropdownMenuSeparator />
               <DropdownMenuItem>
-                <Link className="flex-1" href={`/dashboard/${data.id}`}>
+                <Link className="flex-1" href={`/internship/${data.id}`}>
                   View detail
                 </Link>
               </DropdownMenuItem>
