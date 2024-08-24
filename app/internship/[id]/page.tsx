@@ -16,7 +16,7 @@ const InternDetailPage = async ({ params }: { params: { id: string } }) => {
   if (error || !data.user) redirect("/login");
 
   const isAdmin = await supabase
-    .from("profiles")
+    .from("roles")
     .select("is_admin")
     .eq("id", data.user.id)
     .limit(1)

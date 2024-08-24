@@ -58,11 +58,11 @@ export default async function ProtectedPage() {
 
   if (isAdmin.error || !Boolean(isAdmin.data.is_admin)) {
     const date = {
-      coming: new Date("2024-08-11 00:00:00.000000+00"),
-      debug: new Date("2024-08-18 00:00:00.000000+00"),
-      start: new Date("2024-08-26 00:08:00.000000+00"),
-      end: new Date("2024-08-29 00:00:00.000000+00"),
-      extend: new Date("2024-08-31 00:00:00.000000+00"),
+      coming: new Date("2024-08-11 00:00:00.000000+07"),
+      debug: new Date("2024-08-18 00:00:00.000000+07"),
+      start: new Date("2024-08-26 07:00:00.000000+07"),
+      end: new Date("2024-08-29 00:00:00.000000+07"),
+      extend: new Date("2024-08-30 23:59:59.000000+07"),
     };
 
     if (
