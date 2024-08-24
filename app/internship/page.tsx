@@ -40,11 +40,6 @@ interface OptionsInterface {
   name: string;
 }
 
-interface RolesInterface {
-  id: string;
-  is_admin: boolean;
-}
-
 export default async function ProtectedPage() {
   const supabase = createClientBrowserServer();
 
@@ -65,7 +60,7 @@ export default async function ProtectedPage() {
     const date = {
       coming: new Date("2024-08-11 00:00:00.000000+00"),
       debug: new Date("2024-08-18 00:00:00.000000+00"),
-      start: new Date("2024-08-20 00:00:00.000000+00"),
+      start: new Date("2024-08-26 00:08:00.000000+00"),
       end: new Date("2024-08-29 00:00:00.000000+00"),
       extend: new Date("2024-08-31 00:00:00.000000+00"),
     };
