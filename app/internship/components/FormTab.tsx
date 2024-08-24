@@ -46,7 +46,7 @@ const FormTab = ({ userId, majors, years, options }: FormTabProps) => {
         <TabsTrigger value="internship" disabled={!verified}>
           Internship
         </TabsTrigger>
-        <TabsTrigger value="final">Final Step</TabsTrigger>
+        <TabsTrigger value="final" disabled={!submitted}>Final Step</TabsTrigger>
       </TabsList>
       <TabsContent value="profile" className="flex flex-col gap-1">
         <SectionTitle
