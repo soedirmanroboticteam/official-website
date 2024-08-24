@@ -1,5 +1,3 @@
-/* eslint-disable @next/next/no-img-element */
-"use client"; //Client Side
 import { other01 } from "@/assets/otherpages";
 import Image from "next/image";
 

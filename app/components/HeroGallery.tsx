@@ -8,42 +8,42 @@ const HeroGallery = () => {
       <div className="basis-64 md:basis-1/6 md:hover:basis-2/6 rounded-xl bg-black transition-all duration-300 ease-in-out">
         <Image
           src={image1}
-          alt=""
+          alt="Keseruan SRT"
           className="w-full h-full object-cover rounded-xl"
         />
       </div>
       <div className="basis-64 md:basis-1/6 md:hover:basis-2/6 rounded-xl bg-black transition-all duration-300 ease-in-out">
         <Image
           src={image2}
-          alt=""
+          alt="Keseruan SRT"
           className="w-full h-full object-cover rounded-xl"
         />
       </div>
       <div className="basis-64 md:basis-1/6 md:hover:basis-2/6 rounded-xl bg-black transition-all duration-300 ease-in-out">
         <Image
           src={image3}
-          alt=""
+          alt="Keseruan SRT"
           className="w-full h-full object-cover rounded-xl"
         />
       </div>
       <div className="basis-64 md:basis-1/6 md:hover:basis-2/6 rounded-xl bg-black transition-all duration-300 ease-in-out">
         <Image
           src={image4}
-          alt=""
+          alt="Keseruan SRT"
           className="w-full h-full object-cover rounded-xl"
         />
       </div>
       <div className="hidden md:block md:basis-1/6 md:hover:basis-2/6 rounded-xl bg-black transition-all duration-300 ease-in-out">
         <Image
           src={image5}
-          alt=""
+          alt="Keseruan SRT"
           className="w-full h-full object-cover rounded-xl"
         />
       </div>
       <div className="hidden md:block md:basis-1/6 md:hover:basis-2/6 rounded-xl bg-black transition-all duration-300 ease-in-out">
         <Image
           src={image6}
-          alt=""
+          alt="Keseruan SRT"
           className="w-full h-full object-cover rounded-xl"
         />
       </div>
