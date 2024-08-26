@@ -90,7 +90,7 @@ const FormSchema = z.object({
     .string({
       required_error: "Please enter your CV Url.",
     })
-    .regex(/http[A-Za-z]?:\/\/([A-Za-z]+\.[A-Za-z][A-Za-z]+)[^,]*$/, {
+    .regex(/^http[A-Za-z]?:\/\/([A-Za-z]+\.[A-Za-z][A-Za-z]+)[^,]*$/, {
       message: "Please enter a valid URL.",
     })
     .max(128, { message: "Please input URL at most 128 characters." }),
@@ -98,7 +98,7 @@ const FormSchema = z.object({
     .string({
       required_error: "Please enter your Twibbon Url.",
     })
-    .regex(/http[A-Za-z]?:\/\/((www.)?instagram.com\/p\/)[^,]*$/, {
+    .regex(/^http[A-Za-z]?:\/\/((www.)?instagram.com\/p\/)[^,]*$/, {
       message: "Please input a valid Instagram Post URL.",
     })
     .max(128, {
