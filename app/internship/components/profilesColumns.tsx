@@ -107,6 +107,7 @@ export const profilesColumns: ColumnDef<Profiles>[] = [
   },
   {
     id: "is admin",
+    accessorKey: "roles.is_admin",
     header: ({ column }) => (
       <div className="flex justify-end">
         <Button
