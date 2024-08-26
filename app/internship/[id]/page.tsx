@@ -100,18 +100,22 @@ const InternDetailPage = async ({ params }: { params: { id: string } }) => {
         <h5 className="text-3xl font-bold">Harapan</h5>
         <p className="text-lg">{internApplication.data.hope}</p>
       </div>
-      <div className="flex justify-between gap-8">
-        <div className="flex-1 space-y-2">
-          <h5 className="text-3xl font-bold">
+      <div className="max-w-full flex flex-wrap justify-between gap-8">
+        <div className="w-full flex-1 space-y-2">
+          <h5 className="w-full text-3xl font-bold">
             {internApplication.data.first.name}
           </h5>
-          <p className="text-xl">{internApplication.data.first_reason}</p>
+          <p className="w-full text-xl text-wrap">
+            {internApplication.data.first_reason}
+          </p>
         </div>
-        <div className="flex-1 space-y-2">
-          <h5 className="text-3xl font-bold">
+        <div className="w-full flex-1 space-y-2">
+          <h5 className="w-full text-3xl font-bold">
             {internApplication.data.second.name}
           </h5>
-          <p className="text-xl">{internApplication.data.second_reason}</p>
+          <p className="w-full text-xl text-wrap">
+            {internApplication.data.second_reason}
+          </p>
         </div>
       </div>
       <div className="flex justify-between gap-8">

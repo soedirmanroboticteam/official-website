@@ -29,6 +29,7 @@ import {
   SelectItem,
 } from "@/components/ui/select";
 import { InternApplication } from "./applicantsColumns";
+import { toast } from "@/components/ui/use-toast";
 
 interface ApplicantsDataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -218,7 +219,7 @@ export function ApplicantsDataTable<TData, TValue>({
           </div>
           <Button
             className="rounded-md"
-            onClick={() =>
+            onClick={() => {
               navigator.clipboard.writeText(
                 "fullname, email, faculty, major, NIM, whatsapp, first choice, first motivation, second choice, second motivation, hope, CV Url, Twibbon Url, first submit, last edited".concat(
                   "\n",
@@ -254,8 +255,17 @@ export function ApplicantsDataTable<TData, TValue>({
                     )
                     .join("\n")
                 )
-              )
-            }
+              );
+
+              toast({
+                title: "Success!",
+                description: (
+                  <p className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
+                    You can now paste the data from the clipboard.
+                  </p>
+                ),
+              });
+            }}
           >
             Copy all data as CSV
           </Button>

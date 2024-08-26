@@ -24,6 +24,7 @@ import { toast } from "@/components/ui/use-toast";
 import { Textarea } from "@/components/ui/textarea";
 import { createClientBrowserClient } from "@/lib/supabase/client";
 import { LoadingButton } from "@/components/ui/loading-button";
+import Link from "next/link";
 
 interface InternshipInterface {
   first_choice: number;
@@ -346,7 +347,15 @@ const InternshipForm = ({
                 />
               </FormControl>
               <FormDescription>
-                Please upload your CV to a cloud provider and enter the URL.
+                Please upload your CV to a cloud provider and enter the URL. If
+                you still don&apos;t have a CV, you can use this template to
+                create one{" "}
+                <Link
+                  href="https://s.id/CVdanTwibbonOprecInternshipSRT2024"
+                  className="text-blue-400 underline"
+                >
+                  Here.
+                </Link>
               </FormDescription>
               <FormMessage />
             </FormItem>
@@ -366,7 +375,15 @@ const InternshipForm = ({
                 />
               </FormControl>
               <FormDescription>
-                Please enter the URL of your twibbon Instagram post.
+                Please enter the URL of your twibbon Instagram post. If you
+                still haven&apos;t made a twibbon,{" "}
+                <Link
+                  href="https://s.id/CVdanTwibbonOprecInternshipSRT2024"
+                  className="text-blue-400 underline"
+                >
+                  Here
+                </Link>{" "}
+                is the link to the twibbon.
               </FormDescription>
               <FormMessage />
             </FormItem>
