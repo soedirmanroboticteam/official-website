@@ -87,7 +87,7 @@ export default async function ProtectedPage() {
     }
 
     if (Date.now() > date.extend.getTime()) {
-      const count = await supabase.from("intern_applications").select("");
+      const count = await supabase.rpc("get_applicants_count");
 
       if (count.error) {
         return <div>Error: {count.error.message}</div>;
@@ -100,9 +100,9 @@ export default async function ProtectedPage() {
             desc="Thank you for your participation! Now that the registration is closed. For those that have filled our form, you'll be contacted soon. Further information will be provided there."
           />
           <h3 className="text-center text-8xl font-semibold">
-            {count.data.length} <br />
+            {count.data} <br />
           </h3>
-          <h4 className="text-center text-3xl font-semibold">registrant</h4>
+          <h4 className="text-center text-3xl font-semibold">Registrant</h4>
         </main>
       );
     }
