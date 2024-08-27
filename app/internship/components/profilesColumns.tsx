@@ -1,6 +1,11 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
+import {
+  HoverCard,
+  HoverCardContent,
+  HoverCardTrigger,
+} from "@/components/ui/hover-card";
 import { Switch } from "@/components/ui/switch";
 import { toast } from "@/components/ui/use-toast";
 import { createClientBrowserClient } from "@/lib/supabase/client";
@@ -17,6 +22,18 @@ export type Profiles = {
   roles: {
     is_admin: boolean;
   };
+  majors: {
+    name: string;
+    degrees: {
+      name: string;
+    };
+    faculties: {
+      name: string;
+    };
+  } | null;
+  years: {
+    name: number;
+  } | null;
 };
 
 import React from "react";
@@ -88,6 +105,22 @@ export const profilesColumns: ColumnDef<Profiles>[] = [
           Fullname
           <ChevronsUpDown className="ml-2 h-4 w-4" />
         </Button>
+      );
+    },
+    cell: ({ row }) => {
+      const data = row.original;
+
+      return (
+        <HoverCard>
+          <HoverCardTrigger>
+            <Button variant="link">{data.name}</Button>
+          </HoverCardTrigger>
+          <HoverCardContent>
+            <p>Jurusan: {data.majors?.name ?? "-"}</p>
+            <p>Fakultas: {data.majors?.faculties.name ?? "-"}</p>
+            <p>Angkatan: {((data.years?.name ?? 0) + 2000).toString()}</p>
+          </HoverCardContent>
+        </HoverCard>
       );
     },
   },

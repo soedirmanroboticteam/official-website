@@ -59,16 +59,12 @@ export default async function ProtectedPage() {
   if (isAdmin.error || !Boolean(isAdmin.data.is_admin)) {
     const date = {
       coming: new Date("2024-08-11 00:00:00.000000+07"),
-      debug: new Date("2024-08-18 00:00:00.000000+07"),
       start: new Date("2024-08-26 07:00:00.000000+07"),
       end: new Date("2024-08-29 00:00:00.000000+07"),
       extend: new Date("2024-08-30 23:59:59.000000+07"),
     };
 
-    if (
-      date.debug.getTime() < Date.now() &&
-      date.start.getTime() > Date.now()
-    ) {
+    if (date.start.getTime() > Date.now()) {
       return (
         <main className="container mx-auto py-4">
           <SectionTitle
@@ -175,7 +171,9 @@ export default async function ProtectedPage() {
       .returns<InternApplication[]>(),
     supabase
       .from("profiles")
-      .select("id, name, email, roles:roles!inner(is_admin)")
+      .select(
+        "id, name, email, roles:roles!inner(is_admin), majors(name, degrees(name), faculties(name)), years(name)"
+      )
       .order("name", { ascending: true })
       .returns<Profiles[]>(),
     supabase
