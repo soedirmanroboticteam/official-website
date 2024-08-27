@@ -60,8 +60,8 @@ export default async function ProtectedPage() {
     const date = {
       coming: new Date("2024-08-11 00:00:00.000000+07"),
       start: new Date("2024-08-26 07:00:00.000000+07"),
-      end: new Date("2024-08-29 00:00:00.000000+07"),
-      extend: new Date("2024-08-30 23:59:59.000000+07"),
+      end: new Date("2024-09-01 00:00:00.000000+07"),
+      extend: new Date("2024-09-03 23:59:59.000000+07"),
     };
 
     if (date.start.getTime() > Date.now()) {
