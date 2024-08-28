@@ -17,8 +17,8 @@ const SponsorSection = async () => {
         <div className="pb-5 flex-col justify-start items-start flex">
           <div className="h-8 px-2 justify-start items-start flex">
             <div className="flex-col justify-start items-start flex">
-              <div className="text-3xl font-semibold leading-loose">
-                Sponsorship
+              <div className="text-4xl font-semibold leading-loose">
+                Our Sponsors
               </div>
             </div>
           </div>
