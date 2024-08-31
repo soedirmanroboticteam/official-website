@@ -114,11 +114,11 @@ export function ApplicantsDataTable<TData, TValue>({
             table.getColumn("First Choice")?.setFilterValue(undefined);
           }}
           defaultValue={
-            (table.getColumn("First Choice")?.getFilterValue() as string) ??
+            (table.getColumn("Second Choice")?.getFilterValue() as string) ??
             undefined
           }
           value={
-            (table.getColumn("First Choice")?.getFilterValue() as string) ??
+            (table.getColumn("Second Choice")?.getFilterValue() as string) ??
             undefined
           }
         >
