@@ -87,11 +87,11 @@ export function ApplicantsDataTable<TData, TValue>({
               <SelectItem value="Financial Manager">
                 Financial Manager
               </SelectItem>
-              <SelectItem value="Human Resource Development (HRD)">
-                Human Resource Development (HRD)
+              <SelectItem value="Human Resources & Development (HRD)">
+                Human Resources & Development (HRD)
               </SelectItem>
-              <SelectItem value="Public Relation (PR)">
-                Public Relation (PR)
+              <SelectItem value="Public Relations (PR)">
+                Public Relations (PR)
               </SelectItem>
               <SelectItem value="Creative Media">Creative Media</SelectItem>
               <SelectItem value="Sponsorship">Sponsorship</SelectItem>
@@ -132,11 +132,11 @@ export function ApplicantsDataTable<TData, TValue>({
               <SelectItem value="Financial Manager">
                 Financial Manager
               </SelectItem>
-              <SelectItem value="Human Resource Development (HRD)">
-                Human Resource Development (HRD)
+              <SelectItem value="Human Resources & Development (HRD)">
+                Human Resources & Development (HRD)
               </SelectItem>
-              <SelectItem value="Public Relation (PR)">
-                Public Relation (PR)
+              <SelectItem value="Public Relations (PR)">
+                Public Relations (PR)
               </SelectItem>
               <SelectItem value="Creative Media">Creative Media</SelectItem>
               <SelectItem value="Sponsorship">Sponsorship</SelectItem>
