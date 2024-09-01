@@ -87,7 +87,7 @@ export default async function ProtectedPage() {
       const { count, error } = await supabase
         .from("intern_applications")
         .select("*", { count: "exact", head: true })
-        .lte("created_at", "2024-09-01 23:59:59.311049+00");
+        .lte("created_at", "2024-09-01 05:00:00.000000+00");
 
       if (error) {
         return <div>Error: {error.message}</div>;
