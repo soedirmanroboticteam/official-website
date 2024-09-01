@@ -1,6 +1,6 @@
 "use server";
 import { redirect } from "next/navigation";
-import { createClientBrowserServer } from "../supabase/server";
+import { createClientBrowserServer } from "@/utils/supabase/server";
 
 export const loginWithGoogleServer = async () => {
   "use server";

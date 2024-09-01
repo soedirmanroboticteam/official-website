@@ -1,12 +1,12 @@
 import React from "react";
 import { Separator } from "@/components/ui/separator";
 import Link from "next/link";
-import { OfficialLogo } from "@/assets";
 import Image from "next/image";
 import { navMenu } from "@/lib/navMenu";
 import { footSocials } from "@/lib/footSocials";
 import { footSponsors } from "@/lib/footSponsors";
 import { footDesc } from "@/lib/footDesc";
+import { Icons } from "./icons";
 
 const Footer = () => {
   return (
@@ -15,7 +15,7 @@ const Footer = () => {
         <div className="flex justify-between gap-x-32 gap-y-8 flex-wrap">
           <div className="max-w-md flex flex-col gap-6 items-center md:items-start">
             <Link href="/" className="flex items-center gap-2">
-              <OfficialLogo height={64} />
+              <Icons.logo className="h-16" />
               <h1 className="text-xl font-semibold leading-none uppercase">
                 Soedirman <br />
                 Robotic <br />

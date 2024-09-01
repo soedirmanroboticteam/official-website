@@ -1,6 +1,6 @@
 "use client";
 import { redirect } from "next/navigation";
-import { createClientBrowserClient } from "../supabase/client";
+import { createClientBrowserClient } from "@/utils/supabase/client";
 
 export const loginWithGoogleClient = async () => {
   const supabase = createClientBrowserClient();

@@ -1,4 +1,4 @@
-import { createClientBrowserServer } from "@/lib/supabase/server";
+import { createClientBrowserServer } from "@/utils/supabase/server";
 import { revalidatePath } from "next/cache";
 import { type NextRequest, NextResponse } from "next/server";
 
