@@ -60,8 +60,9 @@ export default async function ProtectedPage() {
     const date = {
       coming: new Date("2024-08-11 00:00:00.000000+07"),
       start: new Date("2024-08-26 07:00:00.000000+07"),
-      end: new Date("2024-09-01 00:00:00.000000+07"),
-      extend: new Date("2024-09-03 23:59:59.000000+07"),
+      end: new Date("2024-09-01 23:59:59.000000+07"),
+      extendStart: new Date("2024-09-02 07:00:00.000000+07"),
+      extendEnd: new Date("2024-09-03 23:59:59.000000+07"),
     };
 
     if (date.start.getTime() > Date.now()) {
@@ -82,25 +83,60 @@ export default async function ProtectedPage() {
       );
     }
 
-    if (Date.now() > date.extend.getTime()) {
-      const count = await supabase.rpc("get_applicants_count");
+    if (Date.now() > date.end.getTime()) {
+      const { count, error } = await supabase
+        .from("intern_applications")
+        .select("*", { count: "exact", head: true })
+        .lte("created_at", "2024-09-01 23:59:59.311049+00");
 
-      if (count.error) {
-        return <div>Error: {count.error.message}</div>;
+      if (error) {
+        return <div>Error: {error.message}</div>;
       }
 
-      return (
-        <main className="container mx-auto py-4 space-y-4">
-          <SectionTitle
-            title="Closed Registration"
-            desc="Thank you for your participation! Now that the registration is closed. For those that have filled our form, you'll be contacted soon. Further information will be provided there."
-          />
-          <h3 className="text-center text-8xl font-semibold">
-            {count.data} <br />
-          </h3>
-          <h4 className="text-center text-3xl font-semibold">Registrant</h4>
-        </main>
-      );
+      if (count! > 0) {
+        const count = await supabase.rpc("get_applicants_count");
+
+        if (count.error) {
+          return <div>Error: {count.error.message}</div>;
+        }
+
+        return (
+          <main className="container mx-auto py-4 space-y-4">
+            <SectionTitle
+              title="Closed Registration"
+              desc="Thank you for your participation! Now that the registration is closed. For those that have filled our form, you'll be contacted soon. Further information will be provided via WhatsApp Group."
+            />
+            <h3 className="text-center text-8xl font-semibold">
+              {count.data} <br />
+            </h3>
+            <h4 className="text-center text-3xl font-semibold">Registrant</h4>
+          </main>
+        );
+      }
+
+      if (
+        Date.now() < date.extendStart.getTime() ||
+        Date.now() > date.extendEnd.getTime()
+      ) {
+        const applicantsCount = await supabase.rpc("get_applicants_count");
+
+        if (applicantsCount.error) {
+          return <div>Error: {applicantsCount.error.message}</div>;
+        }
+
+        return (
+          <main className="container mx-auto py-4 space-y-4">
+            <SectionTitle
+              title="Closed Registration"
+              desc="Thank you for your participation! Now that the registration is closed. For those that have filled our form, you'll be contacted soon. Further information will be provided via WhatsApp Group."
+            />
+            <h3 className="text-center text-8xl font-semibold">
+              {applicantsCount.data} <br />
+            </h3>
+            <h4 className="text-center text-3xl font-semibold">Registrant</h4>
+          </main>
+        );
+      }
     }
 
     const [majors, years, options] = await Promise.all([
@@ -145,8 +181,8 @@ export default async function ProtectedPage() {
           <Progress
             value={
               Date.now() > date.end.getTime()
-                ? ((date.end.getTime() - Date.now()) /
-                    (date.end.getTime() - date.extend.getTime())) *
+                ? ((date.extendEnd.getTime() - Date.now()) /
+                    (date.extendEnd.getTime() - date.extendStart.getTime())) *
                   100
                 : ((date.start.getTime() - Date.now()) /
                     (date.start.getTime() - date.end.getTime())) *
