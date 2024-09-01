@@ -1,5 +1,5 @@
 import NavigationBar from "@/components/navigation-bar";
-import Footer from "@/components/footer";
+import Footer from "@/components/main-footer";
 
 export default function AppLayout({
   children,
