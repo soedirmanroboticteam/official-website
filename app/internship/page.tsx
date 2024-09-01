@@ -94,10 +94,10 @@ export default async function ProtectedPage() {
       }
 
       if (count! > 0) {
-        const count = await supabase.rpc("get_applicants_count");
+        const applicantsCount = await supabase.rpc("get_applicants_count");
 
-        if (count.error) {
-          return <div>Error: {count.error.message}</div>;
+        if (applicantsCount.error) {
+          return <div>Error: {applicantsCount.error.message}</div>;
         }
 
         return (
@@ -107,7 +107,7 @@ export default async function ProtectedPage() {
               desc="Thank you for your participation! Now that the registration is closed. For those that have filled our form, you'll be contacted soon. Further information will be provided via WhatsApp Group."
             />
             <h3 className="text-center text-8xl font-semibold">
-              {count.data} <br />
+              {applicantsCount.data} <br />
             </h3>
             <h4 className="text-center text-3xl font-semibold">Registrant</h4>
           </main>
