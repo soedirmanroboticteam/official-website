@@ -14,7 +14,7 @@ import { Fade } from "react-awesome-reveal";
 const AchievementSection = () => {
   return (
     <section
-      className={`${sora.className} w-full flex-col justify-start items-start flex`}
+      className={`${sora.className} flex flex-col justify-start items-start overflow-hidden`}
     >
       <Fade triggerOnce={true}>
         <div className="grow shrink basis-0 self-stretch px-6 md:px-14 flex-col justify-center items-center flex">
