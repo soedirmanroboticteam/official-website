@@ -234,7 +234,7 @@ const InternshipForm = ({
                 </SelectTrigger>
                 <SelectContent>
                   {options
-                    .filter((item) => item.id !== 5 && item.id !== 2)
+                    .filter((item) => item.id !== 5)
                     .map((option) => (
                       <SelectItem value={option.id.toString()} key={option.id}>
                         {option.name}
@@ -284,7 +284,7 @@ const InternshipForm = ({
                 </SelectTrigger>
                 <SelectContent>
                   {options
-                    .filter((item) => item.id !== 5 && item.id !== 2)
+                    .filter((item) => item.id !== 5)
                     .map((option) => (
                       <SelectItem value={option.id.toString()} key={option.id}>
                         {option.name}
