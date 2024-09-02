@@ -3,7 +3,7 @@ import { Icons } from "@/components/icons";
 export const siteConfig = {
   name: "Soedirman Robotic Team",
   url: "https://soedirmanrobotic.com",
-  ogImage: "https://soedirmanrobotic.com/images/open-graph.png",
+  ogImage: "https://soedirmanrobotic.com/images/opengraph-image.png",
   description: `We're a group of students with ambitions to be the winner of Kontes Robot Indonesia (KRI) and Kontes Robot Terbang Indonesia (KRTI). We will always strike through for “The Future We Make, For The Better Life”.`,
   email: "soedirmanrobotic@gmail.com",
   socials: [
