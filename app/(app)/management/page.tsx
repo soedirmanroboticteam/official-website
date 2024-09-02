@@ -1,6 +1,12 @@
 import { createClientBrowserServer } from "@/utils/supabase/server";
 import HeroManagement from "@/app/(app)/management/components/hero-management";
 import DivisionSection from "@/components/division-section";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Management",
+  description: "Management Teams page",
+};
 
 export default async function Home() {
   const supabase = createClientBrowserServer();

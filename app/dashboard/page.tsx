@@ -12,6 +12,7 @@ import {
 import { ApplicantsDataTable } from "./components/applicants-data-table";
 import { ProfilesDataTable } from "./components/profiles-data-table";
 import { redirect } from "next/navigation";
+import { Metadata } from "next";
 
 interface FacultyInterface {
   name: string;
@@ -37,6 +38,11 @@ interface OptionsInterface {
   id: number;
   name: string;
 }
+
+export const metadata: Metadata = {
+  title: "Dashboard",
+  description: "Admin Dashboard page",
+};
 
 const page = async () => {
   const supabase = createClientBrowserServer();

@@ -1,6 +1,12 @@
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import React from "react";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Not Found",
+  description: "The page you're looking for is not available.",
+};
 
 const NotFound = () => {
   return (

@@ -1,6 +1,12 @@
 import { createClientBrowserServer } from "@/utils/supabase/server";
 import HeroKri from "@/app/(app)/kri/components/hero-kri";
 import DivisionSection from "@/components/division-section";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "KRI",
+  description: "KRI Teams page",
+};
 
 export default async function Home() {
   const supabase = createClientBrowserServer();

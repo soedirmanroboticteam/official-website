@@ -3,6 +3,7 @@ import { redirect } from "next/navigation";
 import FormTab from "./components/form-tab";
 import SectionTitle from "@/components/section-title";
 import { Progress } from "@/components/ui/progress";
+import { Metadata } from "next";
 
 interface FacultyInterface {
   name: string;
@@ -28,6 +29,11 @@ interface OptionsInterface {
   id: number;
   name: string;
 }
+
+export const metadata: Metadata = {
+  title: "Internship",
+  description: "Internship Application page",
+};
 
 export default async function ProtectedPage() {
   const supabase = createClientBrowserServer();

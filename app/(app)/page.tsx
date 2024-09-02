@@ -4,6 +4,12 @@ import FaqSection from "@/app/(app)/components/faq-section";
 import HeroSection from "@/app/(app)/components/hero-section";
 import TeamSection from "@/app/(app)/components/team-section";
 import SponsorSection from "./components/sponsor-section";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Home",
+  description: "Homepage",
+};
 
 export default function Home() {
   return (

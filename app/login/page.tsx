@@ -4,6 +4,12 @@ import Image from "next/image";
 import { redirect } from "next/navigation";
 import React from "react";
 import { loginWithGoogleServer } from "./actions";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Login",
+  description: "Login page",
+};
 
 async function page() {
   const supabase = createClientBrowserServer();
