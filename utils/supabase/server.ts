@@ -10,6 +10,13 @@ export function createClientBrowserServer() {
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
     {
+      cookieOptions: {
+        domain: ".soedirmanrobotic.com",
+        maxAge: 100000000,
+        path: "/",
+        sameSite: "lax",
+        // secure: process.env.NEXT_PUBLIC_AUTH_DOMAIN.startsWith('https://'),
+      },
       cookies: {
         get(name: string) {
           return cookieStore.get(name)?.value;
