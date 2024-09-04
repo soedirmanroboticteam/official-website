@@ -43,6 +43,7 @@ export default async function Home() {
       .select(
         "name, positions(divisions(id, name, teams(id), description, logo_url), titles(id)), image_url"
       )
+      .order("id", { ascending: true })
       .returns<Member[]>(),
     supabase.from("achievements").select("*").returns<Achievements[]>(),
     supabase
