@@ -1,38 +1,52 @@
-import { createClientBrowserServer } from "@/utils/supabase/server";
+"use client";
 import React from "react";
-import SponsorCarousel from "./sponsor-carousel";
+import { Sponsors } from "@/app/types/global.types";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+} from "@/components/ui/carousel";
+import AutoScroll from "embla-carousel-auto-scroll";
+import Image from "next/image";
 import { Fade } from "react-awesome-reveal";
 
-const SponsorSection = async () => {
-  const supabase = createClientBrowserServer();
-
-  const { data, error } = await supabase.from("sponsors").select("*");
-
+const SponsorSection = ({ sponsors }: { sponsors: Sponsors[] }) => {
   return (
-    <section className="w-full flex-col justify-start items-start flex">
-      <div className="grow shrink basis-0 self-stretch px-6 md:px-14 flex-col justify-center items-center flex">
-        <div className="pb-5 flex-col justify-start items-start flex">
-          <div className="h-8 px-2 justify-start items-start flex">
-            <div className="flex-col justify-start items-start flex">
-              <div className="text-4xl font-semibold leading-loose">
-                Our Sponsors
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div className="grow shrink basis-0 self-stretch px-14 flex-col justify-center items-center flex">
+    <Fade triggerOnce={true}>
+      <section className="w-full flex-col justify-start items-start flex">
+        <h2 className="text-3xl font-semibold leading-loose mx-auto">
+          Our Sponsors
+        </h2>
         <div className="w-full overflow-hidden">
-          <div className="flex overflow-hidden w-full justify-start items-start">
-            <div className="relative flex flex-row flex-nowrap justify-start py-2 w-full overflow-hidden">
-              <SponsorCarousel items={data} />
-              <div className="w-full inset-0 bg-gradient-to-l from-[#000000] from-0% to-transparent to-5% absolute"></div>
-              <div className="w-full inset-0 bg-gradient-to-r from-[#000000] from-0% to-transparent to-5% absolute"></div>
-            </div>
+          <div className="relative flex flex-row flex-nowrap justify-start py-2 w-full overflow-hidden">
+            <Carousel
+              orientation="horizontal"
+              plugins={[AutoScroll({ speed: 1 })]}
+              opts={{ loop: true }}
+              className="w-full"
+            >
+              <CarouselContent className="flex flex-row justify-center gap-2">
+                {sponsors.map((item, index) => (
+                  <CarouselItem
+                    key={index}
+                    className="basis-1/4 justify-center items-center gap-1 flex"
+                  >
+                    <Image
+                      height={128}
+                      width={128}
+                      src={item.image_url}
+                      alt={item.title}
+                    />
+                  </CarouselItem>
+                ))}
+              </CarouselContent>
+            </Carousel>
+            <div className="w-full inset-0 bg-gradient-to-l from-[#000000] from-0% to-transparent to-5% absolute"></div>
+            <div className="w-full inset-0 bg-gradient-to-r from-[#000000] from-0% to-transparent to-5% absolute"></div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </Fade>
   );
 };
 

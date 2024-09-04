@@ -11,125 +11,20 @@ import {
   NavigationMenuTrigger,
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
-import { Icons } from "./icons";
-
-interface NavMenuItem {
-  title: string;
-  description?: string;
-  href: string;
-  spotlight?: boolean;
-}
-
-interface NavMenu {
-  title: string;
-  items: NavMenuItem[];
-}
-
-const navMenu: {
-  title: string;
-  contents?: {
-    title: string;
-    description?: string;
-    href: string;
-    spotlight?: boolean;
-  }[];
-  href?: string;
-}[] = [
-  {
-    title: "About Us",
-    contents: [
-      {
-        title: "Soedirman Robotic Team",
-        description: "Get to know more about us.",
-        href: "/about",
-        spotlight: true,
-      },
-      {
-        title: "Management Teams",
-        description: "Get to know people behind our organization.",
-        href: "/management",
-      },
-      {
-        title: "KRI Teams",
-        description: "Get to know people behind our Robotic Teams.",
-        href: "/kri",
-      },
-      {
-        title: "KRTI Teams",
-        description: "Get to know people behind our UAV Teams.",
-        href: "/krti",
-      },
-    ],
-  },
-  {
-    title: "Media",
-    contents: [
-      {
-        title: "Konten Edukasi",
-        description: "Check out our stories on Medium.",
-        href: "https://medium.com/@soedirmanrobotic",
-      },
-      {
-        title: "E-Magazine",
-        description:
-          "Get up to date about latest technology via our E-Magazine.",
-        href: "/e-magazine",
-      },
-      {
-        title: "YouTube",
-        description:
-          "Get to know more about our organization achievements and history!",
-        href: "https://www.youtube.com/@soedirmanroboticteam",
-      },
-      {
-        title: "Cast-Tic",
-        description:
-          "Don't have time to learn new things? Listen to our podcast and learn something new while still being able to do what you do.",
-        href: "https://open.spotify.com/show/49Nhx2wMSNFfZfC64O7Wmm?si=c6e1ff41fd814cc5",
-      },
-      {
-        title: "TikTok",
-        description:
-          "Learning doesn't have to be boring! Have fun while learning new things with our TikTok videos.",
-        href: "https://www.tiktok.com/@srtunsoed",
-      },
-    ],
-  },
-  {
-    title: "Events",
-    contents: [
-      {
-        title: "Pengabdian Masyarakat",
-        description: "Teaching is the best way of learning!",
-        href: "/pengabdian-masyarakat",
-      },
-      {
-        title: "Internship",
-        description:
-          "Follow our Instagram and get notified about our Internship program!",
-        href: "/internship",
-      },
-      {
-        title: "Open Recruitment",
-        description:
-          "Are you ready to be the next fighters? Don't miss out our opening for new recruits! ",
-        href: "https://join.soedirmanrobotic.com",
-      },
-    ],
-  },
-];
+import { Icons } from "@/components/icons";
+import { NavMenu, navMenu, NavSubMenu } from "@/config/site";
 
 export function NavigationMenuDesktop() {
   return (
-    <NavigationMenu>
+    <NavigationMenu className="hidden md:block">
       <NavigationMenuList>
         {navMenu.map((menu, index) =>
-          menu.contents ? (
+          (menu as NavSubMenu).contents !== undefined ? (
             <NavigationMenuItem className="first:flex-1" key={index}>
               <NavigationMenuTrigger>{menu.title}</NavigationMenuTrigger>
               <NavigationMenuContent>
                 <ul className="grid gap-3 p-4 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]">
-                  {menu.contents.map((content) =>
+                  {(menu as NavSubMenu).contents.map((content) =>
                     content.spotlight ? (
                       <li className="row-span-3" key={content.title}>
                         <NavigationMenuLink asChild>
@@ -160,15 +55,15 @@ export function NavigationMenuDesktop() {
                 </ul>
               </NavigationMenuContent>
             </NavigationMenuItem>
-          ) : menu.href ? (
+          ) : (
             <NavigationMenuItem key={index}>
-              <Link href={menu.href} legacyBehavior passHref>
+              <Link href={(menu as NavMenu).href} legacyBehavior passHref>
                 <NavigationMenuLink className={navigationMenuTriggerStyle()}>
                   {menu.title}
                 </NavigationMenuLink>
               </Link>
             </NavigationMenuItem>
-          ) : null
+          )
         )}
       </NavigationMenuList>
     </NavigationMenu>

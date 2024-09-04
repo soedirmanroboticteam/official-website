@@ -5,8 +5,9 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import HeroGallery from "./hero-gallery";
 import { Fade } from "react-awesome-reveal";
+import { HeroImages } from "@/app/types/global.types";
 
-const HeroSection = () => {
+const HeroSection = ({ heroImages }: { heroImages: HeroImages[] }) => {
   return (
     <section className="w-full flex-col justify-start items-center gap-8 py-6 md:py-12 flex">
       <Fade triggerOnce={true}>
@@ -47,7 +48,7 @@ const HeroSection = () => {
             </Link>
           </Button>
         </div>
-        <HeroGallery />
+        <HeroGallery heroImages={heroImages} />
       </Fade>
     </section>
   );

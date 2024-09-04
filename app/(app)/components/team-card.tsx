@@ -7,53 +7,37 @@ import {
 } from "@/components/ui/card";
 import Image from "next/image";
 import TeamCardPhoto from "./team-card-photo";
-import { createClientBrowserServer } from "@/utils/supabase/server";
+import { Divisions } from "@/app/types/global.types";
+import { Member } from "./contact-section";
 
-interface TeamCardProps {
-  id: number;
-  name: string;
-  description: string;
-  logo_url: string;
-}
-
-const TeamCard = async ({
-  team,
+const TeamCard = ({
+  teamDivision,
+  members,
   index,
 }: {
-  team: TeamCardProps;
+  teamDivision: Divisions;
+  members: Member[];
   index: number;
 }) => {
-  const supabase = createClientBrowserServer();
-
-  const { data, error } = await supabase
-    .from("members")
-    .select("id, name, image_url, divisions(*)")
-    .eq("division", team.id)
-    .order("title", { ascending: true });
-
-  if (error) {
-    return <div>Error: {error.message}</div>;
-  }
-
   return (
     <div className="w-full flex flex-col-reverse md:odd:flex-row md:even:flex-row-reverse justify-center md:justify-between gap-2 md:gap-8">
       <Card className="basis-full md:basis-2/3 min-h-72">
         <CardHeader>
           <div className="relative w-16 h-10 overflow-x-hidden">
             <Image
-              src={team.logo_url}
-              alt={team.name}
+              src={teamDivision.logo_url!}
+              alt={teamDivision.name}
               fill={true}
               style={{ objectFit: "contain" }}
             />
           </div>
-          <CardTitle className="pt-8">{team.name}</CardTitle>
-          <CardDescription>{team.description}</CardDescription>
+          <CardTitle className="pt-8">{teamDivision.name}</CardTitle>
+          <CardDescription>{teamDivision.description}</CardDescription>
         </CardHeader>
       </Card>
       <TeamCardPhoto
         direction={index % 2 ? "backward" : "forward"}
-        members={data}
+        members={members}
       />
     </div>
   );

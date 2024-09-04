@@ -7,23 +7,31 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { frequentQuestion } from "@/lib/frequentQuestions";
 import { Fade } from "react-awesome-reveal";
+import { FrequentlyAskedQuestions } from "@/app/types/global.types";
 
-const FaqSection = () => {
+const FaqSection = ({
+  frequentlyAskedQuestions,
+}: {
+  frequentlyAskedQuestions: FrequentlyAskedQuestions[];
+}) => {
   return (
     <Fade triggerOnce={true} fraction={0.5}>
       <section className="flex w-full px-4 md:px-10 py-20 flex-col justify-center items-start gap-12">
         <SectionTitle
           title="Frequently Asked Questions"
-          desc="Still have question about us? You might be able to find your answer here."
+          desc="Still got questions? Check out our FAQ down here & contact us if still got any."
         />
         <Accordion type="multiple" className="w-full md:px-12">
-          {frequentQuestion.map((question, index) => (
+          {frequentlyAskedQuestions.map((item, index) => (
             <AccordionItem value={`item-${index}`} key={index}>
-              <AccordionTrigger>{question.question}</AccordionTrigger>
+              <AccordionTrigger>{item.question}</AccordionTrigger>
               <AccordionContent>
-                <p>{question.answer}</p>
+                <p
+                  dangerouslySetInnerHTML={{
+                    __html: item.answer,
+                  }}
+                />
               </AccordionContent>
             </AccordionItem>
           ))}

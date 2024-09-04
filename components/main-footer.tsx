@@ -2,10 +2,8 @@ import React from "react";
 import { Separator } from "@/components/ui/separator";
 import Link from "next/link";
 import Image from "next/image";
-import { navMenu } from "@/lib/navMenu";
-import { footSocials } from "@/lib/footSocials";
+import { navMenu, NavSubMenu, siteConfig } from "@/config/site";
 import { footSponsors } from "@/lib/footSponsors";
-import { footDesc } from "@/lib/footDesc";
 import { Icons } from "./icons";
 
 const Footer = () => {
@@ -22,15 +20,17 @@ const Footer = () => {
                 Team
               </h1>
             </Link>
-            <p className=" text-center md:text-justify">{footDesc.desc}</p>
-            <Link href={`mailto:${footDesc.email}`} className="font-bold">
-              {footDesc.email}
+            <p className=" text-center md:text-justify">
+              {siteConfig.description}
+            </p>
+            <Link href={`mailto:${siteConfig.email}`} className="font-bold">
+              {siteConfig.email}
             </Link>
           </div>
           <div className="flex flex-1 flex-col gap-6">
-            <ul className="flex flex-1 flex-wrap justify-between items-start">
+            <ul className="flex flex-1 flex-wrap justify-between items-start gap-y-4">
               {navMenu.map((menu, index) =>
-                menu.contents ? (
+                (menu as NavSubMenu).contents !== undefined ? (
                   <li
                     className="grow shrink basis-1/2 md:basis-0 self-stretch px-2 flex-col justify-start items-start gap-2 inline-flex"
                     key={index}
@@ -38,17 +38,17 @@ const Footer = () => {
                     <h3 className="text-lg font-bold">{menu.title}</h3>
                     <Separator />
                     <ul className="flex flex-col gap-2">
-                      {menu.contents.map((content, id) => (
+                      {(menu as NavSubMenu).contents.map((subMenu, id) => (
                         <li key={id} className="overflow-hidden">
                           <Link
-                            href={content.href}
+                            href={subMenu.href}
                             className="group relative overflow-hidden"
                           >
                             <p className="transition ease-[cubic-bezier(1,-0.01, 0.75, 0.11)] duration-700  group-hover:translate-y-[-100%]">
-                              {content.title}
+                              {subMenu.title}
                             </p>
                             <p className="transition ease-[cubic-bezier(1,-0.01, 0.75, 0.11)] duration-700 top-0 translate-y-[100%] group-hover:translate-y-[0%] absolute">
-                              {content.title}
+                              {subMenu.title}
                             </p>
                           </Link>
                         </li>
@@ -79,9 +79,11 @@ const Footer = () => {
         <div className="flex justify-center md:justify-between flex-wrap-reverse gap-y-4 items-center">
           <p>© 2024 Soedirman Robotic Team</p>
           <ul className="flex gap-6 items-center">
-            {footSocials.map((item, index) => (
+            {siteConfig.socials.map((item, index) => (
               <li key={index}>
-                <Link href={item.href}>{item.logo}</Link>
+                <Link href={item.url}>
+                  <item.icon className="h-6" />
+                </Link>
               </li>
             ))}
           </ul>

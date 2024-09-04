@@ -1,4 +1,4 @@
-import NavigationBar from "@/components/navigation-bar";
+import NavigationBar from "@/app/(app)/components/navigation-bar";
 import Footer from "@/components/main-footer";
 
 export default function AppLayout({
