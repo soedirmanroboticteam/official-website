@@ -1,11 +1,11 @@
 "use client"; //Client Side
-import { OfficialLogo } from "@/assets";
 import React from "react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import HeroGallery from "./hero-gallery";
 import { Fade } from "react-awesome-reveal";
 import { HeroImages } from "@/app/types/global.types";
+import { Icons } from "@/components/icons";
 
 const HeroSection = ({ heroImages }: { heroImages: HeroImages[] }) => {
   return (
@@ -13,7 +13,7 @@ const HeroSection = ({ heroImages }: { heroImages: HeroImages[] }) => {
       <Fade triggerOnce={true}>
         <div className="relative flex-col md:flex-row justify-center items-center gap-8 md:gap-32 flex">
           <div className="relative h-60 md:h-80">
-            <OfficialLogo height={"100%"} />
+            <Icons.logo className="h-full" />
           </div>
           <div className="relative flex-col justify-start items-start flex">
             <div className="justify-center items-start flex">

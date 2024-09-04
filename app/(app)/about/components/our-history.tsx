@@ -1,4 +1,3 @@
-import { other02 } from "@/assets/otherpages";
 import Image from "next/image";
 
 const OurHistory = () => {
@@ -20,7 +19,7 @@ const OurHistory = () => {
       <div className="w-full md:w-1/2 px-10 md:px-32">
         <div className="md:h-[400px] relative">
           <Image
-            src={other02}
+            src="/images/login.png"
             alt="Our History"
             className="object-cover border-black rounded-lg bg-black h-full w-full"
           />
