@@ -13,7 +13,10 @@ export async function updateSession(request: NextRequest) {
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
     {
       cookieOptions: {
-        domain: ".soedirmanrobotic.com",
+        domain:
+          process.env.NODE_ENV === "production"
+            ? ".soedirmanrobotic.com"
+            : "localhost",
       },
       cookies: {
         get(name: string) {
