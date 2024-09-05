@@ -1,5 +1,5 @@
 import { createClientBrowserServer } from "@/utils/supabase/server";
-import DivisionSection from "@/components/division-section";
+import DivisionSection from "@/app/(app)/components/division-section";
 import { Metadata } from "next";
 import { Divisions } from "@/app/types/global.types";
 import { Member } from "../components/contact-section";

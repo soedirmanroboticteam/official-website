@@ -32,10 +32,11 @@ const SponsorSection = ({ sponsors }: { sponsors: Sponsors[] }) => {
                     className="basis-1/4 justify-center items-center gap-1 flex"
                   >
                     <Image
-                      height={128}
-                      width={128}
                       src={item.image_url}
                       alt={item.title}
+                      height={720}
+                      width={720}
+                      className="h-32 w-auto"
                     />
                   </CarouselItem>
                 ))}

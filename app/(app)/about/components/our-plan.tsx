@@ -18,7 +18,6 @@ const OurHistory = () => {
             href="https://www.soedirmanrobotic.com/internship"
             className="text-yellow-600 underline"
           >
-            {" "}
             link
           </a>{" "}
           ini

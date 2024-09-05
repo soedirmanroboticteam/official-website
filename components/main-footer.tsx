@@ -3,10 +3,19 @@ import { Separator } from "@/components/ui/separator";
 import Link from "next/link";
 import Image from "next/image";
 import { navMenu, NavSubMenu, siteConfig } from "@/config/site";
-import { footSponsors } from "@/lib/footSponsors";
 import { Icons } from "./icons";
+import { createClientBrowserServer } from "@/utils/supabase/server";
+import { Sponsors } from "@/app/types/global.types";
 
-const Footer = () => {
+const Footer = async () => {
+  const supabase = createClientBrowserServer();
+
+  const { data, error } = await supabase
+    .from("sponsors")
+    .select("*")
+    .order("id", { ascending: true })
+    .returns<Sponsors[]>();
+
   return (
     <footer className="bg-background text-background-foreground w-full px-4 pt-8">
       <div className="max-w-screen-xl mx-auto flex flex-col py-8 gap-4">
@@ -59,20 +68,24 @@ const Footer = () => {
               )}
             </ul>
             <Separator />
-            <h3 className="font-bold">Big Thanks to:</h3>
-            <ul className="flex flex-1 justify-center md:justify-end md:items-end flex-wrap gap-4">
-              {footSponsors.map((sponsor, index) => (
-                <li key={index}>
-                  <Link href={sponsor.href}>
-                    <Image
-                      src={sponsor.src}
-                      alt={sponsor.title}
-                      height={sponsor.height ? sponsor.height : 64}
-                    />
-                  </Link>
-                </li>
-              ))}
-            </ul>
+            {error || !data ? null : (
+              <>
+                <h3 className="font-bold">Big Thanks to:</h3>
+                <ul className="flex flex-1 justify-center md:justify-end md:items-end flex-wrap gap-4">
+                  {data.map((sponsor, index) => (
+                    <li key={index}>
+                      <Image
+                        src={sponsor.image_url}
+                        alt={sponsor.title}
+                        width={720}
+                        height={720}
+                        className="h-16 w-auto"
+                      />
+                    </li>
+                  ))}
+                </ul>
+              </>
+            )}
           </div>
         </div>
         <Separator />

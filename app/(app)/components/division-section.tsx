@@ -1,4 +1,3 @@
-import { createClientBrowserServer } from "@/utils/supabase/server";
 import React from "react";
 import ProfilePicture from "./profile-picture";
 import { Divisions } from "@/app/types/global.types";
