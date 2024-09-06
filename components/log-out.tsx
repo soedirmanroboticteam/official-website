@@ -1,21 +1,13 @@
-"use client";
 import { Button } from "@/components/ui/button";
-import { createClientBrowserClient } from "@/utils/supabase/client";
 import React from "react";
 
 function LogOut() {
-  const supabase = createClientBrowserClient();
-
-  async function onLogOut() {
-    await supabase.auth.signOut();
-
-    window.location.href = "/login";
-  }
-
   return (
-    <Button variant="destructive" onClick={onLogOut}>
-      LogOut
-    </Button>
+    <form action="/auth/signout" method="POST" className="flex-1 flex">
+      <Button variant="destructive" className="flex-1">
+        Sign Out
+      </Button>
+    </form>
   );
 }
 

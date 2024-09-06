@@ -36,7 +36,7 @@ const SponsorSection = ({ sponsors }: { sponsors: Sponsors[] }) => {
                       alt={item.title}
                       height={720}
                       width={720}
-                      className="h-32 w-auto"
+                      className="h-24 md:h-32 w-auto"
                     />
                   </CarouselItem>
                 ))}

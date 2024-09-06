@@ -22,10 +22,12 @@ const FaqSection = ({
           title="Frequently Asked Questions"
           desc="Still got questions? Check out our FAQ down here & contact us if still got any."
         />
-        <Accordion type="multiple" className="w-full md:px-12">
+        <Accordion type="multiple" className="w-full md:px-12 text-left">
           {frequentlyAskedQuestions.map((item, index) => (
             <AccordionItem value={`item-${index}`} key={index}>
-              <AccordionTrigger>{item.question}</AccordionTrigger>
+              <AccordionTrigger className="text-left">
+                {item.question}
+              </AccordionTrigger>
               <AccordionContent>
                 <p
                   dangerouslySetInnerHTML={{
