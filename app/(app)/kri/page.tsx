@@ -26,6 +26,7 @@ export default async function Home() {
         "name, positions(divisions(id, name, teams(id), description, logo_url), titles(id, name)), image_url"
       )
       .eq("positions.divisions.teams.id", 2)
+      .order("position_id", { ascending: true })
       .returns<Member[]>(),
   ]);
 
