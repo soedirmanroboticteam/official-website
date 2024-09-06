@@ -56,8 +56,8 @@ const AchievementSection = ({
                 ))}
               </CarouselContent>
             </Carousel>
-            <div className="w-full inset-0 bg-gradient-to-l from-[#000000] from-0% to-transparent to-5% absolute"></div>
-            <div className="w-full inset-0 bg-gradient-to-r from-[#000000] from-0% to-transparent to-5% absolute"></div>
+            <div className="w-full inset-0 bg-gradient-to-l from-background from-0% to-transparent to-5% absolute"></div>
+            <div className="w-full inset-0 bg-gradient-to-r from-background from-0% to-transparent to-5% absolute"></div>
           </div>
         </div>
       </section>
