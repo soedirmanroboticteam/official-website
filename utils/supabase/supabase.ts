@@ -98,6 +98,39 @@ export type Database = {
           }
         ];
       };
+      events: {
+        Row: {
+          announcement: string;
+          coming_soon: string;
+          end: string;
+          extend_end: string;
+          extend_start: string;
+          id: number;
+          name: string;
+          start: string;
+        };
+        Insert: {
+          announcement: string;
+          coming_soon: string;
+          end: string;
+          extend_end: string;
+          extend_start: string;
+          id?: number;
+          name: string;
+          start: string;
+        };
+        Update: {
+          announcement?: string;
+          coming_soon?: string;
+          end?: string;
+          extend_end?: string;
+          extend_start?: string;
+          id?: number;
+          name?: string;
+          start?: string;
+        };
+        Relationships: [];
+      };
       faculties: {
         Row: {
           alphabet_code_id: number | null;
@@ -313,49 +346,29 @@ export type Database = {
       };
       members: {
         Row: {
-          division: number;
           id: number;
           image_url: string;
           name: string;
-          position_id: number | null;
-          title: number;
+          position_id: number;
         };
         Insert: {
-          division: number;
           id?: number;
           image_url: string;
           name: string;
-          position_id?: number | null;
-          title: number;
+          position_id: number;
         };
         Update: {
-          division?: number;
           id?: number;
           image_url?: string;
           name?: string;
-          position_id?: number | null;
-          title?: number;
+          position_id?: number;
         };
         Relationships: [
-          {
-            foreignKeyName: "members_division_fkey";
-            columns: ["division"];
-            isOneToOne: false;
-            referencedRelation: "divisions";
-            referencedColumns: ["id"];
-          },
           {
             foreignKeyName: "members_position_id_fkey";
             columns: ["position_id"];
             isOneToOne: false;
             referencedRelation: "positions";
-            referencedColumns: ["id"];
-          },
-          {
-            foreignKeyName: "members_title_fkey";
-            columns: ["title"];
-            isOneToOne: false;
-            referencedRelation: "titles";
             referencedColumns: ["id"];
           }
         ];

@@ -1,8 +1,13 @@
 import { createClientBrowserServer } from "@/utils/supabase/server";
 import DivisionSection from "@/app/(app)/components/division-section";
 import { Metadata } from "next";
-import { Divisions } from "@/app/types/global.types";
-import { Member } from "../components/contact-section";
+import {
+  Divisions,
+  Members,
+  Positions,
+  Teams,
+  Titles,
+} from "@/app/types/global.types";
 import HeroAboutUs from "../components/hero-about-us";
 
 export const metadata: Metadata = {
@@ -22,12 +27,17 @@ export default async function Home() {
       .returns<Divisions[]>(),
     await supabase
       .from("members")
-      .select(
-        "name, positions(divisions(id, name, teams(id), description, logo_url), titles(id, name)), image_url"
-      )
+      .select("*")
       .eq("positions.divisions.teams.id", 1)
       .order("position_id", { ascending: true })
-      .returns<Member[]>(),
+      .returns<
+        (Members & {
+          positions: Positions & {
+            divisions: Divisions & { teams: Teams };
+            titles: Titles;
+          };
+        })[]
+      >(),
   ]);
 
   if (divisions.error || !divisions.data || members.error || !members.data) {

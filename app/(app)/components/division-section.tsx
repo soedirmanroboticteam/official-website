@@ -1,14 +1,24 @@
 import React from "react";
 import ProfilePicture from "./profile-picture";
-import { Divisions } from "@/app/types/global.types";
-import { Member } from "@/app/(app)/components/contact-section";
+import {
+  Divisions,
+  Members,
+  Positions,
+  Teams,
+  Titles,
+} from "@/app/types/global.types";
 
 const DivisionSection = ({
   division,
   members,
 }: {
   division: Divisions;
-  members: Member[];
+  members: (Members & {
+    positions: Positions & {
+      divisions: Divisions & { teams: Teams };
+      titles: Titles;
+    };
+  })[];
 }) => {
   return (
     <section className="w-full px-2 md:px-12 py-6">

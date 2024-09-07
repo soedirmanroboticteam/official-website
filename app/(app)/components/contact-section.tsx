@@ -10,23 +10,26 @@ import { Button } from "@/components/ui/button";
 import AutoScroll from "embla-carousel-auto-scroll";
 import Image from "next/image";
 import Link from "next/link";
+import {
+  Divisions,
+  Members,
+  Positions,
+  Teams,
+  Titles,
+} from "@/app/types/global.types";
 
-export type Member = {
-  name: string;
-  positions: {
-    divisions: {
-      id: number;
-      name: string;
-      teams: { id: number };
-      description: string;
-      logo_url: string;
+const ContactSection = ({
+  members,
+}: {
+  members: (Members & {
+    positions: Positions & {
+      divisions: Divisions & {
+        teams: Teams;
+      };
+      titles: Titles;
     };
-    titles: { id: number; name: string };
-  };
-  image_url: string;
-};
-
-const ContactSection = ({ members }: { members: Member[] }) => {
+  })[];
+}) => {
   return (
     <Fade triggerOnce={true}>
       <section className="w-full px-1 md:px-12">

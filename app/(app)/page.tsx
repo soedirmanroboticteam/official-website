@@ -1,5 +1,5 @@
 import AchievementSection from "@/app/(app)/components/achievement-section";
-import ContactSection, { Member } from "@/app/(app)/components/contact-section";
+import ContactSection from "@/app/(app)/components/contact-section";
 import FaqSection from "@/app/(app)/components/faq-section";
 import HeroSection from "@/app/(app)/components/hero-section";
 import TeamSection from "@/app/(app)/components/team-section";
@@ -11,7 +11,11 @@ import {
   Divisions,
   FrequentlyAskedQuestions,
   HeroImages,
+  Members,
+  Positions,
   Sponsors,
+  Teams,
+  Titles,
 } from "../types/global.types";
 
 export const metadata: Metadata = {
@@ -40,11 +44,16 @@ export default async function Home() {
     supabase.from("divisions").select("*").returns<Divisions[]>(),
     supabase
       .from("members")
-      .select(
-        "name, positions(divisions(id, name, teams(id), description, logo_url), titles(id)), image_url"
-      )
+      .select("*, positions(*, divisions(*, teams(*)), titles(*))")
       .order("position_id", { ascending: true })
-      .returns<Member[]>(),
+      .returns<
+        (Members & {
+          positions: Positions & {
+            divisions: Divisions & { teams: Teams };
+            titles: Titles;
+          };
+        })[]
+      >(),
     supabase.from("achievements").select("*").returns<Achievements[]>(),
     supabase
       .from("frequently_asked_questions")

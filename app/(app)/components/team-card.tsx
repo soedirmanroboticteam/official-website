@@ -7,8 +7,7 @@ import {
 } from "@/components/ui/card";
 import Image from "next/image";
 import TeamCardPhoto from "./team-card-photo";
-import { Divisions } from "@/app/types/global.types";
-import { Member } from "./contact-section";
+import { Divisions, Members, Positions, Teams, Titles } from "@/app/types/global.types";
 
 const TeamCard = ({
   teamDivision,
@@ -16,7 +15,12 @@ const TeamCard = ({
   index,
 }: {
   teamDivision: Divisions;
-  members: Member[];
+  members: (Members & {
+    positions: Positions & {
+      divisions: Divisions & { teams: Teams };
+      titles: Titles;
+    };
+  })[];
   index: number;
 }) => {
   return (

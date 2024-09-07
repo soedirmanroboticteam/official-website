@@ -1,147 +1,98 @@
 import { createClientBrowserServer } from "@/utils/supabase/server";
 import { redirect } from "next/navigation";
 import FormTab from "./components/form-tab";
-import SectionTitle from "@/components/section-title";
 import { Progress } from "@/components/ui/progress";
 import { Metadata } from "next";
-
-interface FacultyInterface {
-  name: string;
-}
-
-interface DegreeInterface {
-  name: string;
-}
-
-interface MajorInterface {
-  id: number;
-  name: string;
-  faculties: FacultyInterface;
-  degrees: DegreeInterface;
-}
-
-interface YearInterface {
-  id: number;
-  name: number;
-}
-
-interface OptionsInterface {
-  id: number;
-  name: string;
-}
+import ComingSoon from "./components/coming-soon";
+import ClosedRegistration from "./components/closed-registration";
+import {
+  Degrees,
+  Faculties,
+  Majors,
+  Options,
+  Years,
+} from "@/app/types/global.types";
+import Announcement from "./components/announcement";
 
 export const metadata: Metadata = {
   title: "Internship",
   description: "Internship Application page",
 };
 
-export default async function ProtectedPage() {
+export default async function page() {
   const supabase = createClientBrowserServer();
 
-  const { data, error } = await supabase.auth.getUser();
+  const eventDate = await supabase
+    .from("events")
+    .select("*")
+    .eq("name", "internship")
+    .limit(1)
+    .maybeSingle();
 
-  if (error || !data?.user) {
+  if (!eventDate.data) {
+    return <div>Error: Event date not found</div>;
+  }
+
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  if (!user) {
     redirect("/login");
   }
 
   const date = {
-    coming: new Date("2024-08-11 00:00:00.000000+07"),
-    start: new Date("2024-08-26 07:00:00.000000+07"),
-    end: new Date("2024-09-01 23:59:59.000000+07"),
-    extendStart: new Date("2024-09-02 10:00:00.000000+07"),
-    extendEnd: new Date("2024-09-03 23:59:59.000000+07"),
+    coming: new Date(eventDate.data.coming_soon),
+    start: new Date(eventDate.data.start),
+    end: new Date(eventDate.data.end),
+    extendStart: new Date(eventDate.data.extend_start),
+    extendEnd: new Date(eventDate.data.extend_end),
+    announcement: new Date(eventDate.data.announcement),
   };
 
   if (date.start.getTime() > Date.now()) {
-    return (
-      <main className="container mx-auto py-4">
-        <SectionTitle
-          title="Coming Soon"
-          desc="Stay tuned at our Instagram @srtunsoed for the latest updates! Don't forget to join our upcoming Open House Events too!"
-        />
-        <Progress
-          value={
-            ((date.coming.getTime() - Date.now()) /
-              (date.coming.getTime() - date.start.getTime())) *
-            100
-          }
-        />
-      </main>
-    );
-  }
-
-  if (Date.now() > date.end.getTime()) {
+    return <ComingSoon coming={date.coming} start={date.start} />;
+  } else if (Date.now() > date.end.getTime()) {
     const { count, error } = await supabase
       .from("intern_applications")
-      .select("*", { count: "exact", head: true })
-      .lte("created_at", "2024-09-01 18:50:48.732058+00");
+      .select("*", { count: "exact", head: true });
 
-    if (error) {
-      return <div>Error: {error.message}</div>;
+    if (error || !count) {
+      return <div>Error: {error?.message ?? "Unknown error"}</div>;
     }
 
-    if (count! > 0) {
-      const applicantsCount = await supabase.rpc("get_applicants_count");
-
-      if (applicantsCount.error) {
-        return <div>Error: {applicantsCount.error.message}</div>;
-      }
-
-      return (
-        <main className="container mx-auto py-4 space-y-4">
-          <SectionTitle
-            title="Closed Registration"
-            desc="Thank you for your participation! Now that the registration is closed. For those that have filled our form, you'll be contacted soon. Further information will be provided via WhatsApp Group."
-          />
-          <h3 className="text-center text-8xl font-semibold">
-            {applicantsCount.data} <br />
-          </h3>
-          <h4 className="text-center text-3xl font-semibold">Registrant</h4>
-        </main>
-      );
+    if (count > 0) {
+      return <ClosedRegistration />;
     }
 
     if (
       Date.now() < date.extendStart.getTime() ||
       Date.now() > date.extendEnd.getTime()
     ) {
-      const applicantsCount = await supabase.rpc("get_applicants_count");
+      return <ClosedRegistration />;
+    }
 
-      if (applicantsCount.error) {
-        return <div>Error: {applicantsCount.error.message}</div>;
-      }
-
-      return (
-        <main className="container mx-auto py-4 space-y-4">
-          <SectionTitle
-            title="Closed Registration"
-            desc="Thank you for your participation! Now that the registration is closed. For those that have filled our form, you'll be contacted soon. Further information will be provided via WhatsApp Group."
-          />
-          <h3 className="text-center text-8xl font-semibold">
-            {applicantsCount.data} <br />
-          </h3>
-          <h4 className="text-center text-3xl font-semibold">Registrant</h4>
-        </main>
-      );
+    if (Date.now() > date.announcement.getTime()) {
+      return <Announcement />;
     }
   }
 
   const [majors, years, options] = await Promise.all([
     supabase
       .from("majors")
-      .select("id, name, faculties(name), degrees(name)")
+      .select("*, faculties(*), degrees(*)")
       .order("faculty_id", { ascending: true })
-      .returns<MajorInterface[]>(),
+      .returns<(Majors & { faculties: Faculties; degrees: Degrees })[]>(),
     supabase
       .from("years")
-      .select("id, name")
+      .select("*")
       .order("name", { ascending: true })
-      .returns<YearInterface[]>(),
+      .returns<Years[]>(),
     supabase
       .from("options")
-      .select("id, name")
+      .select("*")
       .order("id", { ascending: true })
-      .returns<OptionsInterface[]>(),
+      .returns<Options[]>(),
   ]);
 
   if (majors.error || years.error || options.error) {
@@ -158,7 +109,7 @@ export default async function ProtectedPage() {
   return (
     <main className="w-full flex flex-col gap-20 items-center justify-center p-4">
       <FormTab
-        userId={data.user.id}
+        userId={user.id}
         majors={majors.data}
         years={years.data}
         options={options.data}

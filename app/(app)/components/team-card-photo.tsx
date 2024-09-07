@@ -8,11 +8,22 @@ import {
 } from "@/components/ui/carousel";
 import Image from "next/image";
 import AutoScroll from "embla-carousel-auto-scroll";
-import { Member } from "./contact-section";
+import {
+  Members,
+  Positions,
+  Divisions,
+  Teams,
+  Titles,
+} from "@/app/types/global.types";
 
 interface TeamCardPhotoProps {
   direction: "forward" | "backward";
-  members: Member[];
+  members: (Members & {
+    positions: Positions & {
+      divisions: Divisions & { teams: Teams };
+      titles: Titles;
+    };
+  })[];
 }
 
 const TeamCardPhoto = ({ direction, members }: TeamCardPhotoProps) => {

@@ -41,35 +41,18 @@ import {
 import { cn } from "@/lib/utils";
 import { logoutClient } from "@/lib/actions/client";
 import { redirect } from "next/navigation";
-
-interface ProfileInterface {
-  name: string;
-  major_id: number;
-  year_id: number;
-  student_code_id: number;
-  whatsapp: string;
-}
-
-interface MajorInterface {
-  id: number;
-  name: string;
-  faculties: {
-    name: string;
-  };
-  degrees: {
-    name: string;
-  };
-}
-
-interface YearInterface {
-  id: number;
-  name: number;
-}
+import {
+  Degrees,
+  Faculties,
+  Majors,
+  Profiles,
+  Years,
+} from "@/app/types/global.types";
 
 interface ProfileFormProps {
   userId: string;
-  majors: MajorInterface[];
-  years: YearInterface[];
+  majors: (Majors & { faculties: Faculties; degrees: Degrees })[];
+  years: Years[];
   setVerified: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
@@ -125,9 +108,9 @@ const ProfileForm = ({
     const getProfile = async () => {
       const { data, error } = await supabase
         .from("profiles")
-        .select("name, major_id, year_id, student_code_id, whatsapp")
+        .select("*")
         .eq("id", userId)
-        .maybeSingle<ProfileInterface>();
+        .maybeSingle<Profiles>();
 
       if (error) {
         toast({
@@ -145,32 +128,18 @@ const ProfileForm = ({
 
       if (!data) return;
 
-      form.setValue("name", data.name);
+      data.name && form.setValue("name", data.name);
 
-      if (
-        data.major_id &&
-        data.year_id &&
-        data.student_code_id &&
-        data.whatsapp
-      ) {
-        form.setValue("major_id", data.major_id.toString());
-        form.setValue("year_id", data.year_id.toString());
+      data.major_id && form.setValue("major_id", data.major_id.toString());
+
+      data.year_id && form.setValue("year_id", data.year_id.toString());
+
+      data.student_code_id &&
         form.setValue("student_code_id", data.student_code_id.toString());
-        form.setValue("whatsapp", data.whatsapp);
 
-        setVerified(true);
-      } else if (
-        data.major_id ||
-        data.year_id ||
-        data.student_code_id ||
-        data.whatsapp
-      ) {
-        if (data.major_id) form.setValue("major_id", data.major_id.toString());
-        if (data.year_id) form.setValue("year_id", data.year_id.toString());
-        if (data.student_code_id)
-          form.setValue("student_code_id", data.student_code_id.toString());
-        if (data.whatsapp) form.setValue("whatsapp", data.whatsapp);
-      }
+      data.whatsapp && form.setValue("whatsapp", data.whatsapp);
+
+      form.formState.isValid && setVerified(true);
     };
 
     getProfile();

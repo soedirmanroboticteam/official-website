@@ -25,25 +25,11 @@ import { Textarea } from "@/components/ui/textarea";
 import { createClientBrowserClient } from "@/utils/supabase/client";
 import { LoadingButton } from "@/components/ui/loading-button";
 import Link from "next/link";
-
-interface InternshipInterface {
-  first_choice: number;
-  first_reason: string;
-  second_choice: number;
-  second_reason: string;
-  hope: string;
-  cv_url: string;
-  twibbon_url: string;
-}
-
-interface OptionsInterface {
-  id: number;
-  name: string;
-}
+import { InternApplications, Options } from "@/app/types/global.types";
 
 interface InternshipFormProps {
   userId: string;
-  options: OptionsInterface[];
+  options: Options[];
   setSubmitted: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
@@ -123,11 +109,9 @@ const InternshipForm = ({
     const getApplication = async () => {
       const { data, error } = await supabase
         .from("intern_applications")
-        .select(
-          "first_choice, first_reason, second_choice, second_reason, hope, cv_url, twibbon_url"
-        )
+        .select("*")
         .eq("id", userId)
-        .maybeSingle<InternshipInterface>();
+        .maybeSingle<InternApplications>();
 
       if (error) {
         toast({
@@ -145,25 +129,15 @@ const InternshipForm = ({
 
       if (!data) return;
 
-      if (
-        data.first_choice &&
-        data.first_reason &&
-        data.second_choice &&
-        data.second_reason &&
-        data.hope &&
-        data.cv_url &&
-        data.twibbon_url
-      ) {
-        form.setValue("first_choice", data.first_choice.toString());
-        form.setValue("first_reason", data.first_reason);
-        form.setValue("second_choice", data.second_choice.toString());
-        form.setValue("second_reason", data.second_reason);
-        form.setValue("hope", data.hope);
-        form.setValue("cv_url", data.cv_url);
-        form.setValue("twibbon_url", data.twibbon_url);
+      form.setValue("first_choice", data.first_choice.toString());
+      form.setValue("first_reason", data.first_reason);
+      form.setValue("second_choice", data.second_choice.toString());
+      form.setValue("second_reason", data.second_reason);
+      form.setValue("hope", data.hope);
+      form.setValue("cv_url", data.cv_url);
+      form.setValue("twibbon_url", data.twibbon_url);
 
-        setSubmitted(true);
-      }
+      form.formState.isValid && setSubmitted(true);
     };
 
     getApplication();

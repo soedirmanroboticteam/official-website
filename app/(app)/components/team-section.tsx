@@ -5,8 +5,13 @@ import { Button } from "@/components/ui/button";
 import TeamCard from "./team-card";
 import Link from "next/link";
 import { siteConfig } from "@/config/site";
-import { Member } from "./contact-section";
-import { Divisions } from "@/app/types/global.types";
+import {
+  Divisions,
+  Members,
+  Positions,
+  Teams,
+  Titles,
+} from "@/app/types/global.types";
 import { Fade } from "react-awesome-reveal";
 
 const TeamSection = ({
@@ -14,7 +19,12 @@ const TeamSection = ({
   members,
 }: {
   teamDivisions: Divisions[];
-  members: Member[];
+  members: (Members & {
+    positions: Positions & {
+      divisions: Divisions & { teams: Teams };
+      titles: Titles;
+    };
+  })[];
 }) => {
   return (
     <Fade triggerOnce>

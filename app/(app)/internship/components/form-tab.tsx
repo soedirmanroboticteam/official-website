@@ -6,33 +6,19 @@ import ProfileForm from "./profile-form";
 import InternshipForm from "./internship-form";
 import InternshipNote from "./internship-note";
 import WhatsAppGroup from "./whatsapp-group";
-
-interface MajorInterface {
-  id: number;
-  name: string;
-  faculties: {
-    name: string;
-  };
-  degrees: {
-    name: string;
-  };
-}
-
-interface YearInterface {
-  id: number;
-  name: number;
-}
-
-interface OptionsInterface {
-  id: number;
-  name: string;
-}
+import {
+  Degrees,
+  Faculties,
+  Majors,
+  Options,
+  Years,
+} from "@/app/types/global.types";
 
 interface FormTabProps {
   userId: string;
-  majors: MajorInterface[];
-  years: YearInterface[];
-  options: OptionsInterface[];
+  majors: (Majors & { faculties: Faculties; degrees: Degrees })[];
+  years: Years[];
+  options: Options[];
 }
 
 const FormTab = ({ userId, majors, years, options }: FormTabProps) => {
