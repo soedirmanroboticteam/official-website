@@ -3,9 +3,11 @@ import Link from "next/link";
 import React from "react";
 import QRCode from "react-qr-code";
 
-const whatsAppGroupLink = "https://chat.whatsapp.com/EJ2GjRnHGGQ7bntrH6K2sl";
-
-const WhatsAppGroup = () => {
+const WhatsAppGroup = ({
+  whatsAppGroupLink,
+}: {
+  whatsAppGroupLink: string;
+}) => {
   return (
     <div className="flex flex-col justify-center items-center gap-4">
       <div className=" flex justify-center items-center bg-white p-4">

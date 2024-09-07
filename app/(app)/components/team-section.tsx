@@ -39,8 +39,10 @@ const TeamSection = ({
                 teamDivision={team}
                 members={members
                   .filter((member) => member.positions.divisions.id === team.id)
-                  .sort(
-                    (a, b) => a.positions.titles.id - b.positions.titles.id
+                  .sort((a, b) =>
+                    index % 2
+                      ? a.positions.titles.id + b.positions.titles.id
+                      : a.positions.titles.id - b.positions.titles.id
                   )}
                 index={index}
                 key={index}

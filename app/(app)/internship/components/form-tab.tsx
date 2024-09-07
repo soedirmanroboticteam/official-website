@@ -19,9 +19,16 @@ interface FormTabProps {
   majors: (Majors & { faculties: Faculties; degrees: Degrees })[];
   years: Years[];
   options: Options[];
+  whatsAppGroupLink: string;
 }
 
-const FormTab = ({ userId, majors, years, options }: FormTabProps) => {
+const FormTab = ({
+  userId,
+  majors,
+  years,
+  options,
+  whatsAppGroupLink,
+}: FormTabProps) => {
   const [verified, setVerified] = useState<boolean>(false);
   const [submitted, setSubmitted] = useState<boolean>(false);
 
@@ -67,7 +74,7 @@ const FormTab = ({ userId, majors, years, options }: FormTabProps) => {
           desc="Further details about the next step will be delivered via WhatsApp Group. Make sure to join the WhatsApp Group by the QR code or the link down bellow. See you & Good Luck!!!"
         />
         <InternshipNote />
-        <WhatsAppGroup />
+        <WhatsAppGroup whatsAppGroupLink={whatsAppGroupLink} />
       </TabsContent>
     </Tabs>
   );

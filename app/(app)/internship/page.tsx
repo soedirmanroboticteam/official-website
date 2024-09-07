@@ -24,7 +24,9 @@ export default async function page() {
 
   const eventDate = await supabase
     .from("events")
-    .select("*")
+    .select(
+      "coming_soon, start, end, extend_start, extend_end, announcement, screening_url"
+    )
     .eq("name", "internship")
     .limit(1)
     .maybeSingle();
@@ -73,7 +75,13 @@ export default async function page() {
     }
 
     if (Date.now() > date.announcement.getTime()) {
-      return <Announcement />;
+      return (
+        <main className="w-full flex flex-col gap-20 items-center justify-center p-4">
+          <section className="w-full max-w-3xl space-y-4 font-poppins text-justify">
+            <Announcement />
+          </section>
+        </main>
+      );
     }
   }
 
@@ -113,6 +121,7 @@ export default async function page() {
         majors={majors.data}
         years={years.data}
         options={options.data}
+        whatsAppGroupLink={eventDate.data.screening_url}
       />
 
       <section className="w-full max-w-3xl">

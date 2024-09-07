@@ -100,6 +100,7 @@ export type Database = {
       };
       events: {
         Row: {
+          accepted_url: string;
           announcement: string;
           coming_soon: string;
           end: string;
@@ -107,9 +108,11 @@ export type Database = {
           extend_start: string;
           id: number;
           name: string;
+          screening_url: string;
           start: string;
         };
         Insert: {
+          accepted_url: string;
           announcement: string;
           coming_soon: string;
           end: string;
@@ -117,9 +120,11 @@ export type Database = {
           extend_start: string;
           id?: number;
           name: string;
+          screening_url: string;
           start: string;
         };
         Update: {
+          accepted_url?: string;
           announcement?: string;
           coming_soon?: string;
           end?: string;
@@ -127,6 +132,7 @@ export type Database = {
           extend_start?: string;
           id?: number;
           name?: string;
+          screening_url?: string;
           start?: string;
         };
         Relationships: [];
