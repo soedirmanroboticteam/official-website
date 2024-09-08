@@ -98,6 +98,27 @@ export type Database = {
           }
         ];
       };
+      dynamics: {
+        Row: {
+          content: string;
+          created_at: string;
+          id: number;
+          slug: string;
+        };
+        Insert: {
+          content: string;
+          created_at?: string;
+          id?: number;
+          slug: string;
+        };
+        Update: {
+          content?: string;
+          created_at?: string;
+          id?: number;
+          slug?: string;
+        };
+        Relationships: [];
+      };
       events: {
         Row: {
           accepted_url: string;
@@ -110,6 +131,7 @@ export type Database = {
           name: string;
           screening_url: string;
           start: string;
+          warning: string;
         };
         Insert: {
           accepted_url: string;
@@ -122,6 +144,7 @@ export type Database = {
           name: string;
           screening_url: string;
           start: string;
+          warning?: string;
         };
         Update: {
           accepted_url?: string;
@@ -134,6 +157,7 @@ export type Database = {
           name?: string;
           screening_url?: string;
           start?: string;
+          warning?: string;
         };
         Relationships: [];
       };
@@ -381,14 +405,17 @@ export type Database = {
       };
       options: {
         Row: {
+          available: boolean;
           id: number;
           name: string;
         };
         Insert: {
+          available?: boolean;
           id?: number;
           name: string;
         };
         Update: {
+          available?: boolean;
           id?: number;
           name?: string;
         };
@@ -396,16 +423,19 @@ export type Database = {
       };
       positions: {
         Row: {
+          available: boolean;
           division_id: number;
           id: number;
           title_id: number;
         };
         Insert: {
+          available?: boolean;
           division_id: number;
           id?: number;
           title_id: number;
         };
         Update: {
+          available?: boolean;
           division_id?: number;
           id?: number;
           title_id?: number;

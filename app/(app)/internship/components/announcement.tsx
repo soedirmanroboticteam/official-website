@@ -46,10 +46,11 @@ async function Announcement() {
         </h1>
         <p className="">
           Thank you so much for your interest in our Internship program. The
-          announcement has been made, but we regret to inform you that your name
-          is not on the accepted list. We noticed that you have many potential
-          and we really appreciate your time and efforts. We look forward to the
-          possibility of our paths crossing again. <br />
+          announcement has been made, and due to our limited capacity. We regret
+          to inform you that your name is not on the accepted list. We noticed
+          that you have many potential and we really appreciate your time and
+          efforts. We look forward to the possibility of our paths crossing
+          again. <br />
           <br />
           Have a nice day and we wish you the best in your future endeavors!
         </p>

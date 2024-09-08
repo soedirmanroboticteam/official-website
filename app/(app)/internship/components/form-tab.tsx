@@ -20,6 +20,7 @@ interface FormTabProps {
   years: Years[];
   options: Options[];
   whatsAppGroupLink: string;
+  warning: string;
 }
 
 const FormTab = ({
@@ -28,6 +29,7 @@ const FormTab = ({
   years,
   options,
   whatsAppGroupLink,
+  warning,
 }: FormTabProps) => {
   const [verified, setVerified] = useState<boolean>(false);
   const [submitted, setSubmitted] = useState<boolean>(false);
@@ -48,7 +50,7 @@ const FormTab = ({
           title="Profile Form"
           desc="You'll only need to fill this form at once and you can edit it later. Only then you can proceed to fill out your internship application."
         />
-        <InternshipNote />
+        <InternshipNote warning={warning} />
         <ProfileForm
           userId={userId}
           majors={majors}
@@ -61,7 +63,7 @@ const FormTab = ({
           title="Internship Form"
           desc="You'll need to fill all the data at once. But, you can edit it later until the end of the time. Only the last saved data will be considered."
         />
-        <InternshipNote />
+        <InternshipNote warning={warning} />
         <InternshipForm
           userId={userId}
           options={options}
@@ -73,7 +75,7 @@ const FormTab = ({
           title="WhatsApp Group"
           desc="Further details about the next step will be delivered via WhatsApp Group. Make sure to join the WhatsApp Group by the QR code or the link down bellow. See you & Good Luck!!!"
         />
-        <InternshipNote />
+        <InternshipNote warning={warning} />
         <WhatsAppGroup whatsAppGroupLink={whatsAppGroupLink} />
       </TabsContent>
     </Tabs>

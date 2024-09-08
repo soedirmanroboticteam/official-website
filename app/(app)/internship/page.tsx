@@ -25,7 +25,7 @@ export default async function page() {
   const eventDate = await supabase
     .from("events")
     .select(
-      "coming_soon, start, end, extend_start, extend_end, announcement, screening_url"
+      "coming_soon, start, end, extend_start, extend_end, announcement, screening_url, warning"
     )
     .eq("name", "internship")
     .limit(1)
@@ -99,6 +99,7 @@ export default async function page() {
     supabase
       .from("options")
       .select("*")
+      .eq("available", true)
       .order("id", { ascending: true })
       .returns<Options[]>(),
   ]);
@@ -122,6 +123,7 @@ export default async function page() {
         years={years.data}
         options={options.data}
         whatsAppGroupLink={eventDate.data.screening_url}
+        warning={eventDate.data.warning}
       />
 
       <section className="w-full max-w-3xl">

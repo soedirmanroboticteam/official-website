@@ -207,13 +207,11 @@ const InternshipForm = ({
                   <SelectValue placeholder="Select your first choice" />
                 </SelectTrigger>
                 <SelectContent>
-                  {options
-                    .filter((item) => item.id !== 5)
-                    .map((option) => (
-                      <SelectItem value={option.id.toString()} key={option.id}>
-                        {option.name}
-                      </SelectItem>
-                    ))}
+                  {options.map((option) => (
+                    <SelectItem value={option.id.toString()} key={option.id}>
+                      {option.name}
+                    </SelectItem>
+                  ))}
                 </SelectContent>
               </Select>
               <FormDescription>
@@ -257,13 +255,11 @@ const InternshipForm = ({
                   <SelectValue placeholder="Select your second choice" />
                 </SelectTrigger>
                 <SelectContent>
-                  {options
-                    .filter((item) => item.id !== 5)
-                    .map((option) => (
-                      <SelectItem value={option.id.toString()} key={option.id}>
-                        {option.name}
-                      </SelectItem>
-                    ))}
+                  {options.map((option) => (
+                    <SelectItem value={option.id.toString()} key={option.id}>
+                      {option.name}
+                    </SelectItem>
+                  ))}
                 </SelectContent>
               </Select>
               <FormDescription>
