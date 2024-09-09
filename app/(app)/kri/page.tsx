@@ -27,7 +27,7 @@ export default async function Home() {
       .returns<Divisions[]>(),
     await supabase
       .from("members")
-      .select("*")
+      .select("*, positions(*, divisions(*, teams(*)), titles(*))")
       .eq("positions.divisions.teams.id", 2)
       .order("position_id", { ascending: true })
       .returns<

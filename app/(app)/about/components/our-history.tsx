@@ -21,6 +21,8 @@ const OurHistory = () => {
           <Image
             src="/images/login.png"
             alt="Our History"
+            width={1080}
+            height={1080}
             className="object-cover border-black rounded-lg bg-black h-full w-full"
           />
         </div>
