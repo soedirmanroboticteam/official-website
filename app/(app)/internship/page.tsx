@@ -55,6 +55,16 @@ export default async function page() {
   if (date.start.getTime() > Date.now()) {
     return <ComingSoon coming={date.coming} start={date.start} />;
   } else if (Date.now() > date.end.getTime()) {
+    if (Date.now() > date.announcement.getTime()) {
+      return (
+        <main className="w-full flex flex-col gap-20 items-center justify-center p-4">
+          <section className="w-full max-w-3xl space-y-4 font-poppins text-justify">
+            <Announcement />
+          </section>
+        </main>
+      );
+    }
+
     const { count, error } = await supabase
       .from("intern_applications")
       .select("*", { count: "exact", head: true });
@@ -72,16 +82,6 @@ export default async function page() {
       Date.now() > date.extendEnd.getTime()
     ) {
       return <ClosedRegistration />;
-    }
-
-    if (Date.now() > date.announcement.getTime()) {
-      return (
-        <main className="w-full flex flex-col gap-20 items-center justify-center p-4">
-          <section className="w-full max-w-3xl space-y-4 font-poppins text-justify">
-            <Announcement />
-          </section>
-        </main>
-      );
     }
   }
 
